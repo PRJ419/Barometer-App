@@ -22,9 +22,9 @@ namespace Barometer_App.ViewModels
 
         #region Commands
 
-        private ICommand _showBarsCommand;
+        private ICommand _navShowBarsCommand;
 
-        public ICommand ShowBarsCommand => _showBarsCommand ?? (_showBarsCommand = new DelegateCommand(OnShowBars));
+        public ICommand NavShowBarsCommand => _navShowBarsCommand ?? (_navShowBarsCommand = new DelegateCommand(OnShowBars));
 
         async private void OnShowBars()
         {
