@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -19,24 +20,18 @@ namespace Barometer_App.ViewModels
         {
             _navigationService = navigationService;
 
-            Title = "Awesome Bar list";
-
-            Bars = new ObservableCollection<Bar>(new List<Bar>(){
-                new Bar()
-            {Name = "Dat Bar", Address = "Peter Bøgh", BarId = 1,
-                CVR = 21312213, Email = "Dat@bar.dk", Image = "chess.png",
-                AboutText = "Datbar sutter", Rating = 12               
-            },
-                new Bar()
-                {
-                    Name = "Katrines kælder", Address = "Katrionebjerg", BarId = 0,
-                    CVR = 21203050, Email = "KK@kk.dk", Image = "katrine.png",
-                    AboutText = "Katrines kælder er fredagsbar for ingeniørene på katrinebjerg.", Rating = 14
-
-            }
-            });
+            Title = "Awesome Bar list";         
         }
 
+        public override void OnNavigatedTo(INavigationParameters parameters)
+        {
+            var bars = parameters.GetValue<ObservableCollection<Bar>>("Bars");
+            foreach (var bar in bars)
+            {
+                Debug.WriteLine(bar);
+                Bars.Add(bar);
+            }
+        }
 
         #region Propertis
 

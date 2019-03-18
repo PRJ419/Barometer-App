@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Barometer_App.Views.BarEdit">
+    <StackLayout>
+        <StackLayout Orientation="Horizontal">
+        <Picker x:Name="Picker" Title="Filter by:" FontAttributes="Bold" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <Picker.ItemsSource>
+                <!-- Dette er hard codet pt. Ved ikke hvordan jeg lige kommer rundt om det.-->
+                <x:Array Type="{x:Type x:String}">
+                    <x:String>Name</x:String>
+                    <x:String>Rating</x:String>
+                    <x:String>Postal Code</x:String>
+                </x:Array>
+            </Picker.ItemsSource>
+        </Picker>
+        <Button Text="Filter" Command="{Binding FilterItemsCommand}" CommandParameter="{Binding Source={x:Reference Picker}, Path=SelectedItem}"></Button>
+    </StackLayout>
+    <ListView
+            x:Name="BarsListView"
+            SeparatorVisibility ="Default"
+            ItemsSource="{Binding Bar}"
+            VerticalOptions="FillAndExpand"
+            HasUnevenRows="True"
+            RefreshCommand="{Binding LoadItemsCommand}"
+            IsPullToRefreshEnabled="False"
+            >
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <StackLayout>
+                        <Label Text="{Binding Name}"
+                                   LineBreakMode="NoWrap"
+                                   FontSize="16"
+                                   FontAttributes="Bold"
+                                   Style="{DynamicResource ListItemTextStyle}"></Label>
+                        <Label Text="{Binding AboutText}"
+                                   FontSize="12"
+                                   Style="{DynamicResource ListItemDetailTextStyle}"></Label>
+                        <Image
+                                Source="{Binding Image}"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Center"
+                            ></Image>
+                    </StackLayout>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
+    </StackLayout>
+</ContentPage>
