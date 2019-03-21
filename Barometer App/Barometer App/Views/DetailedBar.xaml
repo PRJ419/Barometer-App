@@ -6,9 +6,23 @@
              prism:ViewModelLocator.AutowireViewModel="True">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <Image Source="{Binding Bar.Image}" 
+                   VerticalOptions="Center"
+                   HorizontalOptions="Center"></Image>
+            <Grid Padding="0" Margin="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Text="Info" Style="{DynamicResource DetailedBarButton}"></Button>
+            <Button Grid.Column="1" Text="Drinks" Style="{DynamicResource DetailedBarButton}"></Button>
+            <Button Grid.Column="2" Text="Events" Style="{DynamicResource DetailedBarButton}"></Button>
+            <Button Grid.Column="3" Text="Coupons" Style="{DynamicResource DetailedBarButton}"></Button>
+            <Button Grid.Column="4" Text="Rating" Style="{DynamicResource DetailedBarButton}"></Button>
+            </Grid>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -5,7 +5,7 @@ namespace Barometer_App.ViewModels
 {
     public class SignUpView : ViewModelBase
     {
-        public SignUpView(INavigationService navigationService) : base(navigationService)
+        public SignUpView(INavigationService navigationService) : base()
         {
         }
     }

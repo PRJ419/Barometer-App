@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
@@ -16,20 +17,20 @@ namespace Barometer_App.ViewModels
         private readonly INavigationService _navigationService;
         public ObservableCollection<Bar> Bars { get; set; }
 
-        public BarListViewModel(INavigationService navigationService) : base(navigationService)
-        {
-            _navigationService = navigationService;
 
+        public BarListViewModel(INavigationService navigationService)
+        {
+            Bars = new ObservableCollection<Bar>();
+            _navigationService = navigationService;
             Title = "Awesome Bar list";         
         }
 
-        public override void OnNavigatedTo(INavigationParameters parameters)
+        public override void OnNavigatingTo(INavigationParameters parameters)
         {
             var bars = parameters.GetValue<ObservableCollection<Bar>>("Bars");
             foreach (var bar in bars)
             {
-                Debug.WriteLine(bar);
-                Bars.Add(bar);
+               Bars.Add(bar);
             }
         }
 

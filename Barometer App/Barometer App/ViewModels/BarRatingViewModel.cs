@@ -5,7 +5,7 @@ namespace Barometer_App.ViewModels
 {
     public class BarRatingViewModel : ViewModelBase
     {
-        public BarRatingViewModel(INavigationService navigationService) : base(navigationService)
+        public BarRatingViewModel(INavigationService navigationService) : base()
         {
         }
     }

@@ -5,7 +5,7 @@ namespace Barometer_App.ViewModels
 {
     public class LoginViewModel : ViewModelBase
     {
-        public LoginViewModel(INavigationService navigationService) : base(navigationService)
+        public LoginViewModel(INavigationService navigationService) : base()
         {
 
         }

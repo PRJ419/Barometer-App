@@ -16,9 +16,13 @@
 
         <Image Source="barometer.png" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"></Image>
 
-        <Button Text="Show Bars" Grid.Column="0" Grid.Row="1" Style="{StaticResource MainPageButton}" Command="{Binding Path=NavShowBarsCommand}"></Button>
-        <Button Text="Log In" Grid.Column="1" Grid.Row="1" Style="{StaticResource MainPageButton}"></Button>
-        <Button Text="Sign Up" Grid.Column="0" Grid.Row="2" Style="{StaticResource MainPageButton}"></Button>
-        <Button Text="About" Grid.Column="1" Grid.Row="2" Style="{StaticResource MainPageButton}"></Button>
+        <Button Text="Show Bars" Grid.Column="0" Grid.Row="1"
+                Style="{StaticResource MainPageButton}" Command="{Binding Path=NavShowBarsCommand}"></Button>
+        <Button Text="Log In" Grid.Column="1" Grid.Row="1"
+                Style="{StaticResource MainPageButton}" Command="{Binding Path=NavLoginCommand}"></Button>
+        <Button Text="Sign Up" Grid.Column="0" Grid.Row="2"
+                Style="{StaticResource MainPageButton}" Command="{Binding Path=NavSignupCommand}}"></Button>
+        <Button Text="About" Grid.Column="1" Grid.Row="2"
+                Style="{StaticResource MainPageButton}"></Button>
     </Grid>
 </ContentPage>
