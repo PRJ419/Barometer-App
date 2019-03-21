@@ -11,7 +11,7 @@ namespace Barometer_App.ViewModels
         private Bar _bar;
         public DetailedBarViewModel(INavigationService navigationService) : base()
         {
-            Title = "Bar Editing Page";
+            Title = "Detailed Bar Page";
             _navigationService = navigationService;
             _bar = new Bar();
         }

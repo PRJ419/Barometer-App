@@ -25,6 +25,7 @@
             HasUnevenRows="True"
             RefreshCommand="{Binding LoadItemsCommand}"
             IsPullToRefreshEnabled="False"
+            SelectedItem="{Binding CurrentBar}"
             >
             <ListView.ItemTemplate>
                 <DataTemplate>
@@ -41,7 +42,7 @@
                             <Image
                                 Source="{Binding Image}"
                                 HorizontalOptions="Center"
-                                VerticalOptions="Center"
+                                VerticalOptions="Center"                               
                             ></Image>
                         </StackLayout>
                     </ViewCell>

@@ -3,25 +3,36 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Barometer_App.Views.DetailedBar"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
-             prism:ViewModelLocator.AutowireViewModel="True">
+             prism:ViewModelLocator.AutowireViewModel="True"
+             Title="{Binding Bar.Name}">
     <ContentPage.Content>
         <StackLayout>
             <Image Source="{Binding Bar.Image}" 
                    VerticalOptions="Center"
                    HorizontalOptions="Center"></Image>
-            <Grid Padding="0" Margin="0">
+
+            <Grid Margin="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="4*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Text="Rating: " TextColor="Black"></Label>
+                <ProgressBar Grid.Column="1" Progress="{Binding Bar.Rating}" ProgressColor="Green"></ProgressBar>
+            </Grid>
+
+            <Label Text="{Binding Bar.LongAboutText}"></Label>
+
+            <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Text="Info" Style="{DynamicResource DetailedBarButton}"></Button>
-            <Button Grid.Column="1" Text="Drinks" Style="{DynamicResource DetailedBarButton}"></Button>
-            <Button Grid.Column="2" Text="Events" Style="{DynamicResource DetailedBarButton}"></Button>
-            <Button Grid.Column="3" Text="Coupons" Style="{DynamicResource DetailedBarButton}"></Button>
-            <Button Grid.Column="4" Text="Rating" Style="{DynamicResource DetailedBarButton}"></Button>
+
+                <Button Grid.Column="0" Text="Drinks" Style="{DynamicResource DetailedBarButton}"></Button>
+                <Button Grid.Column="1" Text="Events" Style="{DynamicResource DetailedBarButton}"></Button>
+                <Button Grid.Column="2" Text="Coupons" Style="{DynamicResource DetailedBarButton}"></Button>
+
             </Grid>
         </StackLayout>
     </ContentPage.Content>

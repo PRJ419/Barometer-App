@@ -25,13 +25,13 @@ namespace Barometer_App.ViewModels
                 new Bar()
                 {Name = "Dat Bar", Address = "Peter Bøgh", BarId = 1,
                     CVR = "21312213", Email = "Dat@bar.dk", Image = "chess.png",
-                    AboutText = "Datbar sutter", Rating = 12
+                    AboutText = "Datbar sutter", Rating = 0.6
                 },
                 new Bar()
                 {
                     Name = "Katrines kælder", Address = "Katrionebjerg", BarId = 0,
                     CVR = "21203050", Email = "KK@kk.dk", Image = "katrine.png",
-                    AboutText = "Katrines kælder er fredagsbar for ingeniørene på katrinebjerg.", Rating = 14
+                    AboutText = "Katrines kælder er fredagsbar for ingeniørene på katrinebjerg.", Rating = 0.9, LongAboutText = "The BackButtonTitle, Title, TitleIcon, and TitleView properties can all define values that occupy space on the navigation bar. While the navigation bar size varies by platform and screen size, setting all of these properties will result in conflicts due to the limited space available. Instead of attempting to use a combination of these properties, you may find that you can better achieve your desired navigation bar design by only setting the TitleView property."
                 }
             });
         }
@@ -70,6 +70,18 @@ namespace Barometer_App.ViewModels
         public ICommand NavSignupCommand => _navSignupCommand ?? (_navSignupCommand = new DelegateCommand(OnNavSignUp));
 
         public async void OnNavSignUp()
+        {
+            var navParams = new NavigationParameters();
+            navParams.Add("Bar", Bars[1]);
+
+            await _navigationService.NavigateAsync("DetailedBar", navParams);
+        }
+
+        private ICommand _navAboutCommand;
+
+        public ICommand NavAboutCommand => _navAboutCommand ?? (_navAboutCommand = new DelegateCommand(OnNavAbout));
+
+        public async void OnNavAbout()
         {
             var navParams = new NavigationParameters();
             navParams.Add("Bar", Bars[1]);

@@ -41,10 +41,28 @@ namespace Barometer_App.ViewModels
         public Bar CurrentBar
         {
             get => _currentBar;
-            set => SetProperty(ref _currentBar, value);
+            //Muligvis en lappeløsning. Forhåbenligt virker det. 
+            set
+            {
+                SetProperty(ref _currentBar, value);
+
+                if (_currentBar == null)
+                    return;
+
+                NavigateViaListView();
+            } 
         }
 
         #endregion
+
+        public async void NavigateViaListView()
+        {
+            var navParams = new NavigationParameters();
+            navParams.Add("Bar", _currentBar);
+            await _navigationService.NavigateAsync("DetailedBar", navParams);
+            CurrentBar = null;
+        }
+
 
         #region Commands
 
@@ -65,11 +83,25 @@ namespace Barometer_App.ViewModels
             
         }
 
+        private ICommand _DetailedBarNavCommand;
+        public ICommand DetailedBarNavCommand
+        {
+            get
+            {
+                return _DetailedBarNavCommand ??
+                       (_DetailedBarNavCommand = new DelegateCommand(OnDetailedBarNavCommand));
+            }
+        }
+
+        private void OnDetailedBarNavCommand()
+        {
+
+        }
+
         private ICommand _filterItemsCommand;
 
         public ICommand FilterItemsCommand {
             get {
-                Debug.WriteLine("Called");
             return _filterItemsCommand ?? (_filterItemsCommand =
                 new DelegateCommand<string>(FilterItemsExecute, FilterItemsCanExecute).ObservesProperty(() => Bars.Count)
             );

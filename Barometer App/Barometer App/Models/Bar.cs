@@ -37,6 +37,13 @@ namespace Barometer_App.Models
             set => SetProperty(ref _aboutText, value);
         }
 
+        private string _longAboutText;
+        public string LongAboutText
+        {
+            get => _longAboutText;
+            set => SetProperty(ref _longAboutText, value);
+        }
+
         private string _cvr;
         public string CVR {
             get => _cvr;
@@ -67,10 +74,12 @@ namespace Barometer_App.Models
             set => SetProperty(ref _image, value);
         }
 
-        private int _rating;
-        public int Rating {
+        private double _rating;
+        public double Rating {
             get => _rating;
             set => SetProperty(ref _rating, value);
         }
+
+        //Der skal implementeres drinks , Event list, Coupons mm hvis vi når så langt. 
     }
 }
