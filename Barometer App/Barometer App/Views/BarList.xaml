@@ -1,8 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Barometer_App.Views.BarList"              
-             Title="{Binding Title}">
+             x:Class="Barometer_App.Views.BarList"  
+             xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
+             Title="{Binding Title}"
+             >
+    <ContentPage.Behaviors>
+        <b:EventToCommandBehavior EventName="Disappearing" Command="{Binding OnLoadItemsCommand}"></b:EventToCommandBehavior>
+    </ContentPage.Behaviors>
     <StackLayout>
         <StackLayout Orientation="Horizontal">
             <Picker x:Name="Picker" Title="Filter by:" FontAttributes="Bold" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
@@ -27,6 +32,12 @@
             IsPullToRefreshEnabled="False"
             SelectedItem="{Binding CurrentBar}"
             >
+            <ListView.Behaviors>
+                <b:EventToCommandBehavior EventName="ItemSelected"
+                                          Command="{Binding NavigationCommand}">
+                    
+                </b:EventToCommandBehavior>
+            </ListView.Behaviors>
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>

@@ -41,19 +41,31 @@ namespace Barometer_App.ViewModels
         public Bar CurrentBar
         {
             get => _currentBar;
-            //Muligvis en lappeløsning. Forhåbenligt virker det. 
             set
             {
                 SetProperty(ref _currentBar, value);
-
-                if (_currentBar == null)
-                    return;
-
-                NavigateViaListView();
             } 
         }
 
         #endregion
+
+        #region Commands
+
+        private ICommand _loadItemsCommand;
+        public ICommand LoadItemsCommand =>
+            _loadItemsCommand ??
+            (_loadItemsCommand = new DelegateCommand(OnLoadItemsCommand));
+
+        private void OnLoadItemsCommand()
+        {
+            Debug.Write("HERE");
+            CurrentBar = null;
+        }
+
+        private ICommand _navigationCommand;
+
+        public ICommand NavigationCommand =>
+             _navigationCommand ?? (_navigationCommand = new DelegateCommand(NavigateViaListView));
 
         public async void NavigateViaListView()
         {
@@ -64,34 +76,10 @@ namespace Barometer_App.ViewModels
         }
 
 
-        #region Commands
-
-
-        //Skal implementeres når vi skal hente data fra DB
-        private ICommand _loadItemsCommand;
-        public ICommand LoadItemsCommand
-        {
-            get
-            {
-                return _loadItemsCommand ??
-                       (_loadItemsCommand = new DelegateCommand(OnLoadItemsCommand));
-            }
-        }
-
-        private void OnLoadItemsCommand()
-        {
-            
-        }
-
-        private ICommand _DetailedBarNavCommand;
-        public ICommand DetailedBarNavCommand
-        {
-            get
-            {
-                return _DetailedBarNavCommand ??
-                       (_DetailedBarNavCommand = new DelegateCommand(OnDetailedBarNavCommand));
-            }
-        }
+        private ICommand _detailedBarNavCommand;
+        public ICommand DetailedBarNavCommand =>
+            _detailedBarNavCommand ??
+            (_detailedBarNavCommand = new DelegateCommand(OnDetailedBarNavCommand));
 
         private void OnDetailedBarNavCommand()
         {
