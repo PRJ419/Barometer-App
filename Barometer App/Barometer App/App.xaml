@@ -4,6 +4,16 @@
              xmlns:prism="clr-namespace:Prism.DryIoc;assembly=Prism.DryIoc.Forms"
              x:Class="Barometer_App.App">
     <Application.Resources>
+        <Color x:Key="BtnColor">DarkGray</Color>
+        <Color x:Key="TxtColor">White</Color>
+
+        <Style x:Key="BtnLabelStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="Large"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="TextColor" Value="{StaticResource TxtColor}"/>
+                <!--<Setter Property="FontFamily" Value=""/> -->
+        </Style>
+
         <Style x:Key="MainPageButton" TargetType="{x:Type Button}">
             <Style.Setters>
                 <Setter Property="FontSize" Value="Large"></Setter>
@@ -12,6 +22,7 @@
                 <Setter Property="Margin" Value="2"></Setter>
             </Style.Setters>
         </Style>
+
         <Style x:Key="DetailedBarButton" TargetType="{x:Type Button}">
             <Style.Setters>
                 <Setter Property="FontSize" Value="10"></Setter>
@@ -20,6 +31,6 @@
                 <Setter Property="Padding" Value="0"></Setter>
             </Style.Setters>
         </Style>
-            
+
     </Application.Resources>
 </prism:PrismApplication>
