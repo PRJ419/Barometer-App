@@ -6,6 +6,7 @@
              prism:ViewModelLocator.AutowireViewModel="True"
              Title="{Binding Bar.Name}">
     <ContentPage.Content>
+        <ScrollView>
         <StackLayout>
             <Image Source="{Binding Bar.Image}" 
                    VerticalOptions="Center"
@@ -20,7 +21,7 @@
                 <ProgressBar Grid.Column="1" Progress="{Binding Bar.Rating}" ProgressColor="Green"></ProgressBar>
             </Grid>
 
-            <Label Text="{Binding Bar.LongAboutText}"></Label>
+            <Label Text="{Binding Bar.LongAboutText}" FontSize="10"></Label>
 
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -35,5 +36,6 @@
 
             </Grid>
         </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

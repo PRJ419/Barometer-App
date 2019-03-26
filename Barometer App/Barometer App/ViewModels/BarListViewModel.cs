@@ -59,8 +59,8 @@ namespace Barometer_App.ViewModels
         {
             var navParams = new NavigationParameters();
             navParams.Add("Bar", _currentBar);
-            await _navigationService.NavigateAsync("DetailedBar", navParams);
             CurrentBar = null;
+            await _navigationService.NavigateAsync("DetailedBar", navParams);
         }
 
 

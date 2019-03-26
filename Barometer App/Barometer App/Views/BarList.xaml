@@ -30,7 +30,7 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <StackLayout>
+                        <StackLayout Margin="5">
                             <Label Text="{Binding Name}"
                                    LineBreakMode="NoWrap"
                                    FontSize="16"
@@ -39,6 +39,14 @@
                             <Label Text="{Binding AboutText}"
                                    FontSize="12"
                                    Style="{DynamicResource ListItemDetailTextStyle}"></Label>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Column="0" Text="Rating" Style="{DynamicResource ListItemDetailTextStyle}"></Label>
+                                <ProgressBar Grid.Column="1" Progress="0.8" ProgressColor="Green"></ProgressBar>
+                            </Grid>
                             <Image
                                 Source="{Binding Image}"
                                 HorizontalOptions="Center"
