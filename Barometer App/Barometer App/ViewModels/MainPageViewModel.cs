@@ -16,6 +16,8 @@ namespace Barometer_App.ViewModels
     {
         public ObservableCollection<Bar> Bars { get; set; }
 
+        public bool LoggedIn { get; set; } = false;
+
         private readonly INavigationService _navigationService;
         public MainPageViewModel(INavigationService navigationService)
         {
@@ -38,7 +40,7 @@ namespace Barometer_App.ViewModels
 
 
 
-        #region Commands
+        #region NavCommands
 
         private ICommand _navShowBarsCommand;
 
@@ -60,9 +62,8 @@ namespace Barometer_App.ViewModels
         public async void OnNavLogin()
         {
             var navParams = new NavigationParameters();
-            navParams.Add("Bar", Bars[1]);
 
-            await _navigationService.NavigateAsync("BarEdit", navParams);
+            await _navigationService.NavigateAsync("Login", navParams);
         }
 
         private ICommand _navSignupCommand;
@@ -72,9 +73,8 @@ namespace Barometer_App.ViewModels
         public async void OnNavSignUp()
         {
             var navParams = new NavigationParameters();
-            navParams.Add("Bar", Bars[1]);
 
-            await _navigationService.NavigateAsync("DetailedBar", navParams);
+            await _navigationService.NavigateAsync("Signup", navParams);
         }
 
         private ICommand _navAboutCommand;
@@ -84,10 +84,24 @@ namespace Barometer_App.ViewModels
         public async void OnNavAbout()
         {
             var navParams = new NavigationParameters();
-            navParams.Add("Bar", Bars[1]);
 
-            await _navigationService.NavigateAsync("DetailedBar", navParams);
+            await _navigationService.NavigateAsync("About", navParams);
         }
+
+        private ICommand _navSettingsCommand;
+
+        public ICommand NavSettingsCommand => _navSettingsCommand ?? (_navSettingsCommand = new DelegateCommand(OnNavSettings));
+
+        public async void OnNavSettings()
+        {
+            var navParams = new NavigationParameters();
+
+            await _navigationService.NavigateAsync("Settings", navParams);
+        }
+        #endregion
+
+        #region Commands
+
         #endregion
     }
 }

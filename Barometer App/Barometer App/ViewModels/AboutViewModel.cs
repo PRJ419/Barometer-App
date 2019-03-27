@@ -7,6 +7,7 @@ namespace Barometer_App.ViewModels
     {
         public AboutViewModel(INavigationService navigationService) : base()
         {
+            Title = "About";
         }
     }
 }

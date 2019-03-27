@@ -3,12 +3,30 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Barometer_App.Views.Signup"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
-             prism:ViewModelLocator.AutowireViewModel="True">
+             prism:ViewModelLocator.AutowireViewModel="True"
+             Title="{Binding Title}">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout VerticalOptions="CenterAndExpand">
+            <Image Source="Logo.JPG" Margin="40, 20"/>
+
+            <Label Text="Sign-Up to Bar-O-Meter" Style="{StaticResource HeaderStyle}"/>
+
+            <Label Text="Full Name" TextColor="{StaticResource LabelColor}"/>
+            <Entry Placeholder="John Doe" PlaceholderColor="DimGray" />
+
+            <Label Text="E-mail" TextColor="{StaticResource LabelColor}"/>
+            <Entry Placeholder="JohnDoe@email.com" PlaceholderColor="DimGray" />
+
+            <Label Text="Birthday" TextColor="{StaticResource LabelColor}"/>
+            <DatePicker/>
+
+            <Label Text="Username" TextColor="{StaticResource LabelColor}"/>
+            <Entry Placeholder="Username" PlaceholderColor="DimGray" />
+
+            <Label Text="Password" TextColor="{StaticResource LabelColor}"/>
+            <Entry Placeholder="Password" PlaceholderColor="DimGray" IsPassword="True"/>
+
+            <Button Text="Sign Up" Command="{Binding SignupCommand}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

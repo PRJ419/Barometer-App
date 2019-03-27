@@ -6,12 +6,20 @@
     <Application.Resources>
         <Color x:Key="BtnColor">DarkGray</Color>
         <Color x:Key="TxtColor">White</Color>
+        <Color x:Key="LabelColor">DarkGray</Color>
 
         <Style x:Key="BtnLabelStyle" TargetType="Label">
                 <Setter Property="FontSize" Value="Large"/>
                 <Setter Property="FontAttributes" Value="Bold"/>
                 <Setter Property="TextColor" Value="{StaticResource TxtColor}"/>
                 <!--<Setter Property="FontFamily" Value=""/> -->
+        </Style>
+
+        <Style x:Key="HeaderStyle" TargetType="Label">
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="HorizontalTextAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="0, 20"/>
+            <Setter Property="TextColor" Value="{StaticResource LabelColor}"/>
         </Style>
 
         <Style x:Key="MainPageButton" TargetType="{x:Type Button}">

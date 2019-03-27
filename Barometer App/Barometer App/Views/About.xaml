@@ -3,12 +3,27 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Barometer_App.Views.About"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
-             prism:ViewModelLocator.AutowireViewModel="True">
+             prism:ViewModelLocator.AutowireViewModel="True"
+             Title="{Binding Title}">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout VerticalOptions="CenterAndExpand">
+            <Image Source="Logo.JPG" Margin="40, 20"/>
+            
+            <Label Text="Bar-O-Meter Prototype by Group 6" 
+                   LineBreakMode="WordWrap" 
+                   HorizontalTextAlignment="Center" 
+                   TextColor="{StaticResource LabelColor}"/>
+
+            <Label Text="Spring 2019 @ IHA" 
+                   LineBreakMode="WordWrap" 
+                   HorizontalTextAlignment="Center" 
+                   TextColor="{StaticResource LabelColor}"/>
+
+            <!-- {Release Version}.{Major}.{Minor} -->
+            <Label Text="Version 0.1.0" 
+                   LineBreakMode="WordWrap" 
+                   HorizontalTextAlignment="Center" 
+                   TextColor="{StaticResource LabelColor}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
