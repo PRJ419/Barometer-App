@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace Barometer App.Views
+namespace Barometer_App.Views
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class Settings : ViewCell
+	public partial class Settings : ContentPage
 	{
 		public Settings ()
 		{
-			InitializeComponent ();
+			InitializeComponent();
 		}
 	}
 }
