@@ -14,11 +14,13 @@
 
             <Grid Margin="5">
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                     <ColumnDefinition Width="4*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Label Grid.Column="0" Text="Rating: " TextColor="Black"></Label>
-                <ProgressBar Grid.Column="1" Progress="{Binding Bar.Rating}" ProgressColor="Green"></ProgressBar>
+                <Button Text="Rate!" FontSize="Small" Command="{Binding RatingCommand}"></Button>
+                <Label Grid.Column="1" Text="Rating: " TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"></Label>
+                <ProgressBar Grid.Column="2" Progress="{Binding Bar.Rating}" ProgressColor="Green"></ProgressBar>
             </Grid>
 
             <Label Text="{Binding Bar.LongAboutText}" FontSize="10"></Label>

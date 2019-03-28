@@ -58,7 +58,6 @@ namespace Barometer_App.ViewModels
 
         private void OnLoadItemsCommand()
         {
-            Debug.Write("HERE");
             CurrentBar = null;
         }
 
