@@ -10,7 +10,7 @@ using Xamarin.Forms.Xaml;
 namespace Barometer_App.Views
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class BarRating : ContentPage
+	public partial class BarRating
 	{
 		public BarRating ()
 		{
