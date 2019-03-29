@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:Skia="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
              x:Class="Barometer_App.Views.MainPage"
              Title="{Binding Title}">
 
@@ -17,22 +18,23 @@
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
 
+            <Skia:SKCanvasView PaintSurface="CanvasPaintRoundedRectangle" Grid.Row="0" Grid.Column="0" />
             <StackLayout x:Name="ShowBarsBtn" Grid.Row="0" Grid.Column="0" 
-                         VerticalOptions="CenterAndExpand" BackgroundColor="{StaticResource BtnColor}"
-                         Margin="3,3">
+                         VerticalOptions="CenterAndExpand" Margin="3,3">
+
                 <Image Source="beer.png" InputTransparent="True"/>
                 <Label Text="SHOW BARS" Margin="10" InputTransparent="True"
-                       HorizontalOptions="CenterAndExpand" Style="{StaticResource BtnLabelStyle}"/>
+                    HorizontalOptions="CenterAndExpand" Style="{StaticResource BtnLabelStyle}"/>
 
                 <StackLayout.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding NavShowBarsCommand}"/>
                 </StackLayout.GestureRecognizers>
             </StackLayout>
 
+            <Skia:SKCanvasView PaintSurface="CanvasPaintRoundedRectangle" Grid.Row="0" Grid.Column="1"/>
             <!-- Login for when the user isn't logged in -->
             <StackLayout x:Name="Login" Grid.Row="0" Grid.Column="1" 
-                         VerticalOptions="CenterAndExpand" BackgroundColor="{StaticResource BtnColor}"
-                         Margin="3,3">
+                         VerticalOptions="CenterAndExpand" Margin="3,3">
                 <Image Source="man.png" InputTransparent="True"/>
                 <Label Text="LOGIN" Margin="10" InputTransparent="True"
                        HorizontalOptions="CenterAndExpand" Style="{StaticResource BtnLabelStyle}"/>
@@ -44,8 +46,7 @@
 
             <!-- Log out for when the user is logged in -->
             <StackLayout x:Name="Logout" Grid.Row="0" Grid.Column="1" 
-                         VerticalOptions="CenterAndExpand" BackgroundColor="{StaticResource BtnColor}"
-                         Margin="3,3" IsVisible="{Binding LoggedIn}">
+                         VerticalOptions="CenterAndExpand" Margin="3,3" IsVisible="{Binding LoggedIn}">
                 <Image Source="man.png" InputTransparent="True"/>
                 <Label Text="LOG OUT" Margin="10" InputTransparent="True"
                        HorizontalOptions="CenterAndExpand" Style="{StaticResource BtnLabelStyle}"/>
@@ -55,10 +56,10 @@
                 </StackLayout.GestureRecognizers>
             </StackLayout>
 
+            <Skia:SKCanvasView PaintSurface="CanvasPaintRoundedRectangle" Grid.Row="1" Grid.Column="0"/>
             <!-- Sign Up shows if user is not logged in -->
             <StackLayout x:Name="SignUp" Grid.Row="1" Grid.Column="0" 
-                         VerticalOptions="CenterAndExpand" BackgroundColor="{StaticResource BtnColor}"
-                         Margin="3,3">
+                         VerticalOptions="CenterAndExpand" Margin="3,3">
                 <Image Source="pen.png" InputTransparent="True"/>
                 <Label Text="SIGN UP" Margin="10" InputTransparent="True"
                        HorizontalOptions="CenterAndExpand" Style="{StaticResource BtnLabelStyle}"/>
@@ -70,8 +71,7 @@
 
             <!-- Settings shows if a user is logged in -->
             <StackLayout x:Name="Settings" Grid.Row="1" Grid.Column="0" 
-                         VerticalOptions="CenterAndExpand" BackgroundColor="{StaticResource BtnColor}"
-                         Margin="3,3" IsVisible="{Binding LoggedIn}">
+                         VerticalOptions="CenterAndExpand" Margin="3,3" IsVisible="{Binding LoggedIn}">
                 <Image Source="pen.png" InputTransparent="True"/>
                 <Label Text="SETTINGS" Margin="10" InputTransparent="True"
                        HorizontalOptions="CenterAndExpand" Style="{StaticResource BtnLabelStyle}"/>
@@ -81,9 +81,10 @@
                 </StackLayout.GestureRecognizers>
             </StackLayout>
 
+            <Skia:SKCanvasView PaintSurface="CanvasPaintRoundedRectangle" Grid.Row="1" Grid.Column="1"/>
             <StackLayout x:Name="About" Grid.Row="1" Grid.Column="1" 
-                         VerticalOptions="CenterAndExpand" BackgroundColor="{StaticResource BtnColor}"
-                         Margin="3,3">
+                         VerticalOptions="CenterAndExpand" Margin="3,3">
+
                 <Image Source="questionmark.png" InputTransparent="True"/>
                 <Label Text="ABOUT" Margin="10" InputTransparent="True"
                        HorizontalOptions="CenterAndExpand" Style="{StaticResource BtnLabelStyle}"/>
@@ -92,16 +93,6 @@
                     <TapGestureRecognizer Command="{Binding NavAboutCommand}"/>
                 </StackLayout.GestureRecognizers>
             </StackLayout>
-
-            <!--<Button Text="Show Bars" Grid.Column="0" Grid.Row="1"
-                    Style="{StaticResource MainPageButton}" Command="{Binding Path=NavShowBarsCommand}"></Button>
-            <Button Text="Log In" Grid.Column="1" Grid.Row="1"
-                    Style="{StaticResource MainPageButton}" Command="{Binding Path=NavLoginCommand}"></Button>
-            <Button Text="Sign Up" Grid.Column="0" Grid.Row="2"
-                    Style="{StaticResource MainPageButton}" Command="{Binding Path=NavSignupCommand}"></Button>
-            <Button Text="About" Grid.Column="1" Grid.Row="2"
-                    Style="{StaticResource MainPageButton}"></Button>
-            -->
         </Grid>
     </StackLayout>
 </ContentPage>

@@ -9,6 +9,8 @@ using System.Windows.Input;
 using Barometer_App.Models;
 using Prism.Commands;
 using Prism.Navigation;
+using RESTClient;
+using RESTClient.DTOs;
 
 namespace Barometer_App.ViewModels
 {
@@ -25,12 +27,22 @@ namespace Barometer_App.ViewModels
             Title = "Awesome Bar list";         
         }
 
-        public override void OnNavigatingTo(INavigationParameters parameters)
+        public override async void OnNavigatingTo(INavigationParameters parameters)
         {
-            var bars = parameters.GetValue<ObservableCollection<Bar>>("Bars");
+            /*var bars = parameters.GetValue<ObservableCollection<Bar>>("Bars");
             foreach (var bar in bars)
             {
                Bars.Add(bar);
+            }*/
+
+            RestClient client = new RestClient();
+
+            List<BarDto> bars = await client.GetBarList();
+
+            foreach (var bar in bars)
+            {
+                if(bar.isSimple) 
+                    Bars.Add(new Bar() {Name = bar.BarName, AboutText = bar.ShortDescription, Rating = bar.AvgRating, Image = "katrine.png"});
             }
         }
 
