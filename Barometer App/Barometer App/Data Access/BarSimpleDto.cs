@@ -8,7 +8,7 @@ namespace RESTClient.DTOs
         /// <summary>
         /// Transfer object for the listview of bars
         /// </summary>
-        public class BarDto
+        public class BarSimpleDto
         {
             // Is the class representation simple
             public bool isSimple { get; private set; }

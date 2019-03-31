@@ -29,20 +29,10 @@ namespace Barometer_App.ViewModels
 
         public override async void OnNavigatingTo(INavigationParameters parameters)
         {
-            /*var bars = parameters.GetValue<ObservableCollection<Bar>>("Bars");
+            var bars = parameters.GetValue<ObservableCollection<Bar>>("Bars");
             foreach (var bar in bars)
             {
-               Bars.Add(bar);
-            }*/
-
-            RestClient client = new RestClient();
-
-            List<BarDto> bars = await client.GetBarList();
-
-            foreach (var bar in bars)
-            {
-                if(bar.isSimple) 
-                    Bars.Add(new Bar() {Name = bar.BarName, AboutText = bar.ShortDescription, Rating = bar.AvgRating, Image = "katrine.png"});
+                Bars.Add(bar);
             }
         }
 

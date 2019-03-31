@@ -26,6 +26,7 @@
             <Label Text="Password" TextColor="{StaticResource LabelColor}"/>
             <Entry Placeholder="Password" PlaceholderColor="DimGray" IsPassword="True"/>
 
+            <Button Text="Bars can sign up here!" Command=""></Button>
             <Button Text="Sign Up" Command="{Binding SignupCommand}"/>
         </StackLayout>
     </ContentPage.Content>
