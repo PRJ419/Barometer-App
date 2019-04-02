@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Collections.Specialized;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Linq;
 using System.Windows.Input;
 using Barometer_App.Models;
 using Prism.Commands;
 using Prism.Navigation;
-using RESTClient;
-using RESTClient.DTOs;
 
 namespace Barometer_App.ViewModels
 {
@@ -27,7 +22,7 @@ namespace Barometer_App.ViewModels
             Title = "Awesome Bar list";         
         }
 
-        public override async void OnNavigatingTo(INavigationParameters parameters)
+        public override void OnNavigatingTo(INavigationParameters parameters)
         {
             var bars = parameters.GetValue<ObservableCollection<Bar>>("Bars");
             foreach (var bar in bars)
@@ -70,8 +65,7 @@ namespace Barometer_App.ViewModels
 
         public async void NavigateViaListView()
         {
-            var navParams = new NavigationParameters();
-            navParams.Add("Bar", _currentBar);
+            var navParams = new NavigationParameters {{"Bar", _currentBar}};
             CurrentBar = null;
             await _navigationService.NavigateAsync("DetailedBar", navParams);
         }

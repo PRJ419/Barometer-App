@@ -19,7 +19,7 @@
                     <ColumnDefinition Width="4*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Button Text="Rate!" FontSize="Small" Command="{Binding RatingCommand}"></Button>
-                <Label Grid.Column="1" Text="Rating: " TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"></Label>
+                <Label Grid.Column="1" Text="Rating: " TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="10"></Label>
                 <ProgressBar Grid.Column="2" Progress="{Binding Bar.Rating}" ProgressColor="Green"></ProgressBar>
             </Grid>
 
