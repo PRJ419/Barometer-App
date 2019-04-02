@@ -38,10 +38,7 @@ namespace Barometer_App.ViewModels
         public Bar CurrentBar
         {
             get => _currentBar;
-            set
-            {
-                SetProperty(ref _currentBar, value);
-            } 
+            set => SetProperty(ref _currentBar, value);
         }
 
         #endregion
