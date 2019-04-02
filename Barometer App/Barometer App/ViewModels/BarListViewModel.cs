@@ -27,7 +27,7 @@ namespace Barometer_App.ViewModels
             Title = "Awesome Bar list";         
         }
 
-        public override async void OnNavigatingTo(INavigationParameters parameters)
+        public override void OnNavigatingTo(INavigationParameters parameters)
         {
             var bars = parameters.GetValue<ObservableCollection<Bar>>("Bars");
             foreach (var bar in bars)
@@ -43,10 +43,7 @@ namespace Barometer_App.ViewModels
         public Bar CurrentBar
         {
             get => _currentBar;
-            set
-            {
-                SetProperty(ref _currentBar, value);
-            } 
+            set => SetProperty(ref _currentBar, value);
         }
 
         #endregion
@@ -70,8 +67,7 @@ namespace Barometer_App.ViewModels
 
         public async void NavigateViaListView()
         {
-            var navParams = new NavigationParameters();
-            navParams.Add("Bar", _currentBar);
+            var navParams = new NavigationParameters {{"Bar", _currentBar}};
             CurrentBar = null;
             await _navigationService.NavigateAsync("DetailedBar", navParams);
         }
