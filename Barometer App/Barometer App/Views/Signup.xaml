@@ -5,8 +5,8 @@
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
              Title="{Binding Title}">
-    <ContentPage.Content>
-        <StackLayout VerticalOptions="CenterAndExpand">
+    <ScrollView>
+        <StackLayout VerticalOptions="CenterAndExpand" Margin="5">
             <Image Source="Logo.JPG" Margin="40, 20"/>
 
             <Label Text="Sign-Up to Bar-O-Meter" Style="{StaticResource HeaderStyle}"/>
@@ -26,7 +26,8 @@
             <Label Text="Password" TextColor="{StaticResource LabelColor}"/>
             <Entry Placeholder="Password" PlaceholderColor="DimGray" IsPassword="True"/>
 
+            <Button Text="Bars can sign up here!" Command="{Binding NavigateToBarSignUpCommand}"></Button>
             <Button Text="Sign Up" Command="{Binding SignupCommand}"/>
         </StackLayout>
-    </ContentPage.Content>
+    </ScrollView>
 </ContentPage>

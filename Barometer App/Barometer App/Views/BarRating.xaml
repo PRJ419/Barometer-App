@@ -10,7 +10,7 @@
         <RowDefinition Height="*"></RowDefinition>
         <RowDefinition Height="*"></RowDefinition>
         <RowDefinition Height="*"></RowDefinition>
-        <RowDefinition Height="*"></RowDefinition>
+        <RowDefinition Height="2*"></RowDefinition>
         <RowDefinition Height="4*"></RowDefinition>
     </Grid.RowDefinitions>
     <Label Grid.Row="1" Text="{Binding Bar.Name}"  FontSize="Large" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
