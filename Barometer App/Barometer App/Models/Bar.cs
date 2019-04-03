@@ -45,41 +45,53 @@ namespace Barometer_App.Models
         }
 
         private string _cvr;
-        public string CVR {
+        public string CVR
+        {
             get => _cvr;
             set => SetProperty(ref _cvr, value);
         }
 
         private string _phoneNumber;
-        public string PhoneNumber {
+        public string PhoneNumber
+        {
             get => _phoneNumber;
             set => SetProperty(ref _phoneNumber, value);
         }
 
         private string _email;
-        public string Email {
+        public string Email
+        {
             get => _email;
             set => SetProperty(ref _email, value);
         }
 
         private int _barId;
-        public int BarId {
+        public int BarId
+        {
             get => _barId;
             set => SetProperty(ref _barId, value);
         }
 
         private string _image;
-        public string Image {
+        public string Image
+        {
             get => _image;
             set => SetProperty(ref _image, value);
         }
 
         private double _rating;
-        public double Rating {
+        public double Rating
+        {
             get => _rating;
             set => SetProperty(ref _rating, value);
         }
 
+        private int _ageRestriction;
+
+        public int AgeRestriction {
+            get => _ageRestriction;
+            set => SetProperty(ref _ageRestriction, value);
+        }
         //Der skal implementeres drinks , Event list, Coupons mm hvis vi når så langt. 
     }
 }

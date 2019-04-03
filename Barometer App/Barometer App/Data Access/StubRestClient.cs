@@ -24,9 +24,9 @@ namespace RESTClient
             StubList.Add(bar1);
 
             BarSimpleDto bar2 = new BarSimpleDto();
-            bar1.BarName = "Bar2";
-            bar1.AvgRating = 4;
-            bar1.ShortDescription = "This is Bar2";
+            bar2.BarName = "Bar2";
+            bar2.AvgRating = 4;
+            bar2.ShortDescription = "This is Bar2";
             StubList.Add(bar2);
 
             return StubList;
@@ -47,19 +47,21 @@ namespace RESTClient
         //GET api/bars/{id}
         public async Task<BarDto> GetDetailedBar(string id)
         {
-            BarDto DetailedBar = new BarDto();
-            DetailedBar.BarName = "Barname";
-            DetailedBar.Address = "Bar address";
-            DetailedBar.AgeLimit = 18;
-            DetailedBar.AvgRating = 4.2;
-            DetailedBar.CVR = 12345678;
-            DetailedBar.Educations = "School of engineering";
-            DetailedBar.Email = "Bar email";
-            DetailedBar.LongDescription = "Looooooong description";
-            DetailedBar.PhoneNumber = 87654321;
-            DetailedBar.ShortDescription = "Short description";
+            var detailedBar = new BarDto
+            {
+                BarName = "Barname",
+                Address = "Bar address",
+                AgeLimit = 18,
+                AvgRating = 4.2,
+                CVR = 12345678,
+                Educations = "School of engineering",
+                Email = "Bar email",
+                LongDescription = "Looooooong description",
+                PhoneNumber = 87654321,
+                ShortDescription = "Short description"
+            };
 
-            return DetailedBar;
+            return detailedBar;
         }
 
         //DELETE api/bars/{id}

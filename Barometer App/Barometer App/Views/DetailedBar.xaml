@@ -6,15 +6,21 @@
              prism:ViewModelLocator.AutowireViewModel="True"
              Title="{Binding Bar.Name}">
     <ContentPage.Content>
-        <ScrollView>
+        <ScrollView Margin="10">
         <StackLayout>
             <Image Source="{Binding Bar.Image}" 
                    VerticalOptions="Center"
                    HorizontalOptions="Center"></Image>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Age Limit is:" FontSize="Small" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
+                    <Label Text="{Binding Bar.AgeRestriction}" FontSize="Large"
+                           HorizontalTextAlignment="Center" VerticalTextAlignment="Center"
+                           HorizontalOptions="CenterAndExpand"></Label>
+            </StackLayout>
 
-            <Grid Margin="5">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                <Grid Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                     <ColumnDefinition Width="4*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>

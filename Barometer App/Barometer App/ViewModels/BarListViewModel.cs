@@ -6,6 +6,7 @@ using System.Windows.Input;
 using Barometer_App.Models;
 using Prism.Commands;
 using Prism.Navigation;
+using RESTClient;
 
 namespace Barometer_App.ViewModels
 {
@@ -14,21 +15,15 @@ namespace Barometer_App.ViewModels
         private readonly INavigationService _navigationService;
         public ObservableCollection<Bar> Bars { get; set; }
 
+        public IRestClient RestClient { get; set; }
 
         public BarListViewModel(INavigationService navigationService)
         {
             Bars = new ObservableCollection<Bar>();
+            RestClient = new StubRestClient();
+            OnLoadItemsCommand();
             _navigationService = navigationService;
-            Title = "Awesome Bar list";         
-        }
-
-        public override void OnNavigatingTo(INavigationParameters parameters)
-        {
-            var bars = parameters.GetValue<ObservableCollection<Bar>>("Bars");
-            foreach (var bar in bars)
-            {
-                Bars.Add(bar);
-            }
+            Title = "Awesome Bar list";
         }
 
         #region Propertis
@@ -53,6 +48,16 @@ namespace Barometer_App.ViewModels
         private void OnLoadItemsCommand()
         {
             CurrentBar = null;
+            var barList = RestClient.GetBarList();
+            foreach (var barSimpleDto in barList.Result)
+            {
+                Bars.Add(new Bar {
+                    AboutText = barSimpleDto.ShortDescription,
+                    Rating = barSimpleDto.AvgRating/5,
+                    Name = barSimpleDto.BarName,
+                    Image = "katrine.png"
+                });
+            }
         }
 
         private ICommand _navigationCommand;
@@ -61,34 +66,24 @@ namespace Barometer_App.ViewModels
              _navigationCommand ?? (_navigationCommand = new DelegateCommand(NavigateViaListView));
 
         public async void NavigateViaListView()
-        {
-            var navParams = new NavigationParameters {{"Bar", _currentBar}};
+        { 
             CurrentBar = null;
-            await _navigationService.NavigateAsync("DetailedBar", navParams);
-        }
-
-
-        private ICommand _detailedBarNavCommand;
-        public ICommand DetailedBarNavCommand =>
-            _detailedBarNavCommand ??
-            (_detailedBarNavCommand = new DelegateCommand(OnDetailedBarNavCommand));
-
-        private void OnDetailedBarNavCommand()
-        {
-
+            await _navigationService.NavigateAsync("DetailedBar");
         }
 
         private ICommand _filterItemsCommand;
 
-        public ICommand FilterItemsCommand {
-            get {
-            return _filterItemsCommand ?? (_filterItemsCommand =
-                new DelegateCommand<string>(FilterItemsExecute, FilterItemsCanExecute).ObservesProperty(() => Bars.Count)
-            );
+        public ICommand FilterItemsCommand
+        {
+            get
+            {
+                return _filterItemsCommand ?? (_filterItemsCommand =
+                    new DelegateCommand<string>(FilterItemsExecute, FilterItemsCanExecute).ObservesProperty(() => Bars.Count)
+                );
             }
         }
 
-    public bool FilterItemsCanExecute(string obj)
+        public bool FilterItemsCanExecute(string obj)
         {
             return obj != null;
         }
@@ -117,7 +112,7 @@ namespace Barometer_App.ViewModels
             Bars.Clear();
 
             foreach (var bar in tempBars)
-            {               
+            {
                 Bars.Add(bar);
             }
         }
