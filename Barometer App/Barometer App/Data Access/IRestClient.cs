@@ -9,9 +9,13 @@ namespace RESTClient
     public interface IRestClient
     {
         //List<BarSimpleDto> GetBestBarsList(); WAT IS DIS
-        bool CreateBar(BarSimpleDto newBar);
-        bool EditBar(BarSimpleDto editedBar);
-        List<BarSimpleDto> GetBarList();
-        BarSimpleDto GetDetailedBar(string id);
+        Task<List<BarSimpleDto>> GetBarList();
+        Task<bool> EditBar(BarDto editedBar);
+        Task<bool> CreateBar(BarDto newBar);
+        Task<BarDto> GetDetailedBar(string id);
+        Task<bool> DeleteBar(string id);
+        Task<List<BarSimpleDto>> GetWorstBarList();
+        Task<List<BarSimpleDto>> GetSpecificBarList(string id1, string id2);
+        Task<List<DrinkDto>> GetBarDrinkList(string id);
     }
 }
