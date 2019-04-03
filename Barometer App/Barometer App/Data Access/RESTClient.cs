@@ -10,7 +10,7 @@ using RESTClient.DTOs;
 
 namespace RESTClient
 {
-    class RestClient : IRestClient
+    public class RestClient : IRestClient
     {
         private const string Baseaddress = "https://localhost:44310/";
 
