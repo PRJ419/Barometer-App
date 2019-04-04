@@ -48,8 +48,7 @@ namespace Barometer_App.ViewModels
 
         public async void OnRatingCommand()
         {
-            var navigationParameters = new NavigationParameters();
-            navigationParameters.Add("Bar", Bar);
+            var navigationParameters = new NavigationParameters {{"Bar", Bar}};
             await _navigationService.NavigateAsync("BarRating", navigationParameters);
         }
     }

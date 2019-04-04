@@ -13,7 +13,6 @@ namespace Barometer_App.ViewModels
     {
         private readonly INavigationService _navigationService;
 
-        private Bar _bar;
 
         public BarEditViewModel(INavigationService navigationService)
         {
@@ -21,6 +20,8 @@ namespace Barometer_App.ViewModels
             _navigationService = navigationService;
             _bar = new Bar();
         }
+
+        private Bar _bar;
 
         public Bar Bar
         {
