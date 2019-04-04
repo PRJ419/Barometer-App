@@ -15,7 +15,7 @@ namespace RESTClient
         Task<BarDto> GetDetailedBar(string id);
         Task<bool> DeleteBar(string id);
         Task<List<BarSimpleDto>> GetWorstBarList();
-        Task<List<BarSimpleDto>> GetSpecificBarList(string id1, string id2);
+        Task<List<BarSimpleDto>> GetSpecificBarList(int index1, int index2);
         Task<List<DrinkDto>> GetBarDrinkList(string id);
     }
 }

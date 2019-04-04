@@ -75,7 +75,7 @@ namespace RESTClient
         }
 
         //GET api/bars/{from}/{to}
-        public async Task<List<BarSimpleDto>> GetSpecificBarList(string id1, string id2)
+        public async Task<List<BarSimpleDto>> GetSpecificBarList(int index1, int index2)
         {
             throw new NotImplementedException();
         }

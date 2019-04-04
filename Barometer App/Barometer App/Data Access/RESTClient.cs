@@ -176,7 +176,7 @@ namespace RESTClient
         }
 
         //GET api/bars/{from}/{to}
-        public async Task<List<BarSimpleDto>> GetSpecificBarList(string id1, string id2) //Ikke testet endnu
+        public async Task<List<BarSimpleDto>> GetSpecificBarList(int index1, int index2) //Virker men weird, skal lige snakke med tobi
         {
             using (var client = new HttpClient())
             {
@@ -184,7 +184,7 @@ namespace RESTClient
 
                 try
                 {
-                    var response = await client.GetAsync($"api/bars/{id1}/{id2}");
+                    var response = await client.GetAsync($"api/bars/{index1}/{index2}");
                     if (response.IsSuccessStatusCode)
                     {
                         var msg = await response.Content.ReadAsStringAsync();
@@ -206,7 +206,7 @@ namespace RESTClient
         }
 
         //GET api/bars/{barname}/drinks
-        public async Task<List<DrinkDto>> GetBarDrinkList(string id) //Ikke testet endnu
+        public async Task<List<DrinkDto>> GetBarDrinkList(string id)
         {
             using (var client = new HttpClient())
             {
