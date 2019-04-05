@@ -42,12 +42,12 @@
                 <DataTemplate>
                     <ViewCell>
                         <StackLayout Margin="5">
-                            <Label Text="{Binding Name}"
+                            <Label Text="{Binding BarName}"
                                    LineBreakMode="NoWrap"
                                    FontSize="16"
                                    FontAttributes="Bold"
                                    Style="{DynamicResource ListItemTextStyle}"></Label>
-                            <Label Text="{Binding AboutText}"
+                            <Label Text="{Binding ShortDescription}"
                                    FontSize="12"
                                    Style="{DynamicResource ListItemDetailTextStyle}"></Label>
                             <Grid>
@@ -56,7 +56,7 @@
                                     <ColumnDefinition Width="3*"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
                                 <Label Grid.Column="0" Text="Rating" Style="{DynamicResource ListItemDetailTextStyle}"></Label>
-                                <ProgressBar Grid.Column="1" Progress="0.8" ProgressColor="Green"></ProgressBar>
+                                <ProgressBar Grid.Column="1" Progress="{Binding AvgRating}" ProgressColor="Green"></ProgressBar>
                             </Grid>
                             <Image
                                 Source="{Binding Image}"

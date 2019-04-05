@@ -4,7 +4,7 @@
              x:Class="Barometer_App.Views.DetailedBar"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
-             Title="{Binding Bar.Name}">
+             Title="{Binding Bar.BarName}">
     <ContentPage.Content>
         <ScrollView Margin="10">
         <StackLayout>
@@ -25,11 +25,11 @@
                         <ColumnDefinition Width="2*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <Label Grid.Column="0" Text="Rating: " TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="10"></Label>
-                    <ProgressBar Grid.Column="1" Progress="{Binding Bar.Rating}" ProgressColor="Green"></ProgressBar>
+                    <ProgressBar Grid.Column="1"  Progress="{Binding Bar.AvgRating}" ProgressColor="Green"></ProgressBar>
                     <Button Grid.Column="2" Text="Rate" Command="{Binding RatingCommand}"></Button>
                 </Grid>
 
-            <Label Text="{Binding Bar.LongAboutText}" FontSize="10"></Label>
+                <Label Text="{Binding Bar.LongDescription}" FontSize="10"></Label>
 
             <Grid>
                 <Grid.ColumnDefinitions>

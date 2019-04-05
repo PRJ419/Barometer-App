@@ -12,12 +12,12 @@
                FontAttributes="Bold"
                TextColor="Black"
                ></Label>
-        <Label Text="{Binding Bar.Name}"
+            <Label Text="{Binding Bar.BarName}"
              LineBreakMode="NoWrap"
             FontSize="16"
             FontAttributes="Bold"
             Style="{DynamicResource ListItemTextStyle}"></Label>
-        <Label Text="{Binding Bar.AboutText}"
+            <Label Text="{Binding Bar.ShortDescription}"
             FontSize="12"
             Style="{DynamicResource ListItemDetailTextStyle}"></Label>
         <Image
@@ -33,12 +33,12 @@
                FontAttributes="Bold"
                TextColor="Black"
         ></Label>
-        <Entry Text="{Binding Bar.Name}"
+            <Entry Text="{Binding Bar.BarName}"
                FontSize="10"
                FontAttributes="Bold"
                Style="{DynamicResource ListItemTextStyle}"
                MaxLength="50"></Entry>
-        <Entry Text="{Binding Bar.AboutText}"
+            <Entry Text="{Binding Bar.ShortDescription}"
                FontSize="10"
                Style="{DynamicResource ListItemDetailTextStyle}"
                MaxLength="200"></Entry>

@@ -7,19 +7,20 @@ using Barometer_App.Models;
 using Prism.Commands;
 using Prism.Navigation;
 using RESTClient;
+using RESTClient.DTOs;
 
 namespace Barometer_App.ViewModels
 {
     public class BarListViewModel : ViewModelBase
     {
         private readonly INavigationService _navigationService;
-        public ObservableCollection<Bar> Bars { get; set; }
+        public ObservableCollection<BarListViewDto> Bars { get; set; }
 
         public IRestClient RestClient { get; set; }
 
         public BarListViewModel(INavigationService navigationService)
         {
-            Bars = new ObservableCollection<Bar>();
+            Bars = new ObservableCollection<BarListViewDto>();
             RestClient = new StubRestClient();
             OnLoadItemsCommand();
             _navigationService = navigationService;
@@ -28,9 +29,9 @@ namespace Barometer_App.ViewModels
 
         #region Propertis
 
-        private Bar _currentBar = null;
+        private BarListViewDto _currentBar = null;
 
-        public Bar CurrentBar
+        public BarListViewDto CurrentBar
         {
             get => _currentBar;
             set => SetProperty(ref _currentBar, value);
@@ -51,10 +52,10 @@ namespace Barometer_App.ViewModels
             var barList = RestClient.GetBarList();
             foreach (var barSimpleDto in barList.Result)
             {
-                Bars.Add(new Bar {
-                    AboutText = barSimpleDto.ShortDescription,
-                    Rating = barSimpleDto.AvgRating/5,
-                    Name = barSimpleDto.BarName,
+                Bars.Add(new BarListViewDto() {
+                    ShortDescription = barSimpleDto.ShortDescription,
+                    AvgRating = barSimpleDto.AvgRating/5,
+                    BarName = barSimpleDto.BarName,
                     Image = "katrine.png"
                 });
             }
@@ -90,15 +91,15 @@ namespace Barometer_App.ViewModels
 
         public void FilterItemsExecute(string obj)
         {
-            List<Bar> tempBars;
+            List<BarListViewDto> tempBars;
 
             switch (obj)
             {
                 case "Name":
-                    tempBars = Bars.OrderBy(o => o.Name).ToList();
+                    tempBars = Bars.OrderBy(o => o.BarName).ToList();
                     break;
                 case "Rating":
-                    tempBars = Bars.OrderBy(o => o.Rating).ToList();
+                    tempBars = Bars.OrderBy(o => o.AvgRating).ToList();
                     //Highest rating first
                     tempBars.Reverse();
                     break;
