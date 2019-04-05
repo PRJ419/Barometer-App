@@ -20,14 +20,14 @@
 
                 <Grid Margin="5">
                     <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="4*"></ColumnDefinition>
                         <ColumnDefinition Width="2*"></ColumnDefinition>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                    <ColumnDefinition Width="4*"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <Button Text="Rate!" FontSize="Small" Command="{Binding RatingCommand}"></Button>
-                <Label Grid.Column="1" Text="Rating: " TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="10"></Label>
-                <ProgressBar Grid.Column="2" Progress="{Binding Bar.Rating}" ProgressColor="Green"></ProgressBar>
-            </Grid>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Text="Rating: " TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="10"></Label>
+                    <ProgressBar Grid.Column="1" Progress="{Binding Bar.Rating}" ProgressColor="Green"></ProgressBar>
+                    <Button Grid.Column="2" Text="Rate" Command="{Binding RatingCommand}"></Button>
+                </Grid>
 
             <Label Text="{Binding Bar.LongAboutText}" FontSize="10"></Label>
 
