@@ -14,6 +14,8 @@ namespace RESTClient
     {
         private const string Baseaddress = "https://localhost:44310/";
 
+        //BAR
+
         //GET api/bars/
         public async Task<List<BarSimpleDto>> GetBarList()
         {
@@ -234,5 +236,7 @@ namespace RESTClient
                 }
             }
         }
+
+        
     }
 }
