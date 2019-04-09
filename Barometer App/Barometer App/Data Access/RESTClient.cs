@@ -47,7 +47,7 @@ namespace RESTClient
         }
 
         //PUT /api/bars/
-        public async Task<bool> EditBar(BarDto editedBar) //Virker ikke
+        public async Task<bool> EditBar(BarDto editedBar)
         {
             using (var client = new HttpClient())
             {
@@ -178,7 +178,7 @@ namespace RESTClient
         }
 
         //GET /api/bars/{from}/{to}
-        public async Task<List<BarSimpleDto>> GetSpecificBarList(int index1, int index2) //Virker men weird, skal lige snakke med tobi
+        public async Task<List<BarSimpleDto>> GetSpecificBarList(int startIndex, int pageSize) //Virker, og det er alfabetisk orden
         {
             using (var client = new HttpClient())
             {
@@ -186,7 +186,7 @@ namespace RESTClient
 
                 try
                 {
-                    var response = await client.GetAsync($"api/bars/{index1}/{index2}");
+                    var response = await client.GetAsync($"api/bars/{startIndex}/{pageSize}");
                     if (response.IsSuccessStatusCode)
                     {
                         var msg = await response.Content.ReadAsStringAsync();
@@ -211,7 +211,7 @@ namespace RESTClient
         //DRINK
 
         //GET /api/bars/{barname}/drinks
-        public async Task<List<DrinkDto>> GetBarDrinkList(string id) //Skal testes
+        public async Task<List<DrinkDto>> GetBarDrinkList(string id)
         {
             using (var client = new HttpClient())
             {
@@ -241,7 +241,7 @@ namespace RESTClient
         }
 
         //PUT /api/bars/{barname}/drinks
-        public async Task<bool> EditDrink(DrinkDto editedDrink, string id) //Skal testes
+        public async Task<bool> EditDrink(DrinkDto editedDrink, string id)
         {
             using (var client = new HttpClient())
             {
@@ -266,7 +266,7 @@ namespace RESTClient
         }
 
         //POST /api/bars/{barname}/drinks
-        public async Task<bool> CreateDrink(DrinkDto newDrink, string id) //Skal testes
+        public async Task<bool> CreateDrink(DrinkDto newDrink, string id)
         {
             using (var client = new HttpClient())
             {
@@ -290,7 +290,7 @@ namespace RESTClient
             }
         }
 
-        //DELETE /api/bars/{barname}/drinks HVORDAN FINDER VI DEN SPECIFIKKE DRINK?
+        //DELETE /api/bars/{barname}/drinks TODO: HVORDAN FINDER VI DEN SPECIFIKKE DRINK?
         /*public async Task<bool> DeleteDrink(string barId)
         {
             using (var client = new HttpClient())
@@ -314,7 +314,7 @@ namespace RESTClient
         //EVENT
 
         //GET /api/bars/{barname}/events
-        public async Task<List<BarEventDto>> GetBarEventList(string id) //Skal testes
+        public async Task<List<BarEventDto>> GetBarEventList(string id) //TODO: Skal testes
         {
             using (var client = new HttpClient())
             {
@@ -344,7 +344,7 @@ namespace RESTClient
         }
 
         //PUT /api/bars/{barname}/events
-        public async Task<bool> EditEvent(BarEventDto editedEvent, string id) //Skal testes
+        public async Task<bool> EditEvent(BarEventDto editedEvent, string id) //TODO: Skal testes
         {
             using (var client = new HttpClient())
             {
@@ -369,7 +369,7 @@ namespace RESTClient
         }
 
         //POST /api/bars/{barname}/events
-        public async Task<bool> CreateEvent(BarEventDto newEvent, string id) //Skal testes
+        public async Task<bool> CreateEvent(BarEventDto newEvent, string id) //TODO: Skal testes
         {
             using (var client = new HttpClient())
             {
@@ -394,7 +394,7 @@ namespace RESTClient
         }
 
         //DELETE /eventname
-        public async Task<bool> DeleteEvent(string id) //Skal testes
+        public async Task<bool> DeleteEvent(string id) //TODO: Skal testes
         {
             using (var client = new HttpClient())
             {
@@ -417,7 +417,7 @@ namespace RESTClient
         //REVIEW
 
         //GET /api/bars/{barname}/reviews
-        public async Task<List<ReviewDto>> GetBarReviewList(string id) //Skal testes
+        public async Task<List<ReviewDto>> GetBarReviewList(string id) //TODO: Skal testes
         {
             using (var client = new HttpClient())
             {
@@ -447,7 +447,7 @@ namespace RESTClient
         }
 
         //PUT /api/bars/{barname}/reviews
-        public async Task<bool> EditReview(ReviewDto editedReview, string id) //Skal testes
+        public async Task<bool> EditReview(ReviewDto editedReview, string id) //TODO: Skal testes
         {
             using (var client = new HttpClient())
             {
@@ -472,7 +472,7 @@ namespace RESTClient
         }
 
         //POST /api/bars/{barname}/reviews
-        public async Task<bool> CreateReview(ReviewDto newReview, string id) //Skal testes
+        public async Task<bool> CreateReview(ReviewDto newReview, string id) //TODO: Skal testes
         {
             using (var client = new HttpClient())
             {
@@ -497,9 +497,9 @@ namespace RESTClient
         }
 
         //DELETE /api/bars/{barname}/reviews
-        //SKAL VI SLETTE LISTEN AF REVIEWS ELLER SPECIFIK?
+        //TODO: SKAL VI SLETTE LISTEN AF REVIEWS ELLER SPECIFIK?
 
         //GET /api/bars/{barname}/reviews/{username}
-        //GETTER VI KUN EN SPECIFIK PERSONS REVIEW FOR EN BESTEMT BAR ELLER FOR ALLE BARER?
+        //TODO: GETTER VI KUN EN SPECIFIK PERSONS REVIEW FOR EN BESTEMT BAR ELLER FOR ALLE BARER?
     }
 }
