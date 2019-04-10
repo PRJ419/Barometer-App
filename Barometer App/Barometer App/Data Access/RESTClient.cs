@@ -12,11 +12,10 @@ namespace RESTClient
 {
     public class RestClient : IRestClient
     {
-      //  private const string Baseaddress = "https://localhost:44310/";
-        private const string Baseaddress = "https://10.192.78.236:45457/";
+        private const string Baseaddress = "https://localhost:44310/";
 
         //GET api/bars/
-        public async Task<List<BarSimpleDto>> GetBarList()
+        public async Task<List<BarSimple>> GetBestBarList() //Virker
         {
             using (var client = new HttpClient())
             {
@@ -28,25 +27,25 @@ namespace RESTClient
                     if (response.IsSuccessStatusCode)
                     {
                         var msg = await response.Content.ReadAsStringAsync();
-                        var bars = JsonConvert.DeserializeObject<List<BarSimpleDto>>(msg);
+                        var bars = JsonConvert.DeserializeObject<List<BarSimple>>(msg);
 
                         return bars;
                     }
 
                     //GetAsync failed, returning empty list of bars
-                    return new List<BarSimpleDto>();
+                    return new List<BarSimple>();
                 }
                 catch (Exception e)
                 {
                     Console.WriteLine("Der var ingen barer at hente");
                     //There were no bars to get, returning empty list of bars
-                    return new List<BarSimpleDto>();
+                    return new List<BarSimple>();
                 }
             }
         }
 
         //PUT api/bars/
-        public async Task<bool> EditBar(BarDto editedBar) //Virker ikke
+        public async Task<bool> EditBar(Bar editedBar) //Virker
         {
             using (var client = new HttpClient())
             {
@@ -71,7 +70,7 @@ namespace RESTClient
         }
 
         //POST api/bars/
-        public async Task<bool> CreateBar(BarDto newBar)
+        public async Task<bool> CreateBar(Bar newBar) //Virker
         {
             using (var client = new HttpClient())
             {
@@ -96,7 +95,7 @@ namespace RESTClient
         }
 
         //GET api/bars/{id}
-        public async Task<BarDto> GetDetailedBar(string id)
+        public async Task<Bar> GetDetailedBar(string id) //Virker
         {
             using (var client = new HttpClient())
             {
@@ -109,25 +108,25 @@ namespace RESTClient
                     if (response.IsSuccessStatusCode)
                     {
                         var msg = await response.Content.ReadAsStringAsync();
-                        var bar = JsonConvert.DeserializeObject<BarDto>(msg);
+                        var bar = JsonConvert.DeserializeObject<Bar>(msg);
 
                         return bar;
                     }
 
                     //GetAsync failed, returning empty bar
-                    return new BarDto();
+                    return new Bar();
                 }
                 catch (Exception e)
                 {
                     Console.WriteLine($"Der eksisterer ingen bar ved navn {id}");
                     //There were no bar to get, returning empty bar
-                    return new BarDto();
+                    return new Bar();
                 }
             }
         }
 
         //DELETE api/bars/{id}
-        public async Task<bool> DeleteBar(string id)
+        public async Task<bool> DeleteBar(string id) // Virker
         {
             using (var client = new HttpClient())
             {
@@ -147,7 +146,7 @@ namespace RESTClient
         }
 
         //GET api/bars/worst
-        public async Task<List<BarSimpleDto>> GetWorstBarList()
+        public async Task<List<BarSimple>> GetWorstBarList() //Virker
         {
             using (var client = new HttpClient())
             {
@@ -159,25 +158,26 @@ namespace RESTClient
                     if (response.IsSuccessStatusCode)
                     {
                         var msg = await response.Content.ReadAsStringAsync();
-                        var bars = JsonConvert.DeserializeObject<List<BarSimpleDto>>(msg);
+                        var bars = JsonConvert.DeserializeObject<List<BarSimple>>(msg);
 
                         return bars;
                     }
 
                     //GetAsync failed, returning empty list of bars
-                    return new List<BarSimpleDto>();
+                    return new List<BarSimple>();
                 }
                 catch (Exception e)
                 {
                     Console.WriteLine("Der var ingen barer at hente");
                     //There were no bars to get, returning empty list of bars
-                    return new List<BarSimpleDto>();
+                    return new List<BarSimple>();
                 }
             }
         }
 
         //GET api/bars/{from}/{to}
-        public async Task<List<BarSimpleDto>> GetSpecificBarList(string id1, string id2) //Ikke testet endnu
+        public async Task<List<BarSimple>>
+            GetSpecificBarList(int startIndex, int pageSize) //Virker men i alfabetisk orden
         {
             using (var client = new HttpClient())
             {
@@ -185,55 +185,27 @@ namespace RESTClient
 
                 try
                 {
-                    var response = await client.GetAsync($"api/bars/{id1}/{id2}");
+                    var response = await client.GetAsync($"api/bars/{startIndex}/{pageSize}");
                     if (response.IsSuccessStatusCode)
                     {
                         var msg = await response.Content.ReadAsStringAsync();
-                        var bars = JsonConvert.DeserializeObject<List<BarSimpleDto>>(msg);
+                        var bars = JsonConvert.DeserializeObject<List<BarSimple>>(msg);
 
                         return bars;
                     }
 
                     //GetAsync failed, returning empty list of bars
-                    return new List<BarSimpleDto>();
+                    return new List<BarSimple>();
                 }
                 catch (Exception e)
                 {
                     Console.WriteLine("Der var ingen barer at hente");
                     //There were no bars to get, returning empty list of bars
-                    return new List<BarSimpleDto>();
+                    return new List<BarSimple>();
                 }
             }
         }
 
-        //GET api/bars/{barname}/drinks
-        public async Task<List<DrinkDto>> GetBarDrinkList(string id) //Ikke testet endnu
-        {
-            using (var client = new HttpClient())
-            {
-                client.BaseAddress = new Uri(Baseaddress);
 
-                try
-                {
-                    var response = await client.GetAsync($"api/bars/{id}/drinks/");
-                    if (response.IsSuccessStatusCode)
-                    {
-                        var msg = await response.Content.ReadAsStringAsync();
-                        var drinks = JsonConvert.DeserializeObject<List<DrinkDto>>(msg);
-
-                        return drinks;
-                    }
-
-                    //GetAsync failed, returning empty list of bars
-                    return new List<DrinkDto>();
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine("Der var ingen drinks at hente");
-                    //There were no drinks to get, returning empty list of drinks
-                    return new List<DrinkDto>();
-                }
-            }
-        }
     }
 }
