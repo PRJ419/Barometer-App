@@ -37,11 +37,11 @@ namespace Barometer_App.Models
             set => SetProperty(ref _aboutText, value);
         }
 
-        private string _longAboutText;
-        public string LongAboutText
+        private string _longDescription;
+        public string LongDescription
         {
-            get => _longAboutText;
-            set => SetProperty(ref _longAboutText, value);
+            get => _longDescription;
+            set => SetProperty(ref _longDescription, value);
         }
 
         private string _cvr;

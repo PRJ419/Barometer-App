@@ -48,7 +48,7 @@ namespace Barometer_App.ViewModels
         private async void OnLoadItemsCommand()
         {
             CurrentBar = null;
-            var barList =await  RestClient.GetBarList();
+            var barList =await  RestClient.GetBestBarList();
             foreach (var barSimpleDto in barList)
             {
                 Bars.Add(new Bar {
@@ -66,9 +66,9 @@ namespace Barometer_App.ViewModels
              _navigationCommand ?? (_navigationCommand = new DelegateCommand(NavigateViaListView));
 
         public async void NavigateViaListView()
-        { 
-            CurrentBar = null;
+        {           
             var navParam = new NavigationParameters {{"Bar", CurrentBar}};
+            CurrentBar = null;
             await _navigationService.NavigateAsync("DetailedBar", navParam);
         }
 

@@ -22,13 +22,13 @@ namespace Barometer_App.ViewModels
             RestClient = new RestClient();
             Bar = new Bar();
             _tempbar = new Bar();
-            OnLoadItemsCommand(_tempbar.Name);
             Title = Bar.Name;
         }
 
         public override void OnNavigatedTo(INavigationParameters parameters)
         {
             _tempbar = parameters.GetValue<Bar>("Bar");
+            OnLoadItemsCommand(_tempbar.Name);
         }
 
         public Bar Bar
@@ -40,14 +40,8 @@ namespace Barometer_App.ViewModels
 
         public async void OnLoadItemsCommand(string bar)
         {
-            var barDto = await RestClient.GetDetailedBar(bar);
-            Bar.Rating = barDto.AvgRating/5;
-            Bar.AboutText = barDto.ShortDescription;
-            Bar.LongAboutText = barDto.LongDescription;
-            Bar.Address = barDto.Address;
+            Bar = await RestClient.GetDetailedBar(bar);
             Bar.Image = "katrine.png";
-            Bar.AgeRestriction = barDto.AgeLimit;
-            Bar.Name = barDto.BarName;
         }
 
         private ICommand _ratingCommand;
