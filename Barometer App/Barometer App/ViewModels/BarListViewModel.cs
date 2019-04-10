@@ -20,7 +20,7 @@ namespace Barometer_App.ViewModels
         public BarListViewModel(INavigationService navigationService)
         {
             Bars = new ObservableCollection<Bar>();
-            RestClient = new StubRestClient();
+            RestClient = new RestClient();
             OnLoadItemsCommand();
             _navigationService = navigationService;
             Title = "Awesome Bar list";
@@ -45,11 +45,11 @@ namespace Barometer_App.ViewModels
             _loadItemsCommand ??
             (_loadItemsCommand = new DelegateCommand(OnLoadItemsCommand));
 
-        private void OnLoadItemsCommand()
+        private async void OnLoadItemsCommand()
         {
             CurrentBar = null;
-            var barList = RestClient.GetBarList();
-            foreach (var barSimpleDto in barList.Result)
+            var barList =await  RestClient.GetBarList();
+            foreach (var barSimpleDto in barList)
             {
                 Bars.Add(new Bar {
                     AboutText = barSimpleDto.ShortDescription,
@@ -68,7 +68,8 @@ namespace Barometer_App.ViewModels
         public async void NavigateViaListView()
         { 
             CurrentBar = null;
-            await _navigationService.NavigateAsync("DetailedBar");
+            var navParam = new NavigationParameters {{"Bar", CurrentBar}};
+            await _navigationService.NavigateAsync("DetailedBar", navParam);
         }
 
         private ICommand _filterItemsCommand;

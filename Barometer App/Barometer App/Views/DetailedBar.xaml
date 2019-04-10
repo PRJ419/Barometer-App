@@ -4,7 +4,7 @@
              x:Class="Barometer_App.Views.DetailedBar"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
-             Title="{Binding Bar.Name}">
+             Title="{Binding Title}">
     <ContentPage.Content>
         <ScrollView Margin="10">
         <StackLayout>
