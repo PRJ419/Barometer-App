@@ -13,22 +13,20 @@ namespace RESTClient
     {
         
         //GET api/bars/
-        public async Task<List<BarListViewDto>> GetBarList()
+        public async Task<List<BarSimpleDto>> GetBarList()
         {
-            var StubList = new List<BarListViewDto>();
+            List<BarSimpleDto> StubList = new List<BarSimpleDto>();
 
-            BarListViewDto bar1 = new BarListViewDto();
+            BarSimpleDto bar1 = new BarSimpleDto();
             bar1.BarName = "Bar1";
             bar1.AvgRating = 5;
             bar1.ShortDescription = "This is Bar1";
-            bar1.PostalCode = "8600";
             StubList.Add(bar1);
 
-            BarListViewDto bar2 = new BarListViewDto();
+            BarSimpleDto bar2 = new BarSimpleDto();
             bar2.BarName = "Bar2";
             bar2.AvgRating = 4;
             bar2.ShortDescription = "This is Bar2";
-            bar2.PostalCode = "8000";
             StubList.Add(bar2);
 
             return StubList;
@@ -47,15 +45,20 @@ namespace RESTClient
         }
 
         //GET api/bars/{id}
-        public async Task<DetailedBarViewDTO> GetDetailedBar(string id)
+        public async Task<BarDto> GetDetailedBar(string id)
         {
-            var detailedBar = new DetailedBarViewDTO()
+            var detailedBar = new BarDto
             {
                 BarName = "Barname",
                 Address = "Bar address",
-                AgeRestriction = 18,
+                AgeLimit = 18,
                 AvgRating = 4.2,
+                CVR = 12345678,
+                Educations = "School of engineering",
+                Email = "Bar email",
                 LongDescription = "Looooooong description",
+                PhoneNumber = 87654321,
+                ShortDescription = "Short description"
             };
 
             return detailedBar;
@@ -68,13 +71,13 @@ namespace RESTClient
         }
 
         //GET api/bars/worst
-        public async Task<List<BarListViewDto>> GetWorstBarList()
+        public async Task<List<BarSimpleDto>> GetWorstBarList()
         {
             throw new NotImplementedException();
         }
 
         //GET api/bars/{from}/{to}
-        public async Task<List<BarListViewDto>> GetSpecificBarList(string id1, string id2)
+        public async Task<List<BarSimpleDto>> GetSpecificBarList(string id1, string id2)
         {
             throw new NotImplementedException();
         }

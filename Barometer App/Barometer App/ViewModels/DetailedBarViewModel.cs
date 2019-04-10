@@ -4,7 +4,6 @@ using Barometer_App.ViewModels;
 using Prism.Commands;
 using Prism.Navigation;
 using RESTClient;
-using RESTClient.DTOs;
 
 namespace Barometer_App.ViewModels
 {
@@ -14,19 +13,17 @@ namespace Barometer_App.ViewModels
 
         public IRestClient RestClient { get; set; }
 
+        private Bar _bar;
         public DetailedBarViewModel(INavigationService navigationService) : base()
         {
             Title = "Detailed Bar Page";
             _navigationService = navigationService;
             RestClient = new StubRestClient();
-            Bar = new DetailedBarViewDTO();
+            Bar = new Bar();
             OnLoadItemsCommand();
         }
 
-
-
-        private DetailedBarViewDTO _bar;
-        public DetailedBarViewDTO Bar
+        public Bar Bar
         {
             get => _bar;
             set => SetProperty(ref _bar, value);
@@ -36,11 +33,12 @@ namespace Barometer_App.ViewModels
         public void OnLoadItemsCommand()
         {
             var barDto = RestClient.GetDetailedBar("Katrine").Result;
-            Bar.AvgRating = barDto.AvgRating / 5;
-            Bar.LongDescription = barDto.LongDescription;
+            Bar.Rating = barDto.AvgRating;
+            Bar.AboutText = barDto.ShortDescription;
+            Bar.LongAboutText = barDto.LongDescription;
             Bar.Address = barDto.Address;
             Bar.Image = "katrine.png";
-            Bar.AgeRestriction = barDto.AgeRestriction;
+            Bar.AgeRestriction = barDto.AgeLimit;
 
         }
 
