@@ -13,22 +13,19 @@ namespace Barometer_App.ViewModels
 
         public IRestClient RestClient { get; set; }
 
-        private Bar _tempbar;
-
         private Bar _bar;
         public DetailedBarViewModel(INavigationService navigationService) : base()
         {
             _navigationService = navigationService;
-            RestClient = new RestClient();
+            RestClient = new StubRestClient();
             Bar = new Bar();
-            _tempbar = new Bar();
-            Title = Bar.Name;
+            Title = Bar.BarName;
         }
 
         public override void OnNavigatedTo(INavigationParameters parameters)
         {
-            _tempbar = parameters.GetValue<Bar>("Bar");
-            OnLoadItemsCommand(_tempbar.Name);
+            var barName = parameters.GetValue<string>("Bar");
+            OnLoadItemsCommand(barName);
         }
 
         public Bar Bar

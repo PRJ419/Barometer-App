@@ -11,7 +11,7 @@
 
             <Label Text="Sign-Up to Bar-O-Meter" Style="{StaticResource HeaderStyle}"/>
 
-            <Label Text="Full Name" TextColor="{StaticResource LabelColor}"/>
+            <Label Text="Full BarName" TextColor="{StaticResource LabelColor}"/>
             <Entry Placeholder="John Doe" PlaceholderColor="DimGray" />
 
             <Label Text="E-mail" TextColor="{StaticResource LabelColor}"/>

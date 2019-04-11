@@ -8,6 +8,7 @@ using Barometer_App.Views;
 using Newtonsoft.Json;
 using RESTClient.DTOs;
 
+
 namespace RESTClient
 {
     public class StubRestClient : IRestClient
@@ -16,24 +17,16 @@ namespace RESTClient
         //GET api/bars/
         public async Task<List<BarSimple>> GetBestBarList()
         {
-            //var StubList = new List<BarListViewDto>();
+            var stubList = new List<BarSimple>();
 
-            //BarListViewDto bar1 = new BarListViewDto();
-            //bar1.BarName = "Bar1";
-            //bar1.AvgRating = 5;
-            //bar1.ShortDescription = "This is Bar1";
-            //bar1.PostalCode = "8600";
-            //StubList.Add(bar1);
+            var bar1 = new BarSimple {BarName = "Bar1", AvgRating = 5, ShortDescription = "This is Bar1", Image = "katrine.png"};
+            stubList.Add(bar1);
 
-            //BarListViewDto bar2 = new BarListViewDto();
-            //bar2.BarName = "Bar2";
-            //bar2.AvgRating = 4;
-            //bar2.ShortDescription = "This is Bar2";
-            //bar2.PostalCode = "8000";
-            //StubList.Add(bar2);
+            var bar2 = new BarSimple {BarName = "Bar2", AvgRating = 4, ShortDescription = "This is Bar2", Image = "katrine.png"};
+            stubList.Add(bar2);
 
-            //return StubList;
-            throw new NotImplementedException();
+            return stubList;
+
         }
 
         //PUT api/bars/
@@ -51,17 +44,17 @@ namespace RESTClient
         //GET api/bars/{id}
         public async Task<Bar> GetDetailedBar(string id)
         {
-            //var detailedBar = new DetailedBarViewDTO()
-            //{
-            //    BarName = "Barname",
-            //    Address = "Bar address",
-            //    AgeRestriction = 18,
-            //    AvgRating = 4.2,
-            //    LongDescription = "Looooooong description",
-            //};
+            var detailedBar = new Bar()
+            {
+                BarName = "Barname",
+                Address = "Bar address",
+                AgeLimit = 18,
+                AvgRating = 4.2,
+                LongDescription = "Looooooong description",
+                Image = "katrine.png"
+            };
 
-            //return detailedBar;
-            throw new NotImplementedException();
+            return detailedBar;
         }
 
         //DELETE api/bars/{id}

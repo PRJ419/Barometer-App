@@ -6,6 +6,7 @@ using System.Text;
 using Barometer_App.Models;
 using Barometer_App.ViewModels;
 using Prism.Navigation;
+using RESTClient.DTOs;
 
 namespace Barometer_App.ViewModels
 {
@@ -18,12 +19,12 @@ namespace Barometer_App.ViewModels
         {
             Title = "Bar Editing Page";          
             _navigationService = navigationService;
-            _bar = new Bar();
+            _bar = new BarSimple();
         }
 
-        private Bar _bar;
+        private BarSimple _bar;
 
-        public Bar Bar
+        public BarSimple Bar
         {
             get => _bar;
             set => SetProperty(ref _bar, value);
@@ -31,8 +32,11 @@ namespace Barometer_App.ViewModels
 
         public override void OnNavigatingTo(INavigationParameters parameters)
         {
+            //Lappeløsning lige nu.
             var bar = parameters.GetValue<Bar>("Bar");
-            Bar = bar;
+            Bar.BarName = bar.BarName;
+            Bar.AvgRating = bar.AvgRating;
+            Bar.ShortDescription = bar.ShortDescription;
         }
 
     }

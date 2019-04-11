@@ -7,11 +7,12 @@ namespace Barometer_App.Models
     public class Bar : BindableBase
     {
         //Properties for a bar
-        private string _name;
-        public string Name
+        private string _barName;
+
+        public string BarName
         {
-            get => _name;
-            set => SetProperty(ref _name, value);
+            get => _barName;
+            set => SetProperty(ref _barName, value);
         }
 
         private string _address;
@@ -22,22 +23,16 @@ namespace Barometer_App.Models
             set => SetProperty(ref _address, value);
         }
 
-        private string _postalCode;
+        private string _shortDescription;
 
-        public string PostalCode
+        public string ShortDescription
         {
-            get => _postalCode;
-            set => SetProperty(ref _postalCode, value);
-        }
-
-        private string _aboutText;
-        public string AboutText
-        {
-            get => _aboutText;
-            set => SetProperty(ref _aboutText, value);
+            get => _shortDescription;
+            set => SetProperty(ref _shortDescription, value);
         }
 
         private string _longDescription;
+
         public string LongDescription
         {
             get => _longDescription;
@@ -45,6 +40,7 @@ namespace Barometer_App.Models
         }
 
         private string _cvr;
+
         public string CVR
         {
             get => _cvr;
@@ -52,6 +48,7 @@ namespace Barometer_App.Models
         }
 
         private string _phoneNumber;
+
         public string PhoneNumber
         {
             get => _phoneNumber;
@@ -59,39 +56,45 @@ namespace Barometer_App.Models
         }
 
         private string _email;
+
         public string Email
         {
             get => _email;
             set => SetProperty(ref _email, value);
         }
 
-        private int _barId;
-        public int BarId
-        {
-            get => _barId;
-            set => SetProperty(ref _barId, value);
-        }
-
         private string _image;
+
         public string Image
         {
             get => _image;
             set => SetProperty(ref _image, value);
         }
 
-        private double _rating;
-        public double Rating
+        private double _avgRating;
+
+        public double AvgRating
         {
-            get => _rating;
-            set => SetProperty(ref _rating, value);
+            get => _avgRating;
+            set => SetProperty(ref _avgRating, value);
         }
 
-        private int _ageRestriction;
+        private int _ageLimit;
 
-        public int AgeRestriction {
-            get => _ageRestriction;
-            set => SetProperty(ref _ageRestriction, value);
+        public int AgeLimit
+        {
+            get => _ageLimit;
+            set => SetProperty(ref _ageLimit, value);
         }
-        //Der skal implementeres drinks , Event list, Coupons mm hvis vi når så langt. 
+
+        private int _educations;
+
+        public int MyProperty
+        {
+            get => _educations;
+            set => SetProperty(ref _educations, value);
+
+            //Der skal implementeres drinks , Event list, Coupons mm hvis vi når så langt. 
+        }
     }
 }

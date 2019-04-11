@@ -7,20 +7,21 @@ using Barometer_App.Models;
 using Prism.Commands;
 using Prism.Navigation;
 using RESTClient;
+using RESTClient.DTOs;
 
 namespace Barometer_App.ViewModels
 {
     public class BarListViewModel : ViewModelBase
     {
         private readonly INavigationService _navigationService;
-        public ObservableCollection<Bar> Bars { get; set; }
+        public ObservableCollection<BarSimple> Bars { get; set; }
 
         public IRestClient RestClient { get; set; }
 
         public BarListViewModel(INavigationService navigationService)
         {
-            Bars = new ObservableCollection<Bar>();
-            RestClient = new RestClient();
+            Bars = new ObservableCollection<BarSimple>();
+            RestClient = new StubRestClient();
             OnLoadItemsCommand();
             _navigationService = navigationService;
             Title = "Awesome Bar list";
@@ -28,9 +29,9 @@ namespace Barometer_App.ViewModels
 
         #region Propertis
 
-        private Bar _currentBar = null;
+        private BarSimple _currentBar = null;
 
-        public Bar CurrentBar
+        public BarSimple CurrentBar
         {
             get => _currentBar;
             set => SetProperty(ref _currentBar, value);
@@ -49,14 +50,9 @@ namespace Barometer_App.ViewModels
         {
             CurrentBar = null;
             var barList =await  RestClient.GetBestBarList();
-            foreach (var barSimpleDto in barList)
+            foreach (var barSimple in barList)
             {
-                Bars.Add(new Bar {
-                    AboutText = barSimpleDto.ShortDescription,
-                    Rating = barSimpleDto.AvgRating/5,
-                    Name = barSimpleDto.BarName,
-                    Image = "katrine.png"
-                });
+                Bars.Add(barSimple); 
             }
         }
 
@@ -67,7 +63,7 @@ namespace Barometer_App.ViewModels
 
         public async void NavigateViaListView()
         {           
-            var navParam = new NavigationParameters {{"Bar", CurrentBar}};
+            var navParam = new NavigationParameters {{"Bar", CurrentBar.BarName}};
             CurrentBar = null;
             await _navigationService.NavigateAsync("DetailedBar", navParam);
         }
@@ -91,20 +87,17 @@ namespace Barometer_App.ViewModels
 
         public void FilterItemsExecute(string obj)
         {
-            List<Bar> tempBars;
+            List<BarSimple> tempBars;
 
             switch (obj)
             {
-                case "Name":
-                    tempBars = Bars.OrderBy(o => o.Name).ToList();
+                case "BarName":
+                    tempBars = Bars.OrderBy(o => o.BarName).ToList();
                     break;
-                case "Rating":
-                    tempBars = Bars.OrderBy(o => o.Rating).ToList();
+                case "AvgRating":
+                    tempBars = Bars.OrderBy(o => o.AvgRating).ToList();
                     //Highest rating first
                     tempBars.Reverse();
-                    break;
-                case "Postal Code":
-                    tempBars = Bars.OrderBy(o => o.PostalCode).ToList();
                     break;
                 default:
                     throw new InvalidEnumArgumentException("Couldn't find the item");

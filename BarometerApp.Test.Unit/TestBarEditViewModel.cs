@@ -25,10 +25,10 @@ namespace BarometerApp.Test.Unit
             var viewModel = new BarEditViewModel(Substitute.For<INavigationService>());
             var propertiesChanged = new List<string>();
 
-            viewModel.Bar.Name = "Test";
+            viewModel.Bar.BarName = "Test";
             viewModel.PropertyChanged += (s, e) => propertiesChanged.Add(e.PropertyName);
 
-            viewModel.Bar.Name = "Test";
+            viewModel.Bar.BarName = "Test";
 
             Assert.AreEqual(0, propertiesChanged.Count);
         }
@@ -37,15 +37,14 @@ namespace BarometerApp.Test.Unit
         public void ShouldNotifyListenersWhenBarNameChanges()
         {
             var viewModel = new BarEditViewModel(Substitute.For<INavigationService>());
-            var propertiesChanged = new List<string>();
+            var waschanged = false;
 
-            viewModel.Bar.Name = "Test";
-            viewModel.PropertyChanged += (s, e) => propertiesChanged.Add(e.PropertyName);
-
+            viewModel.Bar.BarName = "Test";
+            viewModel.PropertyChanged += (s, e) => waschanged = true;
             //Why is this zero?
-            viewModel.Bar.Name = "Test1";
+            viewModel.Bar.BarName = "Test1";
 
-            Assert.AreEqual(0, propertiesChanged.Count);
+            Assert.IsTrue(waschanged);
         }
     }
 }

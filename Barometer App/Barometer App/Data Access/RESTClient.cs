@@ -36,7 +36,7 @@ namespace RESTClient
                     //GetAsync failed, returning empty list of bars
                     return new List<BarSimple>();
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     Console.WriteLine("Der var ingen barer at hente");
                     //There were no bars to get, returning empty list of bars
@@ -117,7 +117,7 @@ namespace RESTClient
                     //GetAsync failed, returning empty bar
                     return new Bar();
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     Console.WriteLine($"Der eksisterer ingen bar ved navn {id}");
                     //There were no bar to get, returning empty bar
@@ -167,7 +167,7 @@ namespace RESTClient
                     //GetAsync failed, returning empty list of bars
                     return new List<BarSimple>();
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     Console.WriteLine("Der var ingen barer at hente");
                     //There were no bars to get, returning empty list of bars
@@ -198,7 +198,7 @@ namespace RESTClient
                     //GetAsync failed, returning empty list of bars
                     return new List<BarSimple>();
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     Console.WriteLine("Der var ingen barer at hente");
                     //There were no bars to get, returning empty list of bars
