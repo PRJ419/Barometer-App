@@ -76,7 +76,7 @@ namespace Barometer_App.Models
         public double AvgRating
         {
             get => _avgRating;
-            set => SetProperty(ref _avgRating, value/5);
+            set => SetProperty(ref _avgRating, value);
         }
 
         private int _ageLimit;
@@ -87,14 +87,14 @@ namespace Barometer_App.Models
             set => SetProperty(ref _ageLimit, value);
         }
 
-        private int _educations;
+        private string _educations;
 
-        public int Educations
+        public string Educations
         {
             get => _educations;
             set => SetProperty(ref _educations, value);
 
-            //Der skal implementeres drinks , Event list, Coupons mm hvis vi når så langt. 
+           // Der skal implementeres drinks , Event list, Coupons mm hvis vi når så langt. 
         }
     }
 }

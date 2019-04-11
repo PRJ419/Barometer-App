@@ -24,7 +24,7 @@
                         <ColumnDefinition Width="4*"></ColumnDefinition>
                         <ColumnDefinition Width="2*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Label Grid.Column="0" Text="AvgRating: " TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="10"></Label>
+                    <Label Grid.Column="0" Text="Rating: " TextColor="Black" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="10"></Label>
                     <ProgressBar Grid.Column="1" Progress="{Binding Bar.AvgRating}" ProgressColor="Green"></ProgressBar>
                     <Button Grid.Column="2" Text="Rate" Command="{Binding RatingCommand}"></Button>
                 </Grid>

@@ -34,11 +34,9 @@ namespace Barometer_App.ViewModels
             set => SetProperty(ref _bar, value);
         }
 
-
         public async void OnLoadItemsCommand(string bar)
         {
             Bar = await RestClient.GetDetailedBar(bar);
-            Bar.Image = "katrine.png";
         }
 
         private ICommand _ratingCommand;
@@ -47,7 +45,7 @@ namespace Barometer_App.ViewModels
 
         public async void OnRatingCommand()
         {
-            var navigationParameters = new NavigationParameters {{"Bar", Bar}};
+            var navigationParameters = new NavigationParameters {{"Bar", Bar.BarName}};
             await _navigationService.NavigateAsync("BarRating", navigationParameters);
         }
     }
