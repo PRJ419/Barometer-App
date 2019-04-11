@@ -12,25 +12,28 @@
             <Label Text="Bar Sign-Up to Bar-O-Meter" Style="{StaticResource HeaderStyle}"/>
 
             <Label Text="Full Name of Bar" TextColor="{StaticResource LabelColor}"/>
-            <Entry Placeholder="Bar" PlaceholderColor="DimGray" />
+            <Entry Placeholder="Bar" PlaceholderColor="DimGray" Text="{Binding Bar.BarName}"/>
 
             <Label Text="E-mail" TextColor="{StaticResource LabelColor}"/>
-            <Entry Placeholder="Bar@email.com" PlaceholderColor="DimGray" />
-
-            <Label Text="Birthday" TextColor="{StaticResource LabelColor}"/>
-            <DatePicker/>
+            <Entry Placeholder="Bar@email.com" PlaceholderColor="DimGray" Text="{Binding Bar.Email}" />
 
             <Label Text="Address" TextColor="{StaticResource LabelColor}"></Label>
-            <Entry Placeholder="BarStreet 12" PlaceholderColor="DimGray"></Entry>
-
-            <Label Text="Postal code" TextColor="{StaticResource LabelColor}"></Label>
-            <Entry Placeholder="8200" PlaceholderColor="DimGray" MaxLength="4"></Entry>
+            <Entry Placeholder="BarStreet 12" PlaceholderColor="DimGray" Text="{Binding Bar.Address}"></Entry>
 
             <Label Text="CVR" TextColor="{StaticResource LabelColor}"></Label>
-            <Entry Placeholder="12345678" PlaceholderColor="DimGray" MaxLength="8"></Entry>
+            <Entry Placeholder="12345678" PlaceholderColor="DimGray" MaxLength="8" Text="{Binding Bar.CVR}"></Entry>
 
             <Label Text="Phone number" TextColor="{StaticResource LabelColor}"></Label>
-            <Entry Placeholder="88888888" PlaceholderColor="DimGray" MaxLength="8"></Entry>
+            <Entry Placeholder="88888888" PlaceholderColor="DimGray" MaxLength="8" Text="{Binding Bar.PhoneNumber}"></Entry>
+
+            <Label Text="Enter educations" TextColor="{StaticResource LabelColor}"></Label>
+            <Entry Placeholder="School of engineering" PlaceholderColor="DimGray" MaxLength="50" Text="{Binding Bar.Educations}"></Entry>
+
+            <Label Text="Short Desciption of your bar" TextColor="{StaticResource LabelColor}"></Label>
+            <Editor Placeholder="Max 200 chars" PlaceholderColor="DimGray" MaxLength="200" Text="{Binding Bar.ShortDescription}"></Editor>
+
+            <Label Text="Long Desciption of your bar" TextColor="{StaticResource LabelColor}"></Label>
+            <Editor Placeholder="Max 500 chars" PlaceholderColor="DimGray" MaxLength="500" Text="{Binding Bar.LongDescription}"></Editor>
 
             <Label Text="Username" TextColor="{StaticResource LabelColor}"/>
             <Entry Placeholder="Username" PlaceholderColor="DimGray" />
@@ -38,7 +41,7 @@
             <Label Text="Password" TextColor="{StaticResource LabelColor}"/>
             <Entry Placeholder="Password" PlaceholderColor="DimGray" IsPassword="True"/>
 
-            <Button Text="Sign Up" Command="{Binding SignupCommand}"/>
+            <Button Text="Sign Up" Command="{Binding SignUpCommand}"/>
         </StackLayout>
     </ScrollView>
 </ContentPage>

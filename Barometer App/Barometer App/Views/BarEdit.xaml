@@ -14,7 +14,7 @@
                ></Label>
         <Label Text="{Binding Bar.BarName}"
              LineBreakMode="NoWrap"
-            FontSize="16"
+            FontSize="24"
             FontAttributes="Bold"
             Style="{DynamicResource ListItemTextStyle}"></Label>
         <Label Text="{Binding Bar.ShortDescription}"
@@ -26,23 +26,18 @@
             VerticalOptions="Center"
             ></Image>
 
-        <Label HorizontalTextAlignment="Center"
+            <Label HorizontalTextAlignment="Center"
                VerticalTextAlignment="Center"
                Text="You can edit the info here. You can only type 1 line."
                FontSize="10"
                FontAttributes="Bold"
                TextColor="Black"
         ></Label>
-        <Entry Text="{Binding Bar.BarName}"
-               FontSize="10"
-               FontAttributes="Bold"
-               Style="{DynamicResource ListItemTextStyle}"
-               MaxLength="150"></Entry>
             <Entry Text="{Binding Bar.ShortDescription}"
                FontSize="10"
                Style="{DynamicResource ListItemDetailTextStyle}"
                MaxLength="500"></Entry>
-        <Button Text="New picture"
+        <Button Text="Save changes" Command="{Binding SaveCommand}"
                 ></Button>
     </StackLayout>
     </ScrollView>

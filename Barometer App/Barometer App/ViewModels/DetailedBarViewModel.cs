@@ -17,7 +17,7 @@ namespace Barometer_App.ViewModels
         public DetailedBarViewModel(INavigationService navigationService) : base()
         {
             _navigationService = navigationService;
-            RestClient = new StubRestClient();
+            RestClient = new RestClient();
             Bar = new Bar();
             Title = Bar.BarName;
         }

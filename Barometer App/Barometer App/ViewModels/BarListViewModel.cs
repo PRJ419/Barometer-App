@@ -21,7 +21,7 @@ namespace Barometer_App.ViewModels
         public BarListViewModel(INavigationService navigationService)
         {
             Bars = new ObservableCollection<BarSimple>();
-            RestClient = new StubRestClient();
+            RestClient = new RestClient();
             OnLoadItemsCommand();
             _navigationService = navigationService;
             Title = "Awesome Bar list";

@@ -25,7 +25,7 @@ namespace RESTClient.DTOs
             public double AvgRating
             {
                 get => _avgRating;
-                set => SetProperty(ref _avgRating, value);
+                set => SetProperty(ref _avgRating, value/5);
             }
 
             // max length 500

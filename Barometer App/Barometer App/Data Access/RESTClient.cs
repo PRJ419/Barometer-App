@@ -13,7 +13,7 @@ namespace RESTClient
     public class RestClient : IRestClient
     {
        // private const string Baseaddress = "https://localhost:44310/";
-        private const string Baseaddress = "https://10.192.78.236:45457/";
+        private const string Baseaddress = "https://10.192.137.119:45458/";
 
         //GET api/bars/
         public async Task<List<BarSimple>> GetBestBarList() //Virker
@@ -110,7 +110,6 @@ namespace RESTClient
                     {
                         var msg = await response.Content.ReadAsStringAsync();
                         var bar = JsonConvert.DeserializeObject<Bar>(msg);
-
                         return bar;
                     }
 

@@ -76,7 +76,7 @@ namespace Barometer_App.Models
         public double AvgRating
         {
             get => _avgRating;
-            set => SetProperty(ref _avgRating, value);
+            set => SetProperty(ref _avgRating, value/5);
         }
 
         private int _ageLimit;
@@ -89,7 +89,7 @@ namespace Barometer_App.Models
 
         private int _educations;
 
-        public int MyProperty
+        public int Educations
         {
             get => _educations;
             set => SetProperty(ref _educations, value);

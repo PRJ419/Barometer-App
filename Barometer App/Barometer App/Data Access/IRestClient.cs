@@ -17,8 +17,6 @@ namespace RESTClient
         Task<Bar> GetDetailedBar(string id);
         Task<bool> DeleteBar(string id);
         Task<List<BarSimple>> GetWorstBarList();
-        Task<List<BarSimple>> GetSpecificBarList(int startIndex, int pageSize);
-
-        
+        Task<List<BarSimple>> GetSpecificBarList(int startIndex, int pageSize);        
     }
 }
