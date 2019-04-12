@@ -17,7 +17,7 @@ namespace RESTClient
         //BAR
 
         //GET api/bars/
-        public async Task<List<BarSimple>> GetBestBarList() //Virker
+        public async Task<List<BarSimple>> GetBestBarList()
         {
             using (var client = new HttpClient())
             {
@@ -39,7 +39,6 @@ namespace RESTClient
                 }
                 catch (Exception)
                 {
-                    Console.WriteLine("Der var ingen barer at hente");
                     //There were no bars to get, returning empty list of bars
                     return new List<BarSimple>();
                 }
@@ -47,14 +46,13 @@ namespace RESTClient
         }
 
         //PUT api/bars/
-        public async Task<bool> EditBar(Bar editedBar) //Virker
+        public async Task<bool> EditBar(Bar editedBar)
         {
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(Baseaddress);
 
                 var jsonString = JsonConvert.SerializeObject(editedBar);
-                Console.WriteLine(jsonString); //Test
 
                 var content = new StringContent(jsonString, Encoding.UTF8, "application/json");
 
@@ -62,17 +60,14 @@ namespace RESTClient
 
                 if (response.IsSuccessStatusCode)
                 {
-                    Console.WriteLine("Bar has been updated!"); //Test
                     return true;
                 }
-
-                Console.WriteLine($"Something went wrong: {response.StatusCode}"); // Test
                 return false;
             }
         }
 
         //POST api/bars/
-        public async Task<bool> CreateBar(Bar newBar) //Virker
+        public async Task<bool> CreateBar(Bar newBar)
         {
             using (var client = new HttpClient())
             {
@@ -80,24 +75,20 @@ namespace RESTClient
 
                 var jsonString = JsonConvert.SerializeObject(newBar);
 
-                Console.WriteLine($"json : \n{jsonString}"); //Test
                 var content = new StringContent(jsonString, Encoding.UTF8, "application/json");
 
                 var response = await client.PostAsync("api/bars/", content);
 
                 if (response.IsSuccessStatusCode)
                 {
-                    Console.WriteLine("Bar has been created!"); //Test
                     return true;
                 }
-
-                Console.WriteLine($"Something went wrong {response.StatusCode}"); //Test
                 return false;
             }
         }
 
         //GET api/bars/{id}
-        public async Task<Bar> GetDetailedBar(string id) //Virker
+        public async Task<Bar> GetDetailedBar(string id)
         {
             using (var client = new HttpClient())
             {
@@ -113,13 +104,11 @@ namespace RESTClient
                         var bar = JsonConvert.DeserializeObject<Bar>(msg);
                         return bar;
                     }
-
                     //GetAsync failed, returning empty bar
                     return new Bar();
                 }
                 catch (Exception)
                 {
-                    Console.WriteLine($"Der eksisterer ingen bar ved navn {id}");
                     //There were no bar to get, returning empty bar
                     return new Bar();
                 }
@@ -127,7 +116,7 @@ namespace RESTClient
         }
 
         //DELETE api/bars/{id}
-        public async Task<bool> DeleteBar(string id) // Virker
+        public async Task<bool> DeleteBar(string id)
         {
             using (var client = new HttpClient())
             {
@@ -137,17 +126,14 @@ namespace RESTClient
 
                 if (response.IsSuccessStatusCode)
                 {
-                    Console.WriteLine("Bar has been deleted!"); //Test
                     return true;
                 }
-
-                Console.WriteLine($"Something went wrong {response.StatusCode}"); //Test
                 return false;
             }
         }
 
         //GET api/bars/worst
-        public async Task<List<BarSimple>> GetWorstBarList() //Virker
+        public async Task<List<BarSimple>> GetWorstBarList()
         {
             using (var client = new HttpClient())
             {
@@ -163,13 +149,11 @@ namespace RESTClient
 
                         return bars;
                     }
-
                     //GetAsync failed, returning empty list of bars
                     return new List<BarSimple>();
                 }
                 catch (Exception)
                 {
-                    Console.WriteLine("Der var ingen barer at hente");
                     //There were no bars to get, returning empty list of bars
                     return new List<BarSimple>();
                 }
@@ -177,7 +161,7 @@ namespace RESTClient
         }
 
         //GET api/bars/{from}/{to}
-        public async Task<List<BarSimple>> GetSpecificBarList(int startIndex, int pageSize) //Virker men i alfabetisk orden
+        public async Task<List<BarSimple>> GetSpecificBarList(int startIndex, int pageSize) //Virker i alfabetisk orden
         {
             using (var client = new HttpClient())
             {
@@ -193,13 +177,11 @@ namespace RESTClient
 
                         return bars;
                     }
-
                     //GetAsync failed, returning empty list of bars
                     return new List<BarSimple>();
                 }
                 catch (Exception)
                 {
-                    Console.WriteLine("Der var ingen barer at hente");
                     //There were no bars to get, returning empty list of bars
                     return new List<BarSimple>();
                 }
@@ -209,7 +191,7 @@ namespace RESTClient
         //DRINK
 
         //GET api/bars/{barname}/drinks
-        public async Task<List<Drink>> GetBarDrinkList(string id) //Virker
+        public async Task<List<Drink>> GetBarDrinkList(string id)
         {
             using (var client = new HttpClient())
             {
@@ -225,13 +207,11 @@ namespace RESTClient
 
                         return drinks;
                     }
-
                     //GetAsync failed, returning empty list of bars
                     return new List<Drink>();
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine("Der var ingen drinks at hente");
                     //There were no drinks to get, returning empty list of drinks
                     return new List<Drink>();
                 }
@@ -239,14 +219,13 @@ namespace RESTClient
         }
 
         //PUT /api/bars/{barname}/drinks
-        public async Task<bool> EditDrink(Drink editedDrink, string id) //Virker
+        public async Task<bool> EditDrink(Drink editedDrink, string id)
         {
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(Baseaddress);
 
                 var jsonString = JsonConvert.SerializeObject(editedDrink);
-                Console.WriteLine(jsonString); //Test
 
                 var content = new StringContent(jsonString, Encoding.UTF8, "application/json");
 
@@ -254,17 +233,14 @@ namespace RESTClient
 
                 if (response.IsSuccessStatusCode)
                 {
-                    Console.WriteLine("Drink has been updated!"); //Test
                     return true;
                 }
-
-                Console.WriteLine($"Something went wrong: {response.StatusCode}"); // Test
                 return false;
             }
         }
 
         //POST /api/bars/{barname}/drinks
-        public async Task<bool> CreateDrink(Drink newDrink, string id) //Virker
+        public async Task<bool> CreateDrink(Drink newDrink, string id)
         {
             using (var client = new HttpClient())
             {
@@ -272,24 +248,20 @@ namespace RESTClient
 
                 var jsonString = JsonConvert.SerializeObject(newDrink);
 
-                Console.WriteLine($"json : \n{jsonString}"); //Test
                 var content = new StringContent(jsonString, Encoding.UTF8, "application/json");
 
                 var response = await client.PostAsync($"api/bars/{id}/drinks", content);
 
                 if (response.IsSuccessStatusCode)
                 {
-                    Console.WriteLine("Drink has been created!"); //Test
                     return true;
                 }
-
-                Console.WriteLine($"Something went wrong {response.StatusCode}"); //Test
                 return false;
             }
         }
 
         //DELETE /api/bars/{barname}/drinks
-        public async Task<bool> DeleteDrink(string barId, string drinkId) //Virker
+        public async Task<bool> DeleteDrink(string barId, string drinkId)
         {
             using (var client = new HttpClient())
             {
@@ -299,11 +271,8 @@ namespace RESTClient
 
                 if (response.IsSuccessStatusCode)
                 {
-                    Console.WriteLine("Drink has been deleted!"); //Test
                     return true;
                 }
-
-                Console.WriteLine($"Something went wrong {response.StatusCode}"); //Test
                 return false;
             }
         }
@@ -312,7 +281,7 @@ namespace RESTClient
         //EVENT
 
         //GET /api/bars/{barname}/events
-        public async Task<List<BarEvent>> GetBarEventList(string id) //Virker
+        public async Task<List<BarEvent>> GetBarEventList(string id)
         {
             using (var client = new HttpClient())
             {
@@ -328,13 +297,11 @@ namespace RESTClient
 
                         return events;
                     }
-
                     //GetAsync failed, returning empty list of events
                     return new List<BarEvent>();
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine("Der var ingen events at hente");
                     //There were no events to get, returning empty list of events
                     return new List<BarEvent>();
                 }
@@ -342,14 +309,13 @@ namespace RESTClient
         }
 
         //PUT /api/bars/{barname}/events
-        public async Task<bool> EditEvent(BarEvent editedEvent, string id) //Virker
+        public async Task<bool> EditEvent(BarEvent editedEvent, string id)
         {
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(Baseaddress);
 
                 var jsonString = JsonConvert.SerializeObject(editedEvent);
-                Console.WriteLine(jsonString); //Test
 
                 var content = new StringContent(jsonString, Encoding.UTF8, "application/json");
 
@@ -357,17 +323,14 @@ namespace RESTClient
 
                 if (response.IsSuccessStatusCode)
                 {
-                    Console.WriteLine("Event has been updated!"); //Test
                     return true;
                 }
-
-                Console.WriteLine($"Something went wrong: {response.StatusCode}"); // Test
                 return false;
             }
         }
 
         //POST /api/bars/{barname}/events
-        public async Task<bool> CreateEvent(BarEvent newEvent, string id) //Virker
+        public async Task<bool> CreateEvent(BarEvent newEvent, string id)
         {
             using (var client = new HttpClient())
             {
@@ -375,24 +338,20 @@ namespace RESTClient
 
                 var jsonString = JsonConvert.SerializeObject(newEvent);
 
-                Console.WriteLine($"json : \n{jsonString}"); //Test
                 var content = new StringContent(jsonString, Encoding.UTF8, "application/json");
 
                 var response = await client.PostAsync($"api/bars/{id}/events", content);
 
                 if (response.IsSuccessStatusCode)
                 {
-                    Console.WriteLine("Event has been created!"); //Test
                     return true;
                 }
-
-                Console.WriteLine($"Something went wrong {response.StatusCode}"); //Test
                 return false;
             }
         }
 
         //DELETE /api/bars/{barname}/events{eventname}
-        public async Task<bool> DeleteEvent(string barId, string eventId) //Virker
+        public async Task<bool> DeleteEvent(string barId, string eventId)
         {
             using (var client = new HttpClient())
             {
@@ -402,11 +361,8 @@ namespace RESTClient
 
                 if (response.IsSuccessStatusCode)
                 {
-                    Console.WriteLine("Event has been deleted!"); //Test
                     return true;
                 }
-
-                Console.WriteLine($"Something went wrong {response.StatusCode}"); //Test
                 return false;
             }
         }
@@ -415,7 +371,7 @@ namespace RESTClient
         //REVIEW
 
         //GET /api/bars/{barname}/reviews
-        public async Task<List<Review>> GetBarReviewList(string id) //Virker
+        public async Task<List<Review>> GetBarReviewList(string id)
         {
             using (var client = new HttpClient())
             {
@@ -431,13 +387,11 @@ namespace RESTClient
 
                         return events;
                     }
-
                     //GetAsync failed
                     return new List<Review>();
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine("Der var ingen reviews at hente");
                     //There were no reviews to get
                     return new List<Review>();
                 }
@@ -445,14 +399,13 @@ namespace RESTClient
         }
 
         //PUT /api/bars/{barname}/reviews
-        public async Task<bool> EditReview(Review editedReview, string id) //Virker
+        public async Task<bool> EditReview(Review editedReview, string id)
         {
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(Baseaddress);
 
                 var jsonString = JsonConvert.SerializeObject(editedReview);
-                Console.WriteLine(jsonString); //Test
 
                 var content = new StringContent(jsonString, Encoding.UTF8, "application/json");
 
@@ -460,17 +413,14 @@ namespace RESTClient
 
                 if (response.IsSuccessStatusCode)
                 {
-                    Console.WriteLine("Review has been updated!"); //Test
                     return true;
                 }
-
-                Console.WriteLine($"Something went wrong: {response.StatusCode}"); // Test
                 return false;
             }
         }
 
         //POST /api/bars/{barname}/reviews
-        public async Task<bool> CreateReview(Review newReview, string id) //Virker
+        public async Task<bool> CreateReview(Review newReview, string id)
         {
             using (var client = new HttpClient())
             {
@@ -478,24 +428,20 @@ namespace RESTClient
 
                 var jsonString = JsonConvert.SerializeObject(newReview);
 
-                Console.WriteLine($"json : \n{jsonString}"); //Test
                 var content = new StringContent(jsonString, Encoding.UTF8, "application/json");
 
                 var response = await client.PostAsync($"api/bars/{id}/reviews", content);
 
                 if (response.IsSuccessStatusCode)
                 {
-                    Console.WriteLine("Review has been created!"); //Test
                     return true;
                 }
-
-                Console.WriteLine($"Something went wrong {response.StatusCode}"); //Test
                 return false;
             }
         }
 
         //GET /api/bars/{barname}/reviews/{username}
-        public async Task<Review> GetSpecificBarReview(string barId, string username) //Virker
+        public async Task<Review> GetSpecificBarReview(string barId, string username)
         {
             using (var client = new HttpClient())
             {
@@ -517,7 +463,6 @@ namespace RESTClient
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine($"Der eksisterer ingen review fra {username} for {barId}");
                     //There were no review to get, returning empty review
                     return new Review();
                 }
@@ -525,7 +470,7 @@ namespace RESTClient
         }
 
         //DELETE /api/bars/{barname}/reviews/{username}
-        public async Task<bool> DeleteReview(string barId, string username) //Virker
+        public async Task<bool> DeleteReview(string barId, string username)
         {
             using (var client = new HttpClient())
             {
@@ -535,11 +480,8 @@ namespace RESTClient
 
                 if (response.IsSuccessStatusCode)
                 {
-                    Console.WriteLine("Review has been deleted!"); //Test
                     return true;
                 }
-
-                Console.WriteLine($"Something went wrong {response.StatusCode}"); //Test
                 return false;
             }
         }
