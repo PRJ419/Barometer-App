@@ -22,10 +22,15 @@ namespace Barometer_App.ViewModels
         {
             Bars = new ObservableCollection<BarSimple>();
             RestClient = new RestClient();
-            OnLoadItemsCommand();
             _navigationService = navigationService;
             Title = "Awesome Bar list";
         }
+
+        public override void OnNavigatedTo(INavigationParameters parameters)
+        {
+            OnLoadItemsCommand();
+        }
+
 
         #region Propertis
 
@@ -48,6 +53,7 @@ namespace Barometer_App.ViewModels
 
         private async void OnLoadItemsCommand()
         {
+            Bars.Clear();
             CurrentBar = null;
             var barList =await  RestClient.GetBestBarList();
             foreach (var barSimple in barList)
