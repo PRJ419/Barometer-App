@@ -33,7 +33,7 @@ namespace RESTClient
         }
 
         //PUT api/bars/
-        public async Task<bool> EditBar(BarDto editedBar) //Virker ikke
+        public async Task<bool> EditBar(BarDto editedBar)
         {
             throw new NotImplementedException();
         }
@@ -82,6 +82,53 @@ namespace RESTClient
 
         //GET api/bars/{barname}/drinks
         public async Task<List<DrinkDto>> GetBarDrinkList(string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<bool> EditDrink(DrinkDto editedDrink, string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<bool> CreateDrink(DrinkDto newDrink, string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        //Task<bool> DeleteDrink(string barId) 
+
+        public async Task<List<BarEventDto>> GetBarEventList(string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<bool> EditEvent(BarEventDto editedEvent, string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<bool> CreateEvent(BarEventDto newEvent, string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<bool> DeleteEvent(string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<List<ReviewDto>> GetBarReviewList(string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<bool> EditReview(ReviewDto editedReview, string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<bool> CreateReview(ReviewDto newReview, string id)
         {
             throw new NotImplementedException();
         }

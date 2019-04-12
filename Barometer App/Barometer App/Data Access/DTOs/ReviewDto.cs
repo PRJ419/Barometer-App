@@ -3,16 +3,17 @@
 namespace RESTClient.DTOs
 {
     /// <summary>
-    /// Transfer object for drinks
+    /// Transfer object for reviews
     /// </summary>
-    public class DrinkDto
+    public class ReviewDto
     {
+        [Required]
+        public int BarPressure { get; set; }
+
         [MaxLength(150)]
         public string BarName { get; set; }
 
         [MaxLength(50)]
-        public string DrinksName { get; set; }
-
-        public double Price { get; set; }
+        public string Username { get; set; }
     }
 }
