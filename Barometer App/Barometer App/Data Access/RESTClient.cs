@@ -176,8 +176,7 @@ namespace RESTClient
         }
 
         //GET api/bars/{from}/{to}
-        public async Task<List<BarSimple>>
-            GetSpecificBarList(int startIndex, int pageSize) //Virker men i alfabetisk orden
+        public async Task<List<BarSimple>> GetSpecificBarList(int startIndex, int pageSize) //Virker men i alfabetisk orden
         {
             using (var client = new HttpClient())
             {

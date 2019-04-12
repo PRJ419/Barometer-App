@@ -1,17 +1,17 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
+using System.Text;
+using Prism.Mvvm;
 
-namespace RESTClient.DTOs
+namespace Barometer_App.Models
 {
     /// <summary>
-    /// Transfer object for bar events
+    /// 
     /// </summary>
-    public class BarEventDto
+    public class BarEvent : BindableBase
     {
-        [MaxLength(150)]
         public string BarName { get; set; }
 
-        [MaxLength(75)]
         public string EventName { get; set; }
 
         public DateTime Date { get; set; }
