@@ -1,14 +1,13 @@
-﻿using Prism.Commands;
-using Prism.Mvvm;
+﻿using Prism.Mvvm;
 using Prism.Navigation;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using RESTClient;
 
 namespace Barometer_App.ViewModels
 {
     public class ViewModelBase : BindableBase, INavigationAware, IDestructible
     {
+        protected IRestClient RestClient = new RestClient();
+
         private string _title;
         public string Title
         {

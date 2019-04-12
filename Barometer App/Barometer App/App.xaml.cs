@@ -33,7 +33,7 @@ namespace Barometer_App
             containerRegistry.RegisterForNavigation<Signup>();
             containerRegistry.RegisterForNavigation<About>();
             containerRegistry.RegisterForNavigation<Settings>();
-
+            containerRegistry.RegisterForNavigation<DrinkList>();
             containerRegistry.RegisterForNavigation<BarList>();
             containerRegistry.RegisterForNavigation<BarEdit>();
             containerRegistry.RegisterForNavigation<DetailedBar>();

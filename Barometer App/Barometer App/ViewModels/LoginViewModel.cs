@@ -1,6 +1,4 @@
 ﻿using System.Windows.Input;
-using Barometer_App.ViewModels;
-using Barometer_App;
 using Prism.Commands;
 using Prism.Navigation;
 

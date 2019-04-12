@@ -10,10 +10,32 @@ namespace Barometer_App.Models
     /// </summary>
     public class Drink : BindableBase
     {
-        public string BarName { get; set; }
+        private string _barName;
+        public string BarName
+        {
+            get => _barName;
+            set => SetProperty(ref _barName, value);
+        }
 
-        public string DrinksName { get; set; }
+        private string _drinksName;
+        public string DrinksName
+        {
+            get => _drinksName;
+            set => SetProperty(ref _drinksName, value);
+        }
 
-        public double Price { get; set; }
+        private double _price;
+        public double Price
+        {
+            get => _price;
+            set => SetProperty(ref _price, value);
+        }
+
+        private string _image;
+        public string Image
+        {
+            get => _image;
+            set => SetProperty(ref _image, value);
+        }
     }
 }

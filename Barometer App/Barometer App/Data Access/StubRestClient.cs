@@ -80,7 +80,33 @@ namespace RESTClient
         //GET api/bars/{barname}/drinks
         public async Task<List<Drink>> GetBarDrinkList(string id)
         {
-            throw new NotImplementedException();
+            var list = new List<Drink>
+            {
+                new Drink()
+                {
+                    DrinksName = "Martini",
+                    BarName = "Cbar",
+                    Image = "martini.jpg",
+                    Price = 20.00
+                },
+                new Drink()
+                {
+                    DrinksName = "Bloody mary",
+                    BarName = "Cbar",
+                    Image = "martini.jpg",
+                    Price = 30.00
+                },
+                new Drink()
+                {
+                    DrinksName = "Vodka",
+                    BarName = "Cbar",
+                    Image = "martini.jpg",
+                    Price = 40.00
+                }
+
+               
+            };
+            return list;
         }
 
         //PUT /api/bars/{barname}/drinks

@@ -16,12 +16,9 @@ namespace Barometer_App.ViewModels
         private readonly INavigationService _navigationService;
         public ObservableCollection<BarSimple> Bars { get; set; }
 
-        public IRestClient RestClient { get; set; }
-
         public BarListViewModel(INavigationService navigationService)
-        {
+        {         
             Bars = new ObservableCollection<BarSimple>();
-            RestClient = new RestClient();
             _navigationService = navigationService;
             Title = "Awesome Bar list";
         }

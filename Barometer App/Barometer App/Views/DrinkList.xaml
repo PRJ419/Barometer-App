@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Barometer_App.Views.DrinkList"
+             xmlns:cv="clr-namespace:Xamarin.Forms;assembly=Xamarin.Forms.CarouselView"
+             xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
+             Title="{Binding Title}">
+    <ContentPage.Content>
+        <StackLayout>
+            <cv:CarouselView ItemsSource="{Binding Drinks}"
+                             VerticalOptions="FillAndExpand"
+                             x:Name="CarouselView">
+                <cv:CarouselView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Margin="50">
+                            <Label Margin="50,0,0,0" HorizontalTextAlignment="Center"
+                                       HorizontalOptions="Center"
+                                       VerticalTextAlignment="Center"
+                                       VerticalOptions="Center"
+                                       Text="{Binding DrinksName}"
+                                       FontSize="40" 
+                                       TextColor="Black"
+                                       LineHeight="2"></Label>
+                            <Image Source="martini.jpg"
+                                       HorizontalOptions="Center" 
+                                       VerticalOptions="Center"></Image>
+                            <StackLayout Padding="50" Orientation="Horizontal" HorizontalOptions="Center">
+                                <Label Text="$"
+                                          FontSize="20" 
+                                           TextColor="Black"
+                                           LineHeight="2"></Label>
+                                <Label Text="{Binding Price}" 
+                                           FontSize="20" 
+                                           TextColor="Black"
+                                           LineHeight="2"></Label>
+                            </StackLayout>
+                        </StackLayout>
+                    </DataTemplate>
+                </cv:CarouselView.ItemTemplate>
+            </cv:CarouselView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
