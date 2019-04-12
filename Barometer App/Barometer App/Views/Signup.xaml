@@ -12,19 +12,22 @@
             <Label Text="Sign-Up to Bar-O-Meter" Style="{StaticResource HeaderStyle}"/>
 
             <Label Text="Full Name" TextColor="{StaticResource LabelColor}"/>
-            <Entry Placeholder="John Doe" PlaceholderColor="DimGray" />
+            <Entry Placeholder="John Doe" PlaceholderColor="DimGray" Text="{Binding name}"/>
 
             <Label Text="E-mail" TextColor="{StaticResource LabelColor}"/>
-            <Entry Placeholder="JohnDoe@email.com" PlaceholderColor="DimGray" />
+            <Entry Placeholder="JohnDoe@email.com" PlaceholderColor="DimGray" Text="{Binding email}"/>
 
             <Label Text="Birthday" TextColor="{StaticResource LabelColor}"/>
-            <DatePicker/>
+            <DatePicker Date="{Binding birthday}"/>
 
             <Label Text="Username" TextColor="{StaticResource LabelColor}"/>
-            <Entry Placeholder="Username" PlaceholderColor="DimGray" />
+            <Entry Placeholder="Username" PlaceholderColor="DimGray" Text="{Binding username}"/>
 
             <Label Text="Password" TextColor="{StaticResource LabelColor}"/>
-            <Entry Placeholder="Password" PlaceholderColor="DimGray" IsPassword="True"/>
+            <Entry Placeholder="Password" PlaceholderColor="DimGray" IsPassword="True" Text="{Binding password}"/>
+
+            <Label Text="Confirm Password" TextColor="{StaticResource LabelColor}"/>
+            <Entry Placeholder="Password Again" PlaceholderColor="DimGray" IsPassword="True" Text="{Binding confpass}"/>
 
             <Button Text="Bars can sign up here!" Command="{Binding NavigateToBarSignUpCommand}"></Button>
             <Button Text="Sign Up" Command="{Binding SignupCommand}"/>

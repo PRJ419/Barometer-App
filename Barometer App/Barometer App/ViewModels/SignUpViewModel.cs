@@ -1,4 +1,7 @@
-﻿using System.Windows.Input;
+﻿using System;
+using System.Threading.Tasks;
+using System.Windows.Input;
+using Barometer_App.DTO;
 using Barometer_App.ViewModels;
 using Prism.Commands;
 using Prism.Navigation;
@@ -7,11 +10,23 @@ namespace Barometer_App.ViewModels
 {
     public class SignupViewModel : ViewModelBase
     {
-        public INavigationService NavigationService { get; }
+        public string name { get; set; }
+        public string email { get; set; }
+        public DateTime birthday { get; set; }
+        public string username { get; set; }
+        public string password { get; set; }
+        public string confpass { get; set; }
+
+        public InputValidator validator;
+
+        private IdentityService _apiService = new IdentityService();
+
+        public INavigationService _navigationService { get; }
         public SignupViewModel(INavigationService navigationService) : base()
         {
             Title = "Sign Up";
-            NavigationService = navigationService;
+            _navigationService = navigationService;
+            validator = new InputValidator();
         }
 
         #region Commands
@@ -23,7 +38,28 @@ namespace Barometer_App.ViewModels
 
         public async void OnNavigateToBarSignUp()
         {
-            await NavigationService.NavigateAsync("BarSignup");
+            await _navigationService.NavigateAsync("BarSignup");
+        }
+
+        private ICommand _signupCommand;
+
+        public ICommand SignupCommand => _signupCommand ?? (_signupCommand = new DelegateCommand(OnSignupCommand));
+
+        public async void OnSignupCommand()
+        {
+            RegisterDTO dto = new RegisterDTO()
+            {
+                Email = email,
+                Username = username,
+                Password = password,
+            };
+
+        if(await _apiService.RegisterAsync(dto));
+            /*)
+            await _navigationService.GoBackAsync();
+        else
+            await App.Current.MainPage.DisplayAlert("Error", "Something went wrong in the registration!", "OK");
+            */
         }
 
         #endregion

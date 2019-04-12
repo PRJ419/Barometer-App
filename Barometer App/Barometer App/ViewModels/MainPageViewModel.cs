@@ -16,14 +16,26 @@ namespace Barometer_App.ViewModels
     {
         public ObservableCollection<Bar> Bars { get; set; }
 
-        public bool LoggedIn { get; set; } = false;
+        private Customer _customer;
+        public Customer customer
+        {
+            get => _customer;
+            set => SetProperty(ref _customer, value);
+        }
 
         private readonly INavigationService _navigationService;
         public MainPageViewModel(INavigationService navigationService)
         {
             _navigationService = navigationService;
             Title = "Bar-O-Meter";
-            Bars = new ObservableCollection<Bar>(new List<Bar>(){
+
+            //Load this in later
+            customer = new Customer()
+            {
+                UserToken = null
+            };           
+
+            /*Bars = new ObservableCollection<Bar>(new List<Bar>(){
                 new Bar()
                 {Name = "Dat Bar", Address = "Peter Bøgh", BarId = 1,
                     CVR = "21312213", Email = "Dat@bar.dk", Image = "chess.png",
@@ -36,9 +48,13 @@ namespace Barometer_App.ViewModels
                     AboutText = "Katrines kælder er fredagsbar for ingeniørene på katrinebjerg.", Rating = 0.9, LongAboutText = "The BackButtonTitle, Title, TitleIcon, and TitleView properties can all define values that occupy space on the navigation bar. While the navigation bar size varies by platform and screen size, setting all of these properties will result in conflicts due to the limited space available. Instead of attempting to use a combination of these properties, you may find that you can better achieve your desired navigation bar design by only setting the TitleView property."
                 }
             });
+            */
         }
 
-
+        public override void OnNavigatedTo(INavigationParameters parameters)
+        {
+            customer.UserToken = parameters.GetValue<string>("token");
+        }
 
         #region NavCommands
 
@@ -98,10 +114,6 @@ namespace Barometer_App.ViewModels
 
             await _navigationService.NavigateAsync("Settings", navParams);
         }
-        #endregion
-
-        #region Commands
-
         #endregion
     }
 }
