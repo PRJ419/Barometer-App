@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using System.Net.Http;
 using Barometer_App.Models;
 using Newtonsoft.Json;
-using RESTClient.DTOs;
 
 namespace RESTClient
 {

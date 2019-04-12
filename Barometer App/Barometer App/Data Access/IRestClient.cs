@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using Barometer_App.Models;
-using RESTClient.DTOs;
 
 
 namespace RESTClient

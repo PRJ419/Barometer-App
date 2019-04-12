@@ -9,7 +9,7 @@ using Barometer_App.ViewModels;
 using Prism.Commands;
 using Prism.Navigation;
 using RESTClient;
-using RESTClient.DTOs;
+
 
 namespace Barometer_App.ViewModels
 {
