@@ -13,7 +13,7 @@ namespace RESTClient
     public class RestClient : IRestClient
     {
        // private const string Baseaddress = "https://localhost:44310/";
-        private const string Baseaddress = "https://10.192.137.119:45457/";
+        private const string Baseaddress = "https://10.192.143.116:45456/";
 
         //GET api/bars/
         public async Task<List<BarSimple>> GetBestBarList() //Virker

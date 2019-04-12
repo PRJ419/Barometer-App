@@ -42,7 +42,7 @@ namespace BarometerApp.Test.Unit
             viewModel.Bar.BarName = "Test";
             viewModel.PropertyChanged += (s, e) => waschanged = true;
             //Why is this zero?
-            viewModel.Bar.BarName = "Test1";
+            viewModel.Bar.BarName = "Something";
 
             Assert.IsTrue(waschanged);
         }

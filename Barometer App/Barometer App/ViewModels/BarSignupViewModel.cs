@@ -25,6 +25,7 @@ namespace Barometer_App.ViewModels
             _nav = navigationService;
             Bar = new Bar();
             _restClient = new RestClient();
+            Title = "Bar Sign Up";
         }
 
         private ICommand _signUpCommand;
