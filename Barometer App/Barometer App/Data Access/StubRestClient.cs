@@ -12,7 +12,8 @@ namespace RESTClient
 {
     public class StubRestClient : IRestClient
     {
-        
+        //BAR
+
         //GET api/bars/
         public async Task<List<BarSimple>> GetBestBarList()
         {
@@ -74,10 +75,90 @@ namespace RESTClient
             throw new NotImplementedException();
         }
 
+        //DRINK
+
         //GET api/bars/{barname}/drinks
-        //public async Task<List<DrinkDto>> GetBarDrinkList(string id)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        public async Task<List<Drink>> GetBarDrinkList(string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        //PUT /api/bars/{barname}/drinks
+        public async Task<bool> EditDrink(Drink editedDrink, string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        //POST /api/bars/{barname}/drinks
+        public async Task<bool> CreateDrink(Drink newDrink, string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        //DELETE /api/bars/{barname}/drinks
+        public async Task<bool> DeleteDrink(string barId, string drinkId)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        //EVENT
+
+        //GET /api/bars/{barname}/events
+        public async Task<List<BarEvent>> GetBarEventList(string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        //PUT /api/bars/{barname}/events
+        public async Task<bool> EditEvent(BarEvent editedEvent, string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        //POST /api/bars/{barname}/events
+        public async Task<bool> CreateEvent(BarEvent newEvent, string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        //DELETE /api/bars/{barname}/events{eventname}
+        public async Task<bool> DeleteEvent(string barId, string eventId)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        //REVIEW
+
+        //GET /api/bars/{barname}/reviews
+        public async Task<List<Review>> GetBarReviewList(string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        //PUT /api/bars/{barname}/reviews
+        public async Task<bool> EditReview(Review editedReview, string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        //POST /api/bars/{barname}/reviews
+        public async Task<bool> CreateReview(Review newReview, string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        //GET /api/bars/{barname}/reviews/{username}
+        public async Task<Review> GetSpecificBarReview(string barId, string username)
+        {
+            throw new NotImplementedException();
+        }
+
+        //DELETE /api/bars/{barname}/reviews/{username}
+        public async Task<bool> DeleteReview(string barId, string username)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

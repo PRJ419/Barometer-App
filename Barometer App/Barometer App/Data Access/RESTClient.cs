@@ -14,6 +14,8 @@ namespace RESTClient
        // private const string Baseaddress = "https://localhost:44310/";
         private const string Baseaddress = "https://10.192.137.119:45457/";
 
+        //BAR
+
         //GET api/bars/
         public async Task<List<BarSimple>> GetBestBarList() //Virker
         {
@@ -204,6 +206,342 @@ namespace RESTClient
             }
         }
 
+        //DRINK
 
+        //GET api/bars/{barname}/drinks
+        public async Task<List<Drink>> GetBarDrinkList(string id) //Virker
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(Baseaddress);
+
+                try
+                {
+                    var response = await client.GetAsync($"api/bars/{id}/drinks/");
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var msg = await response.Content.ReadAsStringAsync();
+                        var drinks = JsonConvert.DeserializeObject<List<Drink>>(msg);
+
+                        return drinks;
+                    }
+
+                    //GetAsync failed, returning empty list of bars
+                    return new List<Drink>();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Der var ingen drinks at hente");
+                    //There were no drinks to get, returning empty list of drinks
+                    return new List<Drink>();
+                }
+            }
+        }
+
+        //PUT /api/bars/{barname}/drinks
+        public async Task<bool> EditDrink(Drink editedDrink, string id) //Virker
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(Baseaddress);
+
+                var jsonString = JsonConvert.SerializeObject(editedDrink);
+                Console.WriteLine(jsonString); //Test
+
+                var content = new StringContent(jsonString, Encoding.UTF8, "application/json");
+
+                var response = await client.PutAsync($"api/bars/{id}/drinks", content);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    Console.WriteLine("Drink has been updated!"); //Test
+                    return true;
+                }
+
+                Console.WriteLine($"Something went wrong: {response.StatusCode}"); // Test
+                return false;
+            }
+        }
+
+        //POST /api/bars/{barname}/drinks
+        public async Task<bool> CreateDrink(Drink newDrink, string id) //Virker
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(Baseaddress);
+
+                var jsonString = JsonConvert.SerializeObject(newDrink);
+
+                Console.WriteLine($"json : \n{jsonString}"); //Test
+                var content = new StringContent(jsonString, Encoding.UTF8, "application/json");
+
+                var response = await client.PostAsync($"api/bars/{id}/drinks", content);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    Console.WriteLine("Drink has been created!"); //Test
+                    return true;
+                }
+
+                Console.WriteLine($"Something went wrong {response.StatusCode}"); //Test
+                return false;
+            }
+        }
+
+        //DELETE /api/bars/{barname}/drinks
+        public async Task<bool> DeleteDrink(string barId, string drinkId) //Virker
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(Baseaddress);
+
+                var response = await client.DeleteAsync($"api/bars/{barId}/drinks/{drinkId}");
+
+                if (response.IsSuccessStatusCode)
+                {
+                    Console.WriteLine("Drink has been deleted!"); //Test
+                    return true;
+                }
+
+                Console.WriteLine($"Something went wrong {response.StatusCode}"); //Test
+                return false;
+            }
+        }
+
+
+        //EVENT
+
+        //GET /api/bars/{barname}/events
+        public async Task<List<BarEvent>> GetBarEventList(string id) //Virker
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(Baseaddress);
+
+                try
+                {
+                    var response = await client.GetAsync($"api/bars/{id}/events/");
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var msg = await response.Content.ReadAsStringAsync();
+                        var events = JsonConvert.DeserializeObject<List<BarEvent>>(msg);
+
+                        return events;
+                    }
+
+                    //GetAsync failed, returning empty list of events
+                    return new List<BarEvent>();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Der var ingen events at hente");
+                    //There were no events to get, returning empty list of events
+                    return new List<BarEvent>();
+                }
+            }
+        }
+
+        //PUT /api/bars/{barname}/events
+        public async Task<bool> EditEvent(BarEvent editedEvent, string id) //Virker
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(Baseaddress);
+
+                var jsonString = JsonConvert.SerializeObject(editedEvent);
+                Console.WriteLine(jsonString); //Test
+
+                var content = new StringContent(jsonString, Encoding.UTF8, "application/json");
+
+                var response = await client.PutAsync($"api/bars/{id}/events", content);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    Console.WriteLine("Event has been updated!"); //Test
+                    return true;
+                }
+
+                Console.WriteLine($"Something went wrong: {response.StatusCode}"); // Test
+                return false;
+            }
+        }
+
+        //POST /api/bars/{barname}/events
+        public async Task<bool> CreateEvent(BarEvent newEvent, string id) //Virker
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(Baseaddress);
+
+                var jsonString = JsonConvert.SerializeObject(newEvent);
+
+                Console.WriteLine($"json : \n{jsonString}"); //Test
+                var content = new StringContent(jsonString, Encoding.UTF8, "application/json");
+
+                var response = await client.PostAsync($"api/bars/{id}/events", content);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    Console.WriteLine("Event has been created!"); //Test
+                    return true;
+                }
+
+                Console.WriteLine($"Something went wrong {response.StatusCode}"); //Test
+                return false;
+            }
+        }
+
+        //DELETE /api/bars/{barname}/events{eventname}
+        public async Task<bool> DeleteEvent(string barId, string eventId) //Virker
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(Baseaddress);
+
+                var response = await client.DeleteAsync($"api/bars/{barId}/events/{eventId}/");
+
+                if (response.IsSuccessStatusCode)
+                {
+                    Console.WriteLine("Event has been deleted!"); //Test
+                    return true;
+                }
+
+                Console.WriteLine($"Something went wrong {response.StatusCode}"); //Test
+                return false;
+            }
+        }
+
+
+        //REVIEW
+
+        //GET /api/bars/{barname}/reviews
+        public async Task<List<Review>> GetBarReviewList(string id) //Virker
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(Baseaddress);
+
+                try
+                {
+                    var response = await client.GetAsync($"api/bars/{id}/reviews/");
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var msg = await response.Content.ReadAsStringAsync();
+                        var events = JsonConvert.DeserializeObject<List<Review>>(msg);
+
+                        return events;
+                    }
+
+                    //GetAsync failed
+                    return new List<Review>();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Der var ingen reviews at hente");
+                    //There were no reviews to get
+                    return new List<Review>();
+                }
+            }
+        }
+
+        //PUT /api/bars/{barname}/reviews
+        public async Task<bool> EditReview(Review editedReview, string id) //Virker
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(Baseaddress);
+
+                var jsonString = JsonConvert.SerializeObject(editedReview);
+                Console.WriteLine(jsonString); //Test
+
+                var content = new StringContent(jsonString, Encoding.UTF8, "application/json");
+
+                var response = await client.PutAsync($"api/bars/{id}/reviews", content);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    Console.WriteLine("Review has been updated!"); //Test
+                    return true;
+                }
+
+                Console.WriteLine($"Something went wrong: {response.StatusCode}"); // Test
+                return false;
+            }
+        }
+
+        //POST /api/bars/{barname}/reviews
+        public async Task<bool> CreateReview(Review newReview, string id) //Virker
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(Baseaddress);
+
+                var jsonString = JsonConvert.SerializeObject(newReview);
+
+                Console.WriteLine($"json : \n{jsonString}"); //Test
+                var content = new StringContent(jsonString, Encoding.UTF8, "application/json");
+
+                var response = await client.PostAsync($"api/bars/{id}/reviews", content);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    Console.WriteLine("Review has been created!"); //Test
+                    return true;
+                }
+
+                Console.WriteLine($"Something went wrong {response.StatusCode}"); //Test
+                return false;
+            }
+        }
+
+        //GET /api/bars/{barname}/reviews/{username}
+        public async Task<Review> GetSpecificBarReview(string barId, string username) //Virker
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(Baseaddress);
+
+                try
+                {
+                    var response = await client.GetAsync($"api/bars/{barId}/reviews/{username}");
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var msg = await response.Content.ReadAsStringAsync();
+                        var review = JsonConvert.DeserializeObject<Review>(msg);
+
+                        return review;
+                    }
+                    //GetAsync failed, returning empty review
+                    return new Review();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine($"Der eksisterer ingen review fra {username} for {barId}");
+                    //There were no review to get, returning empty review
+                    return new Review();
+                }
+            }
+        }
+
+        //DELETE /api/bars/{barname}/reviews/{username}
+        public async Task<bool> DeleteReview(string barId, string username) //Virker
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(Baseaddress);
+
+                var response = await client.DeleteAsync($"api/bars/{barId}/reviews/{username}");
+
+                if (response.IsSuccessStatusCode)
+                {
+                    Console.WriteLine("Review has been deleted!"); //Test
+                    return true;
+                }
+
+                Console.WriteLine($"Something went wrong {response.StatusCode}"); //Test
+                return false;
+            }
+        }
     }
 }

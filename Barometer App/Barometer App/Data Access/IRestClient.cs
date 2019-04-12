@@ -16,6 +16,25 @@ namespace RESTClient
         Task<Bar> GetDetailedBar(string id);
         Task<bool> DeleteBar(string id);
         Task<List<BarSimple>> GetWorstBarList();
-        Task<List<BarSimple>> GetSpecificBarList(int startIndex, int pageSize);        
+        Task<List<BarSimple>> GetSpecificBarList(int startIndex, int pageSize);
+
+        //DRINKS
+        Task<List<Drink>> GetBarDrinkList(string id);
+        Task<bool> EditDrink(Drink editedDrink, string id);
+        Task<bool> CreateDrink(Drink newDrink, string id);
+        Task<bool> DeleteDrink(string barId, string drinkId);
+
+        //EVENTS
+        Task<List<BarEvent>> GetBarEventList(string id);
+        Task<bool> EditEvent(BarEvent editedEvent, string id);
+        Task<bool> CreateEvent(BarEvent newEvent, string id);
+        Task<bool> DeleteEvent(string barId, string eventId);
+
+        //REVIEWS
+        Task<List<Review>> GetBarReviewList(string id);
+        Task<bool> EditReview(Review editedReview, string id);
+        Task<bool> CreateReview(Review newReview, string id);
+        Task<Review> GetSpecificBarReview(string barId, string username);
+        Task<bool> DeleteReview(string barId, string username);
     }
 }
