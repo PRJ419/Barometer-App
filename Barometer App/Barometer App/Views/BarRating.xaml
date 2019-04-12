@@ -13,9 +13,9 @@
         <RowDefinition Height="2*"></RowDefinition>
         <RowDefinition Height="4*"></RowDefinition>
     </Grid.RowDefinitions>
-    <Label Grid.Row="1" Text="{Binding Bar.Name}"  FontSize="Large" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
-        <Slider Grid.Row="2" Value="{Binding Bar.Rating}"  MinimumTrackColor="Green" MaximumTrackColor="DarkRed"></Slider>
-        <Label Grid.Row="3" Text="{Binding Bar.Rating}"  FontSize="Medium" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
-        <Button Grid.Row="4" Text="Rate this beautiful bar"></Button>
+    <Label Grid.Row="1" Text="{Binding Bar.BarName}"  FontSize="Large" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
+        <Slider Grid.Row="2" Value="{Binding BarRating}" Maximum="5" Minimum="1" ThumbColor="DeepPink" MinimumTrackColor="Green" MaximumTrackColor="DarkRed"></Slider>
+        <Label Grid.Row="3" Text="{Binding BarRating}"  FontSize="Medium" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
+        <Button Grid.Row="4" Text="Rate this beautiful bar!" Command="{Binding RateCommand}"></Button>
 </Grid>
 </ContentPage>

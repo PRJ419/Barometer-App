@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using Barometer_App.Models;
 using Barometer_App.Views;
 using Newtonsoft.Json;
 using RESTClient.DTOs;
+
 
 namespace RESTClient
 {
@@ -13,53 +15,46 @@ namespace RESTClient
     {
         
         //GET api/bars/
-        public async Task<List<BarSimpleDto>> GetBarList()
+        public async Task<List<BarSimple>> GetBestBarList()
         {
-            List<BarSimpleDto> StubList = new List<BarSimpleDto>();
+            var stubList = new List<BarSimple>();
 
-            BarSimpleDto bar1 = new BarSimpleDto();
-            bar1.BarName = "Bar1";
-            bar1.AvgRating = 5;
-            bar1.ShortDescription = "This is Bar1";
-            StubList.Add(bar1);
+            var bar1 = new BarSimple {BarName = "Bar1", AvgRating = 5, ShortDescription = "This is Bar1", Image = "katrine.png"};
+            stubList.Add(bar1);
 
-            BarSimpleDto bar2 = new BarSimpleDto();
-            bar1.BarName = "Bar2";
-            bar1.AvgRating = 4;
-            bar1.ShortDescription = "This is Bar2";
-            StubList.Add(bar2);
+            var bar2 = new BarSimple {BarName = "Bar2", AvgRating = 4, ShortDescription = "This is Bar2", Image = "katrine.png"};
+            stubList.Add(bar2);
 
-            return StubList;
+            return stubList;
+
         }
 
         //PUT api/bars/
-        public async Task<bool> EditBar(BarDto editedBar)
+        public async Task<bool> EditBar(Bar editedBar)
         {
             throw new NotImplementedException();
         }
 
         //POST api/bars/
-        public async Task<bool> CreateBar(BarDto newBar)
+        public async Task<bool> CreateBar(Bar newBar)
         {
             throw new NotImplementedException();
         }
 
         //GET api/bars/{id}
-        public async Task<BarDto> GetDetailedBar(string id)
+        public async Task<Bar> GetDetailedBar(string id)
         {
-            BarDto DetailedBar = new BarDto();
-            DetailedBar.BarName = "Barname";
-            DetailedBar.Address = "Bar address";
-            DetailedBar.AgeLimit = 18;
-            DetailedBar.AvgRating = 4.2;
-            DetailedBar.CVR = 12345678;
-            DetailedBar.Educations = "School of engineering";
-            DetailedBar.Email = "Bar email";
-            DetailedBar.LongDescription = "Looooooong description";
-            DetailedBar.PhoneNumber = 87654321;
-            DetailedBar.ShortDescription = "Short description";
+            var detailedBar = new Bar()
+            {
+                BarName = "Barname",
+                Address = "Bar address",
+                AgeLimit = 18,
+                AvgRating = 4.2,
+                LongDescription = "Looooooong description",
+                Image = "katrine.png"
+            };
 
-            return DetailedBar;
+            return detailedBar;
         }
 
         //DELETE api/bars/{id}
@@ -69,68 +64,21 @@ namespace RESTClient
         }
 
         //GET api/bars/worst
-        public async Task<List<BarSimpleDto>> GetWorstBarList()
+        public async Task<List<BarSimple>> GetWorstBarList()
         {
             throw new NotImplementedException();
         }
 
         //GET api/bars/{from}/{to}
-        public async Task<List<BarSimpleDto>> GetSpecificBarList(int index1, int index2)
+        public async Task<List<BarSimple>> GetSpecificBarList(int startIndex, int pageSize)
         {
             throw new NotImplementedException();
         }
 
         //GET api/bars/{barname}/drinks
-        public async Task<List<DrinkDto>> GetBarDrinkList(string id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<bool> EditDrink(DrinkDto editedDrink, string id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<bool> CreateDrink(DrinkDto newDrink, string id)
-        {
-            throw new NotImplementedException();
-        }
-
-        //Task<bool> DeleteDrink(string barId) 
-
-        public async Task<List<BarEventDto>> GetBarEventList(string id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<bool> EditEvent(BarEventDto editedEvent, string id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<bool> CreateEvent(BarEventDto newEvent, string id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<bool> DeleteEvent(string id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<List<ReviewDto>> GetBarReviewList(string id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<bool> EditReview(ReviewDto editedReview, string id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<bool> CreateReview(ReviewDto newReview, string id)
-        {
-            throw new NotImplementedException();
-        }
+        //public async Task<List<DrinkDto>> GetBarDrinkList(string id)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

@@ -3,9 +3,13 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Text;
+using System.Windows.Input;
 using Barometer_App.Models;
 using Barometer_App.ViewModels;
+using Prism.Commands;
 using Prism.Navigation;
+using RESTClient;
+using RESTClient.DTOs;
 
 namespace Barometer_App.ViewModels
 {
@@ -13,14 +17,23 @@ namespace Barometer_App.ViewModels
     {
         private readonly INavigationService _navigationService;
 
-        private Bar _bar;
+        private readonly IRestClient _restClient;
 
         public BarEditViewModel(INavigationService navigationService)
         {
             Title = "Bar Editing Page";          
             _navigationService = navigationService;
-            _bar = new Bar();
+            Bar = new Bar();
+            _restClient = new RestClient();
+            GetBar();
         }
+
+        private async void GetBar()
+        {
+            Bar = await _restClient.GetDetailedBar("cbar");
+        }
+
+        private Bar _bar;
 
         public Bar Bar
         {
@@ -28,10 +41,14 @@ namespace Barometer_App.ViewModels
             set => SetProperty(ref _bar, value);
         }
 
-        public override void OnNavigatingTo(INavigationParameters parameters)
+        private ICommand _saveCommand;
+
+        public ICommand SaveCommand => _saveCommand ?? (_saveCommand = new DelegateCommand(SaveExecute));
+
+        private async void SaveExecute()
         {
-            var bar = parameters.GetValue<Bar>("Bar");
-            Bar = bar;
+           await _restClient.EditBar(Bar);
+           await _navigationService.GoBackAsync();
         }
 
     }

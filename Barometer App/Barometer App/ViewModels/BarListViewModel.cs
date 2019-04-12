@@ -6,36 +6,32 @@ using System.Windows.Input;
 using Barometer_App.Models;
 using Prism.Commands;
 using Prism.Navigation;
+using RESTClient;
+using RESTClient.DTOs;
 
 namespace Barometer_App.ViewModels
 {
     public class BarListViewModel : ViewModelBase
     {
         private readonly INavigationService _navigationService;
-        public ObservableCollection<Bar> Bars { get; set; }
+        public ObservableCollection<BarSimple> Bars { get; set; }
 
+        public IRestClient RestClient { get; set; }
 
         public BarListViewModel(INavigationService navigationService)
         {
-            Bars = new ObservableCollection<Bar>();
+            Bars = new ObservableCollection<BarSimple>();
+            RestClient = new RestClient();
+            OnLoadItemsCommand();
             _navigationService = navigationService;
-            Title = "Awesome Bar list";         
-        }
-
-        public override void OnNavigatingTo(INavigationParameters parameters)
-        {
-            var bars = parameters.GetValue<ObservableCollection<Bar>>("Bars");
-            foreach (var bar in bars)
-            {
-                Bars.Add(bar);
-            }
+            Title = "Awesome Bar list";
         }
 
         #region Propertis
 
-        private Bar _currentBar = null;
+        private BarSimple _currentBar = null;
 
-        public Bar CurrentBar
+        public BarSimple CurrentBar
         {
             get => _currentBar;
             set => SetProperty(ref _currentBar, value);
@@ -50,9 +46,14 @@ namespace Barometer_App.ViewModels
             _loadItemsCommand ??
             (_loadItemsCommand = new DelegateCommand(OnLoadItemsCommand));
 
-        private void OnLoadItemsCommand()
+        private async void OnLoadItemsCommand()
         {
             CurrentBar = null;
+            var barList =await  RestClient.GetBestBarList();
+            foreach (var barSimple in barList)
+            {
+                Bars.Add(barSimple); 
+            }
         }
 
         private ICommand _navigationCommand;
@@ -61,54 +62,42 @@ namespace Barometer_App.ViewModels
              _navigationCommand ?? (_navigationCommand = new DelegateCommand(NavigateViaListView));
 
         public async void NavigateViaListView()
-        {
-            var navParams = new NavigationParameters {{"Bar", _currentBar}};
+        {           
+            var navParam = new NavigationParameters {{"Bar", CurrentBar.BarName}};
             CurrentBar = null;
-            await _navigationService.NavigateAsync("DetailedBar", navParams);
-        }
-
-
-        private ICommand _detailedBarNavCommand;
-        public ICommand DetailedBarNavCommand =>
-            _detailedBarNavCommand ??
-            (_detailedBarNavCommand = new DelegateCommand(OnDetailedBarNavCommand));
-
-        private void OnDetailedBarNavCommand()
-        {
-
+            await _navigationService.NavigateAsync("DetailedBar", navParam);
         }
 
         private ICommand _filterItemsCommand;
 
-        public ICommand FilterItemsCommand {
-            get {
-            return _filterItemsCommand ?? (_filterItemsCommand =
-                new DelegateCommand<string>(FilterItemsExecute, FilterItemsCanExecute).ObservesProperty(() => Bars.Count)
-            );
+        public ICommand FilterItemsCommand
+        {
+            get
+            {
+                return _filterItemsCommand ?? (_filterItemsCommand =
+                    new DelegateCommand<string>(FilterItemsExecute, FilterItemsCanExecute).ObservesProperty(() => Bars.Count)
+                );
             }
         }
 
-    public bool FilterItemsCanExecute(string obj)
+        public bool FilterItemsCanExecute(string obj)
         {
             return obj != null;
         }
 
         public void FilterItemsExecute(string obj)
         {
-            List<Bar> tempBars;
+            List<BarSimple> tempBars;
 
             switch (obj)
             {
-                case "Name":
-                    tempBars = Bars.OrderBy(o => o.Name).ToList();
+                case "BarName":
+                    tempBars = Bars.OrderBy(o => o.BarName).ToList();
                     break;
-                case "Rating":
-                    tempBars = Bars.OrderBy(o => o.Rating).ToList();
+                case "AvgRating":
+                    tempBars = Bars.OrderBy(o => o.AvgRating).ToList();
                     //Highest rating first
                     tempBars.Reverse();
-                    break;
-                case "Postal Code":
-                    tempBars = Bars.OrderBy(o => o.PostalCode).ToList();
                     break;
                 default:
                     throw new InvalidEnumArgumentException("Couldn't find the item");
@@ -117,7 +106,7 @@ namespace Barometer_App.ViewModels
             Bars.Clear();
 
             foreach (var bar in tempBars)
-            {               
+            {
                 Bars.Add(bar);
             }
         }

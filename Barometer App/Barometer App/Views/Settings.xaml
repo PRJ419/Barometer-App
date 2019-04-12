@@ -7,7 +7,9 @@
              Title="{Binding Title}">
   <ContentPage.Content>
       <StackLayout>
-          <Label Text="View not implemented yet!" />
+          <Label Text="Enter the name of the bar you want to delete"></Label>
+          <Entry Text="{Binding BarToDelete}"></Entry>
+            <Button Text="DELETE" Command="{Binding DeleteCommand}"></Button>
       </StackLayout>
   </ContentPage.Content>
 </ContentPage>

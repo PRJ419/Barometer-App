@@ -3,6 +3,7 @@ using Barometer_App.Models;
 using Barometer_App.ViewModels;
 using Prism.Commands;
 using Prism.Navigation;
+using RESTClient;
 
 namespace Barometer_App.ViewModels
 {
@@ -10,12 +11,21 @@ namespace Barometer_App.ViewModels
     {
         private readonly INavigationService _navigationService;
 
+        public IRestClient RestClient { get; set; }
+
         private Bar _bar;
         public DetailedBarViewModel(INavigationService navigationService) : base()
         {
-            Title = "Detailed Bar Page";
             _navigationService = navigationService;
-            _bar = new Bar();
+            RestClient = new RestClient();
+            Bar = new Bar();
+            Title = Bar.BarName;
+        }
+
+        public override void OnNavigatedTo(INavigationParameters parameters)
+        {
+            var barName = parameters.GetValue<string>("Bar");
+            OnLoadItemsCommand(barName);
         }
 
         public Bar Bar
@@ -24,10 +34,9 @@ namespace Barometer_App.ViewModels
             set => SetProperty(ref _bar, value);
         }
 
-        public override void OnNavigatingTo(INavigationParameters parameters)
+        public async void OnLoadItemsCommand(string bar)
         {
-            var bar = parameters.GetValue<Bar>("Bar");
-            Bar = bar;
+            Bar = await RestClient.GetDetailedBar(bar);
         }
 
         private ICommand _ratingCommand;
@@ -36,8 +45,7 @@ namespace Barometer_App.ViewModels
 
         public async void OnRatingCommand()
         {
-            var navigationParameters = new NavigationParameters();
-            navigationParameters.Add("Bar", Bar);
+            var navigationParameters = new NavigationParameters {{"Bar", Bar.BarName}};
             await _navigationService.NavigateAsync("BarRating", navigationParameters);
         }
     }
