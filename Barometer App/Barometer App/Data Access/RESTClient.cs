@@ -17,6 +17,12 @@ namespace RESTClient
         //BAR
 
         //GET api/bars/
+        /// <summary>
+        /// Gets a list of simple bars to be shown on list view in the order of best first.
+        /// </summary>
+        /// <returns>
+        /// A list of BarSimple
+        /// </returns>
         public async Task<List<BarSimple>> GetBestBarList()
         {
             using (var client = new HttpClient())
@@ -46,6 +52,15 @@ namespace RESTClient
         }
 
         //PUT api/bars/
+        /// <summary>
+        /// Allows editing of a bar in the database
+        /// </summary>
+        /// <param name="editedBar">
+        /// An instance of the Bar model
+        /// </param>
+        /// <returns>
+        /// True if it went well. False if it went wrong.
+        /// </returns>
         public async Task<bool> EditBar(Bar editedBar)
         {
             using (var client = new HttpClient())
@@ -67,6 +82,15 @@ namespace RESTClient
         }
 
         //POST api/bars/
+        /// <summary>
+        /// Allows creation of a new bar into the database.
+        /// </summary>
+        /// <param name="newBar">
+        /// An instance of the Bar model.
+        /// </param>
+        /// <returns>
+        /// True if it went well. False if it went wrong.
+        /// </returns>
         public async Task<bool> CreateBar(Bar newBar)
         {
             using (var client = new HttpClient())
@@ -88,6 +112,15 @@ namespace RESTClient
         }
 
         //GET api/bars/{id}
+        /// <summary>
+        /// Gets information about a specific bar for a detailed view of this particular bar.
+        /// </summary>
+        /// <param name="id">
+        /// The name of the bar which is to be fetched.
+        /// </param>
+        /// <returns>
+        /// An instance of the Bar model.
+        /// </returns>
         public async Task<Bar> GetDetailedBar(string id)
         {
             using (var client = new HttpClient())
@@ -116,6 +149,15 @@ namespace RESTClient
         }
 
         //DELETE api/bars/{id}
+        /// <summary>
+        /// Deletes an existing bar in the database.
+        /// </summary>
+        /// <param name="id">
+        /// The name of the bar which is to be deleted.
+        /// </param>
+        /// <returns>
+        /// True if it went well. False if it went wrong.
+        /// </returns>
         public async Task<bool> DeleteBar(string id)
         {
             using (var client = new HttpClient())
@@ -133,6 +175,12 @@ namespace RESTClient
         }
 
         //GET api/bars/worst
+        /// <summary>
+        /// Gets a list of simple bars to be shown on the list view in the order of worst first.
+        /// </summary>
+        /// <returns>
+        /// A list of BarSimple
+        /// </returns>
         public async Task<List<BarSimple>> GetWorstBarList()
         {
             using (var client = new HttpClient())
@@ -161,7 +209,19 @@ namespace RESTClient
         }
 
         //GET api/bars/{from}/{to}
-        public async Task<List<BarSimple>> GetSpecificBarList(int startIndex, int pageSize) //Virker i alfabetisk orden
+        /// <summary>
+        /// Gets a specific list of simple bars to avoid getting all at the same time. It does so in alphabetical order.
+        /// </summary>
+        /// <param name="startIndex">
+        /// The index of the full list of bars in which the specific list shall start from.
+        /// </param>
+        /// <param name="pageSize">
+        /// The amount of bars which is to be shown on the list.
+        /// </param>
+        /// <returns>
+        /// A list of BarSimple.
+        /// </returns>
+        public async Task<List<BarSimple>> GetSpecificBarList(int startIndex, int pageSize)
         {
             using (var client = new HttpClient())
             {
