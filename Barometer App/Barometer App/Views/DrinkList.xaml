@@ -7,37 +7,49 @@
              Title="{Binding Title}">
     <ContentPage.Content>
         <StackLayout>
-            <cv:CarouselView ItemsSource="{Binding Drinks}"
-                             VerticalOptions="FillAndExpand"
-                             x:Name="CarouselView">
-                <cv:CarouselView.ItemTemplate>
+            <ListView 
+                SeparatorVisibility ="Default"
+                ItemsSource="{Binding Drinks}"
+                VerticalOptions="FillAndExpand"
+                HasUnevenRows="True">
+                <ListView.ItemTemplate>
                     <DataTemplate>
-                        <StackLayout Margin="50">
-                            <Label Margin="50,0,0,0" HorizontalTextAlignment="Center"
-                                       HorizontalOptions="Center"
+                        <ViewCell>
+                            <Grid HeightRequest="100" Margin="50,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="4*"></ColumnDefinition>
+                                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Label
+                                   Text="{Binding DrinksName}"
+                                   TextColor="SlateGray"
+                                   FontAttributes="Bold"
+                                   LineHeight="2"
+                                   HorizontalTextAlignment="Start"
+                                   VerticalTextAlignment="Center"
+                                   FontSize="Large"></Label>
+                                <Image Grid.Column="1" Source="martini.jpg"
+                                   HorizontalOptions="Center" 
+                                   VerticalOptions="Center" Aspect="AspectFit"></Image>
+                                <Label Grid.Column="2" Text="$"
+                                       TextColor="DodgerBlue"
+                                       LineHeight="2" HorizontalTextAlignment="End"
                                        VerticalTextAlignment="Center"
-                                       VerticalOptions="Center"
-                                       Text="{Binding DrinksName}"
-                                       FontSize="40" 
-                                       TextColor="Black"
+                                       FontSize="Small">
+                                </Label>
+                                <Label Grid.Column="3" Text="{Binding Price}" 
+                                       HorizontalTextAlignment="Start"
+                                       VerticalTextAlignment="Center"
+                                       TextColor="DodgerBlue"
+                                       FontSize="Large"
                                        LineHeight="2"></Label>
-                            <Image Source="martini.jpg"
-                                       HorizontalOptions="Center" 
-                                       VerticalOptions="Center"></Image>
-                            <StackLayout Padding="50" Orientation="Horizontal" HorizontalOptions="Center">
-                                <Label Text="$"
-                                          FontSize="20" 
-                                           TextColor="Black"
-                                           LineHeight="2"></Label>
-                                <Label Text="{Binding Price}" 
-                                           FontSize="20" 
-                                           TextColor="Black"
-                                           LineHeight="2"></Label>
-                            </StackLayout>
-                        </StackLayout>
+                            </Grid>
+                        </ViewCell>
                     </DataTemplate>
-                </cv:CarouselView.ItemTemplate>
-            </cv:CarouselView>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

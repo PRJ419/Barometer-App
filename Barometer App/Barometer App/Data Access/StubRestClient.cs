@@ -19,10 +19,10 @@ namespace RESTClient
         {
             var stubList = new List<BarSimple>();
 
-            var bar1 = new BarSimple {BarName = "Bar1", AvgRating = 5, ShortDescription = "This is Bar1", Image = "katrine.png"};
+            var bar1 = new BarSimple { BarName = "Bar1", AvgRating = 5, ShortDescription = "This is Bar1", Image = "katrine.png" };
             stubList.Add(bar1);
 
-            var bar2 = new BarSimple {BarName = "Bar2", AvgRating = 4, ShortDescription = "This is Bar2", Image = "katrine.png"};
+            var bar2 = new BarSimple { BarName = "Bar2", AvgRating = 4, ShortDescription = "This is Bar2", Image = "katrine.png" };
             stubList.Add(bar2);
 
             return stubList;
@@ -104,7 +104,7 @@ namespace RESTClient
                     Price = 40.00
                 }
 
-               
+
             };
             return list;
         }
@@ -133,7 +133,20 @@ namespace RESTClient
         //GET /api/bars/{barname}/events
         public async Task<List<BarEvent>> GetBarEventList(string id)
         {
-            throw new NotImplementedException();
+            var events = new List<BarEvent>();
+
+            for (int i = 0; i < 3; i++)
+            {
+                events.Add(new BarEvent()
+                {
+                    BarName = "Katrines kælder",
+                    Image = "katrine.png",
+                    Date = DateTime.Now,
+                    EventName = "Harry Pot bar"
+                });
+            }
+
+            return events;
         }
 
         //PUT /api/bars/{barname}/events

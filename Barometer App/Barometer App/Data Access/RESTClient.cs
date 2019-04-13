@@ -446,7 +446,6 @@ namespace RESTClient
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(Baseaddress);
-
                 try
                 {
                     var response = await client.GetAsync($"api/bars/{barId}/reviews/{username}");

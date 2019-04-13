@@ -39,7 +39,7 @@
                 </Grid.ColumnDefinitions>
 
                     <Button Grid.Column="0" Text="Drinks" Command="{Binding DrinksCommand}" Style="{DynamicResource DetailedBarButton}"></Button>
-                <Button Grid.Column="1" Text="Events" Style="{DynamicResource DetailedBarButton}"></Button>
+                <Button Grid.Column="1" Text="Events" Command="{Binding EventCommand}" Style="{DynamicResource DetailedBarButton}"></Button>
                 <Button Grid.Column="2" Text="Coupons" Style="{DynamicResource DetailedBarButton}"></Button>
 
             </Grid>
