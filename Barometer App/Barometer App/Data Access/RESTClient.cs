@@ -251,6 +251,15 @@ namespace RESTClient
         //DRINK
 
         //GET api/bars/{barname}/drinks
+        /// <summary>
+        /// Gets a list of a specific bars drinks.
+        /// </summary>
+        /// <param name="id">
+        /// The name of the bar which drinks one wish to see.
+        /// </param>
+        /// <returns>
+        /// The list of the bars drinks.
+        /// </returns>
         public async Task<List<Drink>> GetBarDrinkList(string id)
         {
             using (var client = new HttpClient())
@@ -279,6 +288,18 @@ namespace RESTClient
         }
 
         //PUT /api/bars/{barname}/drinks
+        /// <summary>
+        /// Allows editing of a bars drink.
+        /// </summary>
+        /// <param name="editedDrink">
+        /// The edited version of the drink.
+        /// </param>
+        /// <param name="id">
+        /// The name of the bar which the drink belongs to.
+        /// </param>
+        /// <returns>
+        /// True if it went well. False if it went wrong.
+        /// </returns>
         public async Task<bool> EditDrink(Drink editedDrink, string id)
         {
             using (var client = new HttpClient())
@@ -300,6 +321,18 @@ namespace RESTClient
         }
 
         //POST /api/bars/{barname}/drinks
+        /// <summary>
+        /// Allows creation of a new drink to the specific bars menu.
+        /// </summary>
+        /// <param name="newDrink">
+        /// A new instance of the Drink model, which will be added.
+        /// </param>
+        /// <param name="id">
+        /// The name of the bar which the newly created drink belongs to.
+        /// </param>
+        /// <returns>
+        /// True if it went well. False if it went wrong.
+        /// </returns>
         public async Task<bool> CreateDrink(Drink newDrink, string id)
         {
             using (var client = new HttpClient())
@@ -321,6 +354,18 @@ namespace RESTClient
         }
 
         //DELETE /api/bars/{barname}/drinks
+        /// <summary>
+        /// Deletes a specific drink from a bars menu.
+        /// </summary>
+        /// <param name="barId">
+        /// The name of bar which the drink belongs to.
+        /// </param>
+        /// <param name="drinkId">
+        /// The name of the drink which is to be deleted.
+        /// </param>
+        /// <returns>
+        /// True if it went well. False if it went wrong.
+        /// </returns>
         public async Task<bool> DeleteDrink(string barId, string drinkId)
         {
             using (var client = new HttpClient())
@@ -341,6 +386,15 @@ namespace RESTClient
         //EVENT
 
         //GET /api/bars/{barname}/events
+        /// <summary>
+        /// Gets a list of all of a bars events.
+        /// </summary>
+        /// <param name="id">
+        /// The name of the bar which events one wants to get.
+        /// </param>
+        /// <returns>
+        /// The list of BarEvents.
+        /// </returns>
         public async Task<List<BarEvent>> GetBarEventList(string id)
         {
             using (var client = new HttpClient())
@@ -369,6 +423,18 @@ namespace RESTClient
         }
 
         //PUT /api/bars/{barname}/events
+        /// <summary>
+        /// Allows editing of an event of a bar.
+        /// </summary>
+        /// <param name="editedEvent">
+        /// The edited version of the bar event.
+        /// </param>
+        /// <param name="id">
+        /// The name of the bar which the event belongs to.
+        /// </param>
+        /// <returns>
+        /// True if it went well. False if it went wrong.
+        /// </returns>
         public async Task<bool> EditEvent(BarEvent editedEvent, string id)
         {
             using (var client = new HttpClient())
@@ -390,6 +456,18 @@ namespace RESTClient
         }
 
         //POST /api/bars/{barname}/events
+        /// <summary>
+        /// Allows creation of an event of a bar.
+        /// </summary>
+        /// <param name="newEvent">
+        /// The event which is wished to be created.
+        /// </param>
+        /// <param name="id">
+        /// The name of the bar which the event belongs to.
+        /// </param>
+        /// <returns>
+        /// True if it went well. False if it went wrong.
+        /// </returns>
         public async Task<bool> CreateEvent(BarEvent newEvent, string id)
         {
             using (var client = new HttpClient())
@@ -411,6 +489,18 @@ namespace RESTClient
         }
 
         //DELETE /api/bars/{barname}/events{eventname}
+        /// <summary>
+        /// Deletes a specific event of a bar.
+        /// </summary>
+        /// <param name="barId">
+        /// The name of the bar which the event belongs to.
+        /// </param>
+        /// <param name="eventId">
+        /// The name of the event which is to be deleted.
+        /// </param>
+        /// <returns>
+        /// True if it went well. False if it went wrong.
+        /// </returns>
         public async Task<bool> DeleteEvent(string barId, string eventId)
         {
             using (var client = new HttpClient())
@@ -431,6 +521,15 @@ namespace RESTClient
         //REVIEW
 
         //GET /api/bars/{barname}/reviews
+        /// <summary>
+        /// Gets a list of reviews for a specific bar.
+        /// </summary>
+        /// <param name="id">
+        /// The name of the bar which reviews which one wants to get.
+        /// </param>
+        /// <returns>
+        /// The list of reviews.
+        /// </returns>
         public async Task<List<Review>> GetBarReviewList(string id)
         {
             using (var client = new HttpClient())
@@ -459,6 +558,18 @@ namespace RESTClient
         }
 
         //PUT /api/bars/{barname}/reviews
+        /// <summary>
+        /// Allows editing of a review for a specific bar.
+        /// </summary>
+        /// <param name="editedReview">
+        /// The edited version of the review.
+        /// </param>
+        /// <param name="id">
+        /// The name of the bar which the review belongs to.
+        /// </param>
+        /// <returns>
+        /// True if it went well. False if it went wrong.
+        /// </returns>
         public async Task<bool> EditReview(Review editedReview, string id)
         {
             using (var client = new HttpClient())
@@ -480,6 +591,18 @@ namespace RESTClient
         }
 
         //POST /api/bars/{barname}/reviews
+        /// <summary>
+        /// Allows creation of a review for a specific bar.
+        /// </summary>
+        /// <param name="newReview">
+        /// The review which is to be created.
+        /// </param>
+        /// <param name="id">
+        /// The name of the bar which the review belongs to.
+        /// </param>
+        /// <returns>
+        /// True if it went well. False if it went wrong.
+        /// </returns>
         public async Task<bool> CreateReview(Review newReview, string id)
         {
             using (var client = new HttpClient())
@@ -501,6 +624,18 @@ namespace RESTClient
         }
 
         //GET /api/bars/{barname}/reviews/{username}
+        /// <summary>
+        /// Gets a specific users reviews for a bar.
+        /// </summary>
+        /// <param name="barId">
+        /// The name of the bar which review is wanted.
+        /// </param>
+        /// <param name="username">
+        /// The name of the user which review is wanted.
+        /// </param>
+        /// <returns>
+        /// The specific review of a bar.
+        /// </returns>
         public async Task<Review> GetSpecificBarReview(string barId, string username)
         {
             using (var client = new HttpClient())
@@ -530,6 +665,18 @@ namespace RESTClient
         }
 
         //DELETE /api/bars/{barname}/reviews/{username}
+        /// <summary>
+        /// Deletes a review from a specific user for a specific bar.
+        /// </summary>
+        /// <param name="barId">
+        /// The name of the bar which the review belongs to.
+        /// </param>
+        /// <param name="username">
+        /// The name of the user which the review belongs to.
+        /// </param>
+        /// <returns>
+        /// True if it went well. False if it went wrong.
+        /// </returns>
         public async Task<bool> DeleteReview(string barId, string username)
         {
             using (var client = new HttpClient())
