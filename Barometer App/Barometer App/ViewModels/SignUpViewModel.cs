@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Windows.Input;
 using Barometer_App.DTO;
+using Barometer_App.Services;
 using Prism.Commands;
 using Prism.Navigation;
+using RESTClient;
 
 namespace Barometer_App.ViewModels
 {
@@ -17,8 +19,8 @@ namespace Barometer_App.ViewModels
 
         public InputValidator validator;
 
-        private IdentityService _apiService = new IdentityService();
-
+        private RestClient _apiService = new RestClient();
+  
         public INavigationService _navigationService { get; }
         public SignupViewModel(INavigationService navigationService) : base()
         {
@@ -52,12 +54,11 @@ namespace Barometer_App.ViewModels
                 Password = password,
             };
 
-        if(await _apiService.RegisterAsync(dto));
-            /*)
+        if(await _apiService.RegisterAsync(dto))
             await _navigationService.GoBackAsync();
         else
             await App.Current.MainPage.DisplayAlert("Error", "Something went wrong in the registration!", "OK");
-            */
+            
         }
 
         #endregion

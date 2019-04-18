@@ -52,7 +52,7 @@ namespace Barometer_App.ViewModels
         {
             Bars.Clear();
             CurrentBar = null;
-            var barList =await  RestClient.GetBestBarList();
+            var barList = await RestClient.GetBestBarList();
             foreach (var barSimple in barList)
             {
                 Bars.Add(barSimple); 
