@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 using Prism.Mvvm;
 
@@ -16,19 +17,29 @@ namespace Barometer_App.Models
         private string usertoken;
         public string UserToken
         {
-            get { return usertoken; }
+            get
+            {
+                return usertoken;
+            }
             set
             {
                 usertoken = value;
-                SetProperty(ref _LoggedIn, (usertoken != null));
+                _LoggedIn = (usertoken != null);
+                RaisePropertyChanged("LoggedIn");
             }
         }
 
         private bool _LoggedIn;
         public bool LoggedIn
         {
-            get { return _LoggedIn;}
-            set { SetProperty(ref _LoggedIn, value); }
+            get
+            {
+                return _LoggedIn;
+            }
+            set
+            {
+                SetProperty(ref _LoggedIn, value);
+            }
         }
         public string FavoriteBar { get; set; }
         public string FavoriteDrinks { get; set; }
