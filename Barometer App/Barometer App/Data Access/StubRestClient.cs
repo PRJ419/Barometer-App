@@ -32,7 +32,7 @@ namespace RESTClient
         //PUT api/bars/
         public async Task<bool> EditBar(Bar editedBar)
         {
-            throw new NotImplementedException();
+            return false;
         }
 
         //POST api/bars/

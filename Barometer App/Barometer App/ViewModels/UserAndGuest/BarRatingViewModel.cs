@@ -11,19 +11,16 @@ namespace Barometer_App.ViewModels
 
         private Bar _bar;
         private readonly INavigationService _navigationService;
-        private readonly IRestClient _restClient;
-        public BarRatingViewModel(INavigationService navigationService) : base()
+        public BarRatingViewModel(INavigationService navigationService)
         {
             _bar = new Bar();
             _navigationService = navigationService;
-            _restClient = new RestClient();
-
         }
 
         public override async void OnNavigatingTo(INavigationParameters parameters)
         {
             var bar = parameters.GetValue<string>("Bar");
-           _bar = await _restClient.GetDetailedBar(bar);
+           _bar = await RestClient.GetDetailedBar(bar);
            BarRating = (int)(_bar.AvgRating*5);
         }
 
@@ -41,7 +38,7 @@ namespace Barometer_App.ViewModels
         private async void OnRateCommand()
         {
             _bar.AvgRating = (double)BarRating/5;
-            await _restClient.EditBar(_bar);
+            await RestClient.EditBar(_bar);
             var navParams = new NavigationParameters {{"Bar", _bar.BarName}};
             await _navigationService.GoBackAsync(navParams);
         }
