@@ -41,7 +41,7 @@
     <EmbeddedResource Update="Views\About.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\BarEdit.xaml">
+    <EmbeddedResource Update="Views\BarViews\BarEdit.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\UserAndGuestViews\BarList.xaml">
@@ -50,7 +50,7 @@
     <EmbeddedResource Update="Views\UserAndGuestViews\BarRating.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\BarSignup.xaml">
+    <EmbeddedResource Update="Views\BarViews\BarSignup.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\UserAndGuestViews\DetailedBar.xaml">
