@@ -69,17 +69,28 @@ namespace RESTClient
             {
                 client.BaseAddress = new Uri(Baseaddress);
 
-                var jsonString = JsonConvert.SerializeObject(editedBar);
-
-                var content = new StringContent(jsonString, Encoding.UTF8, "application/json");
-
-                var response = await client.PutAsync("api/bars/", content);
-
-                if (response.IsSuccessStatusCode)
+                try
                 {
-                    return true;
+                    var jsonString = JsonConvert.SerializeObject(editedBar);
+
+                    var content = new StringContent(jsonString, Encoding.UTF8, "application/json");
+
+                    var response = await client.PutAsync("api/bars/", content);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        return true;
+                    }
+
+                    //GetAsync failed
+                    return false;
                 }
-                return false;
+                catch (Exception)
+                {
+                    return false;
+                }
+
+                
             }
         }
 
@@ -99,17 +110,25 @@ namespace RESTClient
             {
                 client.BaseAddress = new Uri(Baseaddress);
 
-                var jsonString = JsonConvert.SerializeObject(newBar);
-
-                var content = new StringContent(jsonString, Encoding.UTF8, "application/json");
-
-                var response = await client.PostAsync("api/bars/", content);
-
-                if (response.IsSuccessStatusCode)
+                try
                 {
-                    return true;
+                    var jsonString = JsonConvert.SerializeObject(newBar);
+
+                    var content = new StringContent(jsonString, Encoding.UTF8, "application/json");
+
+                    var response = await client.PostAsync("api/bars/", content);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        return true;
+                    }
+                    //PostAsync failed
+                    return false;
                 }
-                return false;
+                catch (Exception)
+                {
+                    return false;
+                }
             }
         }
 
@@ -166,13 +185,21 @@ namespace RESTClient
             {
                 client.BaseAddress = new Uri(Baseaddress);
 
-                var response = await client.DeleteAsync($"api/bars/{id}/");
-
-                if (response.IsSuccessStatusCode)
+                try
                 {
-                    return true;
+                    var response = await client.DeleteAsync($"api/bars/{id}/");
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        return true;
+                    }
+                    //DeleteAsync failed
+                    return false;
                 }
-                return false;
+                catch (Exception)
+                {
+                    return false;
+                }
             }
         }
 
@@ -281,7 +308,7 @@ namespace RESTClient
                     //GetAsync failed, returning empty list of bars
                     return new List<Drink>();
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     //There were no drinks to get, returning empty list of drinks
                     return new List<Drink>();
@@ -308,17 +335,25 @@ namespace RESTClient
             {
                 client.BaseAddress = new Uri(Baseaddress);
 
-                var jsonString = JsonConvert.SerializeObject(editedDrink);
-
-                var content = new StringContent(jsonString, Encoding.UTF8, "application/json");
-
-                var response = await client.PutAsync($"api/bars/{id}/drinks", content);
-
-                if (response.IsSuccessStatusCode)
+                try
                 {
-                    return true;
+                    var jsonString = JsonConvert.SerializeObject(editedDrink);
+
+                    var content = new StringContent(jsonString, Encoding.UTF8, "application/json");
+
+                    var response = await client.PutAsync($"api/bars/{id}/drinks", content);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        return true;
+                    }
+                    //PutAsync failed
+                    return false;
                 }
-                return false;
+                catch (Exception)
+                {
+                    return false;
+                }
             }
         }
 
@@ -341,17 +376,24 @@ namespace RESTClient
             {
                 client.BaseAddress = new Uri(Baseaddress);
 
-                var jsonString = JsonConvert.SerializeObject(newDrink);
-
-                var content = new StringContent(jsonString, Encoding.UTF8, "application/json");
-
-                var response = await client.PostAsync($"api/bars/{id}/drinks", content);
-
-                if (response.IsSuccessStatusCode)
+                try
                 {
-                    return true;
+                    var jsonString = JsonConvert.SerializeObject(newDrink);
+
+                    var content = new StringContent(jsonString, Encoding.UTF8, "application/json");
+
+                    var response = await client.PostAsync($"api/bars/{id}/drinks", content);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        return true;
+                    }
+                    return false;
                 }
-                return false;
+                catch (Exception)
+                {
+                    return false;
+                }
             }
         }
 
@@ -374,13 +416,20 @@ namespace RESTClient
             {
                 client.BaseAddress = new Uri(Baseaddress);
 
-                var response = await client.DeleteAsync($"api/bars/{barId}/drinks/{drinkId}");
-
-                if (response.IsSuccessStatusCode)
+                try
                 {
-                    return true;
+                    var response = await client.DeleteAsync($"api/bars/{barId}/drinks/{drinkId}");
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        return true;
+                    }
+                    return false;
                 }
-                return false;
+                catch (Exception)
+                {
+                    return false;
+                }
             }
         }
 
@@ -416,7 +465,7 @@ namespace RESTClient
                     //GetAsync failed, returning empty list of events
                     return new List<BarEvent>();
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     //There were no events to get, returning empty list of events
                     return new List<BarEvent>();
@@ -443,17 +492,24 @@ namespace RESTClient
             {
                 client.BaseAddress = new Uri(Baseaddress);
 
-                var jsonString = JsonConvert.SerializeObject(editedEvent);
-
-                var content = new StringContent(jsonString, Encoding.UTF8, "application/json");
-
-                var response = await client.PutAsync($"api/bars/{id}/events", content);
-
-                if (response.IsSuccessStatusCode)
+                try
                 {
-                    return true;
+                    var jsonString = JsonConvert.SerializeObject(editedEvent);
+
+                    var content = new StringContent(jsonString, Encoding.UTF8, "application/json");
+
+                    var response = await client.PutAsync($"api/bars/{id}/events", content);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        return true;
+                    }
+                    return false;
                 }
-                return false;
+                catch (Exception)
+                {
+                    return false;
+                }
             }
         }
 
@@ -476,17 +532,24 @@ namespace RESTClient
             {
                 client.BaseAddress = new Uri(Baseaddress);
 
-                var jsonString = JsonConvert.SerializeObject(newEvent);
-
-                var content = new StringContent(jsonString, Encoding.UTF8, "application/json");
-
-                var response = await client.PostAsync($"api/bars/{id}/events", content);
-
-                if (response.IsSuccessStatusCode)
+                try
                 {
-                    return true;
+                    var jsonString = JsonConvert.SerializeObject(newEvent);
+
+                    var content = new StringContent(jsonString, Encoding.UTF8, "application/json");
+
+                    var response = await client.PostAsync($"api/bars/{id}/events", content);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        return true;
+                    }
+                    return false;
                 }
-                return false;
+                catch (Exception)
+                {
+                    return false;
+                }
             }
         }
 
@@ -509,13 +572,20 @@ namespace RESTClient
             {
                 client.BaseAddress = new Uri(Baseaddress);
 
-                var response = await client.DeleteAsync($"api/bars/{barId}/events/{eventId}/");
-
-                if (response.IsSuccessStatusCode)
+                try
                 {
-                    return true;
+                    var response = await client.DeleteAsync($"api/bars/{barId}/events/{eventId}/");
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        return true;
+                    }
+                    return false;
                 }
-                return false;
+                catch (Exception)
+                {
+                    return false;
+                }
             }
         }
 
@@ -551,7 +621,7 @@ namespace RESTClient
                     //GetAsync failed
                     return new List<Review>();
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     //There were no reviews to get
                     return new List<Review>();
@@ -578,17 +648,24 @@ namespace RESTClient
             {
                 client.BaseAddress = new Uri(Baseaddress);
 
-                var jsonString = JsonConvert.SerializeObject(editedReview);
-
-                var content = new StringContent(jsonString, Encoding.UTF8, "application/json");
-
-                var response = await client.PutAsync($"api/bars/{id}/reviews", content);
-
-                if (response.IsSuccessStatusCode)
+                try
                 {
-                    return true;
+                    var jsonString = JsonConvert.SerializeObject(editedReview);
+
+                    var content = new StringContent(jsonString, Encoding.UTF8, "application/json");
+
+                    var response = await client.PutAsync($"api/bars/{id}/reviews", content);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        return true;
+                    }
+                    return false;
                 }
-                return false;
+                catch (Exception)
+                {
+                    return false;
+                }
             }
         }
 
@@ -611,17 +688,24 @@ namespace RESTClient
             {
                 client.BaseAddress = new Uri(Baseaddress);
 
-                var jsonString = JsonConvert.SerializeObject(newReview);
-
-                var content = new StringContent(jsonString, Encoding.UTF8, "application/json");
-
-                var response = await client.PostAsync($"api/bars/{id}/reviews", content);
-
-                if (response.IsSuccessStatusCode)
+                try
                 {
-                    return true;
+                    var jsonString = JsonConvert.SerializeObject(newReview);
+
+                    var content = new StringContent(jsonString, Encoding.UTF8, "application/json");
+
+                    var response = await client.PostAsync($"api/bars/{id}/reviews", content);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        return true;
+                    }
+                    return false;
                 }
-                return false;
+                catch (Exception)
+                {
+                    return false;
+                }
             }
         }
 
@@ -657,7 +741,7 @@ namespace RESTClient
                     //GetAsync failed, returning empty review
                     return new Review();
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     //There were no review to get, returning empty review
                     return new Review();
@@ -684,13 +768,20 @@ namespace RESTClient
             {
                 client.BaseAddress = new Uri(Baseaddress);
 
-                var response = await client.DeleteAsync($"api/bars/{barId}/reviews/{username}");
-
-                if (response.IsSuccessStatusCode)
+                try
                 {
-                    return true;
+                    var response = await client.DeleteAsync($"api/bars/{barId}/reviews/{username}");
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        return true;
+                    }
+                    return false;
                 }
-                return false;
+                catch (Exception)
+                {
+                    return false;
+                }
             }
         }
 
