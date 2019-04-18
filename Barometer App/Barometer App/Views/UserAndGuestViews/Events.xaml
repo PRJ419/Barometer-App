@@ -14,25 +14,21 @@
                         <StackLayout Padding="20">
                             <Label HorizontalTextAlignment="Center"
                                    HorizontalOptions="Center"
-                                   VerticalTextAlignment="Center">
-                                <Label.FormattedText>
-                                    <FormattedString >
-                                        <Span Text="{Binding EventName}"
-                                          FontSize="40" 
-                                          TextColor="SlateGray"
-                                          ></Span>
-                                    </FormattedString>
-                                </Label.FormattedText>
+                                   VerticalTextAlignment="Center"
+                                   Text="{Binding EventName}"
+                                   FontSize="Large"
+                                   FontFamily="Lobster-Regular.ttf#Lobster-Regular">
+                                
                             </Label>
                             <Image Source="{Binding Image}"
                                    HorizontalOptions="Center" 
                                    VerticalOptions="Center"></Image>
-                            <Label Text="{Binding Date}"
-                                       FontSize="20" 
-                                       TextColor="Black"
-                                       LineHeight="2" 
+                            <Label Text="{Binding Date, StringFormat='{0:MMMM dd, yyyy}'}"
+                                       FontSize="Large" 
                                        VerticalTextAlignment="Center" 
-                                       HorizontalTextAlignment="Center"></Label>
+                                       HorizontalTextAlignment="Center"
+                                       FontFamily="RobotoSlab-Regular.tff#RobotoSlab-Regular">
+                            </Label>
                         </StackLayout>
                     </DataTemplate>
                 </forms:CarouselView.ItemTemplate>

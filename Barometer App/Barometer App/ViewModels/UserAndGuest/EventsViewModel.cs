@@ -19,7 +19,6 @@ namespace Barometer_App.ViewModels
         public override void OnNavigatedTo(INavigationParameters parameters)
         {
             var param = parameters.GetValue<string>("Bar");
-            Title = param + "'s Events";
             LoadDrinks(param);
         }
 
@@ -30,6 +29,7 @@ namespace Barometer_App.ViewModels
             {
                 Events.Add(events);
             }
+            Title = data[0].BarName + "'s Events";
         }
     }
 }
