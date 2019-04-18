@@ -4,6 +4,9 @@ using System.Collections.ObjectModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Net.Http;
+using System.Net.Http.Headers;
+using Barometer_App;
+using Barometer_App.DTO;
 using Barometer_App.Models;
 using Newtonsoft.Json;
 
@@ -15,7 +18,6 @@ namespace RESTClient
         private const string Baseaddress = "https://10.192.143.116:45457/";
 
         //BAR
-
         //GET api/bars/
         public async Task<List<BarSimple>> GetBestBarList()
         {
@@ -484,5 +486,67 @@ namespace RESTClient
                 return false;
             }
         }
+
+        /*
+         * ####################
+         * # IDENTITY SERVICE #
+         * ####################
+         */
+        #region Identity
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public async Task<bool> RegisterAsync(RegisterDTO model)
+        {
+            var client = new HttpClient();
+            client.BaseAddress = new Uri(Baseaddress);
+
+            var json = JsonConvert.SerializeObject(model);
+
+            HttpContent content = new StringContent(json);
+
+            content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+            try
+            {
+                var response = await client.PostAsync("register", content);
+                return response.IsSuccessStatusCode;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+
+        }
+
+        public async Task<string> LoginAsync(LoginDTO model)
+        {
+            var client = new HttpClient();
+            client.BaseAddress = new Uri(Baseaddress);
+
+            var json = JsonConvert.SerializeObject(model);
+            HttpContent content = new StringContent(json);
+
+            content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+            try
+            {
+                var response = await client.PostAsync("login", content);
+                var jwt = await response.Content.ReadAsStringAsync();
+
+                //JObject jwtDyn = JsonConvert.DeserializeObject<JObject>(jwt);
+                //var accessToken = jwtDyn.Value<string>("access_token");
+
+                return jwt;
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+        }
+        #endregion
     }
 }
