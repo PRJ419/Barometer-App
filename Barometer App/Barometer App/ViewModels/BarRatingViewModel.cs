@@ -1,6 +1,5 @@
 ﻿using System.Windows.Input;
 using Barometer_App.Models;
-using Barometer_App.ViewModels;
 using Prism.Commands;
 using Prism.Navigation;
 using RESTClient;

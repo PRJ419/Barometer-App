@@ -1,6 +1,5 @@
 ﻿using System.Windows.Input;
 using Barometer_App.Models;
-using Barometer_App.ViewModels;
 using Prism.Commands;
 using Prism.Navigation;
 using RESTClient;
@@ -11,13 +10,10 @@ namespace Barometer_App.ViewModels
     {
         private readonly INavigationService _navigationService;
 
-        public IRestClient RestClient { get; set; }
-
         private Bar _bar;
         public DetailedBarViewModel(INavigationService navigationService) : base()
         {
             _navigationService = navigationService;
-            RestClient = new RestClient();
             Bar = new Bar();
             Title = Bar.BarName;
         }
@@ -47,6 +43,26 @@ namespace Barometer_App.ViewModels
         {
             var navigationParameters = new NavigationParameters {{"Bar", Bar.BarName}};
             await _navigationService.NavigateAsync("BarRating", navigationParameters);
+        }
+
+        private ICommand _drinksCommand;
+
+        public ICommand DrinksCommand => _drinksCommand ?? (_drinksCommand = new DelegateCommand(OnDrinksCommand));
+
+        private async void OnDrinksCommand()
+        {
+            var navParams = new NavigationParameters {{"Bar", Bar.BarName}};
+            await _navigationService.NavigateAsync("DrinkList", navParams);
+        }
+
+        private ICommand _eventCommand;
+
+        public ICommand EventCommand => _eventCommand ?? (_eventCommand = new DelegateCommand(OnEventCommand));
+
+        private async void OnEventCommand()
+        {
+            var navParams = new NavigationParameters{{"Bar", Bar.BarName}};
+            await _navigationService.NavigateAsync("Events", navParams);
         }
     }
 }

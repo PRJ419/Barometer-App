@@ -8,7 +8,7 @@ using NSubstitute;
 using NUnit.Framework;
 using Prism.Navigation;
 
-namespace BarometerApp.Test.Unit
+namespace Barometer_App.Test.Unit
 {
     public class TestBarEditViewModel
     {

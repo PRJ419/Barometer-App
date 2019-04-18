@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Barometer_App.Views.DrinkList"
+             xmlns:cv="clr-namespace:Xamarin.Forms;assembly=Xamarin.Forms.CarouselView"
+             xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
+             Title="{Binding Title}">
+    <ContentPage.Content>
+        <StackLayout>
+            <ListView 
+                SeparatorVisibility ="Default"
+                ItemsSource="{Binding Drinks}"
+                VerticalOptions="FillAndExpand"
+                HasUnevenRows="True">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid HeightRequest="100" Margin="50,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="4*"></ColumnDefinition>
+                                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Label
+                                   Text="{Binding DrinksName}"
+                                   TextColor="SlateGray"
+                                   FontAttributes="Bold"
+                                   LineHeight="2"
+                                   HorizontalTextAlignment="Start"
+                                   VerticalTextAlignment="Center"
+                                   FontSize="Large"></Label>
+                                <Image Grid.Column="1" Source="martini.jpg"
+                                   HorizontalOptions="Center" 
+                                   VerticalOptions="Center" Aspect="AspectFit"></Image>
+                                <Label Grid.Column="2" Text="$"
+                                       TextColor="DodgerBlue"
+                                       LineHeight="2" HorizontalTextAlignment="End"
+                                       VerticalTextAlignment="Center"
+                                       FontSize="Small">
+                                </Label>
+                                <Label Grid.Column="3" Text="{Binding Price}" 
+                                       HorizontalTextAlignment="Start"
+                                       VerticalTextAlignment="Center"
+                                       TextColor="DodgerBlue"
+                                       FontSize="Large"
+                                       LineHeight="2"></Label>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

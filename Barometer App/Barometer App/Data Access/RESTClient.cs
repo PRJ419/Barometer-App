@@ -12,7 +12,7 @@ namespace RESTClient
     public class RestClient : IRestClient
     {
        // private const string Baseaddress = "https://localhost:44310/";
-        private const string Baseaddress = "https://10.192.137.119:45457/";
+        private const string Baseaddress = "https://10.192.143.116:45457/";
 
         //BAR
 
@@ -641,7 +641,6 @@ namespace RESTClient
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(Baseaddress);
-
                 try
                 {
                     var response = await client.GetAsync($"api/bars/{barId}/reviews/{username}");
