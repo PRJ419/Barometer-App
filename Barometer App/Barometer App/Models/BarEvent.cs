@@ -10,10 +10,33 @@ namespace Barometer_App.Models
     /// </summary>
     public class BarEvent : BindableBase
     {
-        public string BarName { get; set; }
+        private string _barName;
+        public string BarName
+        {
+            get => _barName;
+            set => SetProperty(ref _barName, value);
+        }
 
-        public string EventName { get; set; }
+        private string _eventName;
+        public string EventName
+        {
+            get => _eventName;
+            set => SetProperty(ref _eventName, value);
+        }
 
-        public DateTime Date { get; set; }
+        private DateTime _date;
+        public DateTime Date
+        {
+            get => _date;
+            set => SetProperty(ref _date, value);
+        }
+
+        private string _image;
+
+        public string Image
+        {
+            get => _image;
+            set => SetProperty(ref _image, value);
+        }
     }
 }

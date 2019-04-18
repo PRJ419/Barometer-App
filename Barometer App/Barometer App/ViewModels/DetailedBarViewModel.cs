@@ -54,5 +54,15 @@ namespace Barometer_App.ViewModels
             var navParams = new NavigationParameters {{"Bar", Bar.BarName}};
             await _navigationService.NavigateAsync("DrinkList", navParams);
         }
+
+        private ICommand _eventCommand;
+
+        public ICommand EventCommand => _eventCommand ?? (_eventCommand = new DelegateCommand(OnEventCommand));
+
+        private async void OnEventCommand()
+        {
+            var navParams = new NavigationParameters{{"Bar", Bar.BarName}};
+            await _navigationService.NavigateAsync("Events", navParams);
+        }
     }
 }

@@ -40,6 +40,7 @@ namespace Barometer_App
             containerRegistry.RegisterForNavigation<BarRating>();
             containerRegistry.RegisterForNavigation<BarSignup>();
             containerRegistry.RegisterForNavigation<Settings>();
+            containerRegistry.RegisterForNavigation<Events>();
         }
     }
 }

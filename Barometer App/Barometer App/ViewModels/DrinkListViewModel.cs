@@ -12,7 +12,6 @@ namespace Barometer_App.ViewModels
         public DrinkListViewModel()
         {
             Drinks = new ObservableCollection<Drink>();
-            Title = "Drinks";
         }
 
         public override void OnNavigatedTo(INavigationParameters parameters)
