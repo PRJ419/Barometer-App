@@ -8,6 +8,15 @@ namespace Barometer_App.Models
 {
     public class Customer : BindableBase
     {
+        //Singleton pattern to ensure on only customer is logged in
+        private static readonly Customer customer = new Customer();
+        private Customer() {}
+
+        public static Customer getCustomer()
+        {
+            return customer;
+        }
+
         public string UserName { get; set; }
         public string Name { get; set; }
         //Deprecated begin

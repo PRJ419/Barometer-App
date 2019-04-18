@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Barometer_App
+namespace Barometer_App.Services
 {
     class RuleValidUsername : AbstractRule<string>
     {

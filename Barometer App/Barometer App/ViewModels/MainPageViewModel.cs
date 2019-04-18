@@ -24,30 +24,16 @@ namespace Barometer_App.ViewModels
             Title = "Bar-O-Meter";
 
             //Load this in later
-            customer = new Customer()
-            {
-                UserToken = null
-            };           
-
-            /*Bars = new ObservableCollection<Bar>(new List<Bar>(){
-                new Bar()
-                {Name = "Dat Bar", Address = "Peter Bøgh", BarId = 1,
-                    CVR = "21312213", Email = "Dat@bar.dk", Image = "chess.png",
-                    AboutText = "Datbar sutter", Rating = 0.6
-                },
-                new Bar()
-                {
-                    Name = "Katrines kælder", Address = "Katrionebjerg", BarId = 0,
-                    CVR = "21203050", Email = "KK@kk.dk", Image = "katrine.png",
-                    AboutText = "Katrines kælder er fredagsbar for ingeniørene på katrinebjerg.", Rating = 0.9, LongAboutText = "The BackButtonTitle, Title, TitleIcon, and TitleView properties can all define values that occupy space on the navigation bar. While the navigation bar size varies by platform and screen size, setting all of these properties will result in conflicts due to the limited space available. Instead of attempting to use a combination of these properties, you may find that you can better achieve your desired navigation bar design by only setting the TitleView property."
-                }
-            });
-            */
+            customer = Customer.getCustomer();
         }
 
-        public override void OnNavigatedTo(INavigationParameters parameters)
+        private ICommand _logoutCommand;
+
+        public ICommand LogoutCommand => _logoutCommand ?? (_logoutCommand = new DelegateCommand(OnLogout));
+
+        public void OnLogout()
         {
-            customer.UserToken = parameters.GetValue<string>("token");
+            customer.UserToken = null;
         }
 
         #region NavCommands

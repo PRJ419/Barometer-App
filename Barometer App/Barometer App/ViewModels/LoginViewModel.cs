@@ -1,6 +1,9 @@
 ﻿using System.Windows.Input;
+using Barometer_App.DTO;
+using Barometer_App.Models;
 using Prism.Commands;
 using Prism.Navigation;
+using RESTClient;
 
 namespace Barometer_App.ViewModels
 {
@@ -9,7 +12,7 @@ namespace Barometer_App.ViewModels
         public string username { get; set; }
         public string password { get; set; }
 
-        private IdentityService _apiService = new IdentityService();
+        private RestClient _apiService = new RestClient();
 
         private readonly INavigationService _navigationService;
 
@@ -41,23 +44,29 @@ namespace Barometer_App.ViewModels
 
         public async void OnLoginCommand()
         {
-            LoginDTO dto = new LoginDTO()
+            Customer customer = Customer.getCustomer();
+
+            if (!customer.LoggedIn)
             {
-                Username = username,
-                Password = password,
-            };
+                LoginDTO dto = new LoginDTO()
+                {
+                    Username = username,
+                    Password = password,
+                };
 
-            string token = await _apiService.LoginAsync(dto);
+                string token = await _apiService.LoginAsync(dto);
 
-            if (token != null)
-            {
-                NavigationParameters navParams = new NavigationParameters();
-                navParams.Add("token", token);
+                if (token != null)
+                {
+                    //NavigationParameters navParams = new NavigationParameters();
+                    //navParams.Add("token", token);
 
-                await _navigationService.GoBackAsync(navParams);
+                    customer.UserToken = token;
+                    await _navigationService.GoBackAsync();
+                }
+                else
+                    await App.Current.MainPage.DisplayAlert("Error", "Something went wrong in the login!", "OK");
             }
-            else
-                await App.Current.MainPage.DisplayAlert("Error", "Something went wrong in the login!", "OK");
 
         }
 
