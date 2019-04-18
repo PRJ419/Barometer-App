@@ -15,11 +15,11 @@ namespace Barometer_App.ViewModels
         {
             _navigationService = navigationService;
             Bar = new Bar();
-            Title = Bar.BarName;
         }
 
         public override void OnNavigatedTo(INavigationParameters parameters)
         {
+            if (parameters.GetValue<string>("Bar") == null) return;
             var barName = parameters.GetValue<string>("Bar");
             OnLoadItemsCommand(barName);
         }
@@ -33,6 +33,7 @@ namespace Barometer_App.ViewModels
         public async void OnLoadItemsCommand(string bar)
         {
             Bar = await RestClient.GetDetailedBar(bar);
+            Title = Bar.BarName;
         }
 
         private ICommand _ratingCommand;
