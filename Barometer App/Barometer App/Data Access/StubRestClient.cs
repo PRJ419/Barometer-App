@@ -19,7 +19,7 @@ namespace RESTClient
         {
             var stubList = new List<BarSimple>();
 
-            var bar1 = new BarSimple { BarName = "Bar1", AvgRating = 5, ShortDescription = "This is Bar1", Image = "katrine.png" };
+            var bar1 = new BarSimple { BarName = "Barname", AvgRating = 5, ShortDescription = "This is Bar1", Image = "katrine.png" };
             stubList.Add(bar1);
 
             var bar2 = new BarSimple { BarName = "Bar2", AvgRating = 4, ShortDescription = "This is Bar2", Image = "katrine.png" };
@@ -114,27 +114,27 @@ namespace RESTClient
                 new Drink()
                 {
                     DrinksName = "Martini",
-                    BarName = "Cbar",
+                    BarName = "Barname",
                     Image = "martini.jpg",
                     Price = 20.00
                 },
                 new Drink()
                 {
                     DrinksName = "Bloody mary",
-                    BarName = "Cbar",
+                    BarName = "Barname",
                     Image = "martini.jpg",
                     Price = 30.00
                 },
                 new Drink()
                 {
                     DrinksName = "Vodka",
-                    BarName = "Cbar",
+                    BarName = "Barname",
                     Image = "martini.jpg",
                     Price = 40.00
                 }
             };
 
-            if (id == "Cbar")
+            if (id == "Barname")
             {
                 return list;
             }
@@ -163,7 +163,7 @@ namespace RESTClient
         //EVENT
 
         //GET /api/bars/{barname}/events
-        public async Task<List<BarEvent>> GetBarEventList(string id) //Brug id == "Katrines kælder"
+        public async Task<List<BarEvent>> GetBarEventList(string id)
         {
             var events = new List<BarEvent>();
 
@@ -171,14 +171,14 @@ namespace RESTClient
             {
                 events.Add(new BarEvent()
                 {
-                    BarName = "Katrines kælder",
+                    BarName = "Barname",
                     Image = "katrine.png",
                     Date = DateTime.Now,
                     EventName = "Harry Pot bar"
                 });
             }
 
-            if (id == "Katrines kælder")
+            if (id == "Barname")
             {
                 return events;
             }
@@ -211,16 +211,16 @@ namespace RESTClient
         {
             var reviews = new List<Review>();
 
-            var rev1 = new Review { BarPressure = 5, BarName = "testbar", Username = "user1"};
+            var rev1 = new Review { BarPressure = 5, BarName = "Barname", Username = "user1"};
             reviews.Add(rev1);
 
-            var rev2 = new Review { BarPressure = 4, BarName = "testbar", Username = "user2" };
+            var rev2 = new Review { BarPressure = 4, BarName = "Barname", Username = "user2" };
             reviews.Add(rev2);
 
-            var rev3 = new Review { BarPressure = 3, BarName = "testbar", Username = "user3" };
+            var rev3 = new Review { BarPressure = 3, BarName = "Barname", Username = "user3" };
             reviews.Add(rev3);
 
-            if (id == "testbar")
+            if (id == "Barname")
             {
                 return reviews;
             }
@@ -242,9 +242,9 @@ namespace RESTClient
         //GET /api/bars/{barname}/reviews/{username}
         public async Task<Review> GetSpecificBarReview(string barId, string username) // Brug barId == "testbar" og username == simon
         {
-            var review = new Review { BarPressure = 5, BarName = "testbar", Username = "simon" };
+            var review = new Review { BarPressure = 5, BarName = "Barname", Username = "simon" };
 
-            if (barId == "testbar" && username == "simon")
+            if (barId == "Barname" && username == "simon")
             {
                 return review;
             }
