@@ -11,20 +11,18 @@ namespace Barometer_App.ViewModels
     {
         private readonly INavigationService _navigationService;
 
-        private readonly IRestClient _restClient;
 
         public BarEditViewModel(INavigationService navigationService)
         {
             Title = "Bar Editing Page";          
             _navigationService = navigationService;
             Bar = new Bar();
-            _restClient = new RestClient();
             GetBar();
         }
 
         private async void GetBar()
         {
-            Bar = await _restClient.GetDetailedBar("cbar");
+            Bar = await RestClient.GetDetailedBar("cbar");
         }
 
         private Bar _bar;
@@ -41,7 +39,7 @@ namespace Barometer_App.ViewModels
 
         private async void SaveExecute()
         {
-           await _restClient.EditBar(Bar);
+           await RestClient.EditBar(Bar);
            await _navigationService.GoBackAsync();
         }
 

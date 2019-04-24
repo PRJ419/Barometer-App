@@ -20,13 +20,13 @@
     <Compile Update="Views\About.xaml.cs">
       <DependentUpon>About.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\UserAndGuestViews\BarList.xaml.cs">
+    <Compile Update="Views\BarList.xaml.cs">
       <DependentUpon>BarList.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\UserAndGuestViews\BarRating.xaml.cs">
+    <Compile Update="Views\BarRating.xaml.cs">
       <DependentUpon>BarRating.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\UserAndGuestViews\DetailedBar.xaml.cs">
+    <Compile Update="Views\DetailedBar.xaml.cs">
       <DependentUpon>DetailedBar.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\Login.xaml.cs">
@@ -41,25 +41,28 @@
     <EmbeddedResource Update="Views\About.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\BarViews\BarEdit.xaml">
+    <EmbeddedResource Update="Views\BarEdit.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\UserAndGuestViews\BarList.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Views\UserAndGuestViews\BarRating.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Views\BarViews\BarSignup.xaml">
+    <EmbeddedResource Update="Views\DetailedBarEdit.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\UserAndGuestViews\DetailedBar.xaml">
+    <EmbeddedResource Update="Views\BarList.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\UserAndGuestViews\DrinkList.xaml">
+    <EmbeddedResource Update="Views\BarRating.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\BarSignup.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\UserAndGuestViews\Events.xaml">
+    <EmbeddedResource Update="Views\DetailedBar.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\DrinkList.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Events.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Login.xaml">
