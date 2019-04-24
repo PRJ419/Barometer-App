@@ -33,7 +33,7 @@
 
         <Style x:Key="DetailedBarButton" TargetType="{x:Type Button}">
             <Style.Setters>
-                <Setter Property="FontSize" Value="10"></Setter>
+                <Setter Property="FontSize" Value="14"></Setter>
                 <Setter Property="FontAttributes" Value="Bold"></Setter>
                 <Setter Property="Margin" Value="0"></Setter>
                 <Setter Property="Padding" Value="0"></Setter>
