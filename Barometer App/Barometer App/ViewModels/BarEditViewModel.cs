@@ -2,8 +2,6 @@
 using Barometer_App.Models;
 using Prism.Commands;
 using Prism.Navigation;
-using RESTClient;
-
 
 namespace Barometer_App.ViewModels
 {
@@ -13,12 +11,6 @@ namespace Barometer_App.ViewModels
     public class BarEditViewModel : ViewModelBase
     {
         /// <summary>
-        /// Navigation service for later use
-        /// </summary>
-        private readonly INavigationService _navigationService;
-
-
-        /// <summary>
         /// Constructor for the ViewModel for the BarEditViewModel
         /// </summary>
         /// <param name="navigationService">
@@ -27,17 +19,18 @@ namespace Barometer_App.ViewModels
         public BarEditViewModel(INavigationService navigationService)
         {
             Title = "Bar Editing Page";          
-            _navigationService = navigationService;
+            NavigationService = navigationService;
             Bar = new Bar();
             GetBar();
         }
 
         /// <summary>
         /// Method to retrieve a detailed bar view from the application server
+        /// bug: we need a way to access the correct data here
         /// </summary>
         private async void GetBar()
         {
-            Bar = await RestClient.GetDetailedBar("cbar");
+            Bar = await RestClient.GetDetailedBar("");
         }
 
         /// <summary>
@@ -70,7 +63,7 @@ namespace Barometer_App.ViewModels
         private async void SaveExecute()
         {
            await RestClient.EditBar(Bar);
-           await _navigationService.GoBackAsync();
+           await NavigationService.GoBackAsync();
         }
 
     }

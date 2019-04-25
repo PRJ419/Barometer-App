@@ -3,19 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Barometer_App.Views.BarList"  
              xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
-             Title="{Binding Title}"
-             >
-    <ContentPage.Behaviors>
-        <b:EventToCommandBehavior EventName="Disappearing" Command="{Binding OnLoadItemsCommand}"></b:EventToCommandBehavior>
-    </ContentPage.Behaviors>
+             Title="{Binding Title}">
     <StackLayout>
         <StackLayout Orientation="Horizontal">
             <Picker x:Name="Picker" Title="Filter by:" FontAttributes="Bold" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                 <Picker.ItemsSource>
-                    <!-- Dette er hard codet pt. Ved ikke hvordan jeg lige kommer rundt om det.-->
                     <x:Array Type="{x:Type x:String}">
-                        <x:String>BarName</x:String>
-                        <x:String>AvgRating</x:String>
+                        <x:String>Alphabetical</x:String>
+                        <x:String>Rating</x:String>
                     </x:Array>
                 </Picker.ItemsSource>
             </Picker>
@@ -30,6 +25,7 @@
             RefreshCommand="{Binding LoadItemsCommand}"
             IsPullToRefreshEnabled="False"
             SelectedItem="{Binding CurrentBar}"
+            CachingStrategy="RecycleElementAndDataTemplate"
             >
             <ListView.Behaviors>
                 <b:EventToCommandBehavior EventName="ItemSelected"
@@ -59,6 +55,7 @@
                             </Grid>
                             <Image
                                 Source="{Binding Image}"
+                                MinimumHeightRequest="200"
                                 HorizontalOptions="Center"
                                 VerticalOptions="Center"                               
                             ></Image>

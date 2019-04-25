@@ -9,12 +9,12 @@ namespace Barometer_App.Models
     public class User : BindableBase
     {
         //Singleton pattern to ensure on only customer is logged in
-        private static readonly User customer = new User();
+        private static readonly User Customer = new User();
         private User() {}
 
         public static User GetCustomer()
         {
-            return customer;
+            return Customer;
         }
 
         public string UserName { get; set; }
@@ -23,32 +23,23 @@ namespace Barometer_App.Models
         public string Email{ get; set; }
         public string Password { get; set; }
         //Deprecated end
-        private string usertoken;
+        private string _usertoken;
         public string UserToken
         {
-            get
-            {
-                return usertoken;
-            }
+            get => _usertoken;
             set
             {
-                usertoken = value;
-                _LoggedIn = (usertoken != null);
+                _usertoken = value;
+                _loggedIn = (_usertoken != null);
                 RaisePropertyChanged("LoggedIn");
             }
         }
 
-        private bool _LoggedIn;
+        private bool _loggedIn;
         public bool LoggedIn
         {
-            get
-            {
-                return _LoggedIn;
-            }
-            set
-            {
-                SetProperty(ref _LoggedIn, value);
-            }
+            get => _loggedIn;
+            set => SetProperty(ref _loggedIn, value);
         }
         public string FavoriteBar { get; set; }
         public string FavoriteDrinks { get; set; }

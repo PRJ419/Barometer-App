@@ -1,8 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using Barometer_App.Models;
-using Barometer_App.Views;
 using Prism.Navigation;
-using RESTClient;
 
 namespace Barometer_App.ViewModels
 {
@@ -24,6 +22,7 @@ namespace Barometer_App.ViewModels
             Drinks = new ObservableCollection<Drink>();
         }
 
+        /// <inheritdoc />
         /// <summary>
         /// Override of OnNavigatedTo from INavigationAware
         /// This loads the Events from the currently accessed bar upon navigation to the View

@@ -12,7 +12,6 @@ namespace Barometer_App.ViewModels
     /// </summary>
     public class MainPageViewModel : ViewModelBase
     {
-
         public ObservableCollection<Bar> Bars { get; set; }
 
         /// <summary>
@@ -30,11 +29,6 @@ namespace Barometer_App.ViewModels
         }
 
         /// <summary>
-        /// Navigation Service provided by Prism
-        /// </summary>
-        private readonly INavigationService _navigationService;
-
-        /// <summary>
         /// Constructor for the ViewModel for the MainMenu View
         /// It sets the Title and loads the Customer into the application
         /// </summary>
@@ -43,7 +37,7 @@ namespace Barometer_App.ViewModels
         /// </param>
         public MainPageViewModel(INavigationService navigationService)
         {
-            _navigationService = navigationService;
+            NavigationService = navigationService;
             Title = "Bar-O-Meter";
 
             //Load this in later
@@ -65,7 +59,7 @@ namespace Barometer_App.ViewModels
         /// </summary>
         public void OnLogout()
         {
-            _customer.UserToken = null;
+            Customer.UserToken = null;
         }
 
         #region NavCommands
@@ -87,7 +81,7 @@ namespace Barometer_App.ViewModels
         {
             var navParams = new NavigationParameters {{"Bars", Bars}};
 
-            await _navigationService.NavigateAsync("BarList", navParams);
+            await NavigationService.NavigateAsync("BarList", navParams);
         }
 
         /// <summary>
@@ -107,7 +101,7 @@ namespace Barometer_App.ViewModels
         {
             var navParams = new NavigationParameters();
 
-            await _navigationService.NavigateAsync("Login", navParams);
+            await NavigationService.NavigateAsync("Login", navParams);
         }
 
         /// <summary>
@@ -127,7 +121,7 @@ namespace Barometer_App.ViewModels
         {
             var navParams = new NavigationParameters();
 
-            await _navigationService.NavigateAsync("Signup", navParams);
+            await NavigationService.NavigateAsync("Signup", navParams);
         }
 
         /// <summary>
@@ -147,7 +141,7 @@ namespace Barometer_App.ViewModels
         {
             var navParams = new NavigationParameters();
 
-            await _navigationService.NavigateAsync("DetailedBarEdit", navParams);
+            await NavigationService.NavigateAsync("About", navParams);
         }
 
         /// <summary>
@@ -167,7 +161,7 @@ namespace Barometer_App.ViewModels
         {
             var navParams = new NavigationParameters();
 
-            await _navigationService.NavigateAsync("Settings", navParams);
+            await NavigationService.NavigateAsync("Settings", navParams);
         }
         #endregion
     }

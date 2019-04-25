@@ -23,14 +23,7 @@ namespace Barometer_App.ViewModels
             get => _customer;
             set => SetProperty(ref _customer, value);
         }
-
         private Review _review;
-        private readonly Bar _bar;
-
-        /// <summary>
-        /// Navigation service for navigation of the views
-        /// </summary>
-        private readonly INavigationService _navigationService;
 
         /// <summary>
         /// Constructor for the ViewModel of the BarRating View
@@ -41,18 +34,14 @@ namespace Barometer_App.ViewModels
         /// </param>
         public BarRatingViewModel(INavigationService navigationService)
         {
-            _bar = new Bar();
-            _navigationService = navigationService;
+            NavigationService = navigationService;
             _review = new Review();
             Customer = User.GetCustomer();
-
-            //stub
-           Customer.UserName = "k00ziex";
         }
 
+        /// <inheritdoc />
         /// <summary>
         /// Override of the OnNavigatedTo method from INavigationAware
-        /// TODO: Skulle måske ikke load'e baren igen når det forrige view har denne information
         /// </summary>
         /// <param name="parameters">
         /// Parameter list which is used to hold the barname
@@ -61,12 +50,14 @@ namespace Barometer_App.ViewModels
         {
             var bar = parameters.GetValue<string>("Bar");
             _review = await RestClient.GetSpecificBarReview(bar, Customer.UserName);
-            //Update the database with a new review if none exists. 
+            //Update the database with a new review if none exists.
+            //This could have bee done in a model, but that takes a lot of
+            //unnecessary data transfer
             if (_review.BarName == null) {
                 _review.BarName = bar;
                 _review.Username = Customer.UserName;
                 _review.BarPressure = 5;
-                await RestClient.CreateReview(_review);              
+                await RestClient.CreateReview(_review);             
             }
             BarRating = _review.BarPressure;
         }
@@ -100,14 +91,11 @@ namespace Barometer_App.ViewModels
         /// </summary>
         private async void OnRateCommand()
         {
-            //_bar.AvgRating = (double)BarRating/5;
-            //await RestClient.EditBar(_bar);
-
             _review.BarPressure = BarRating;
             await RestClient.EditReview(_review);
 
             var navParams = new NavigationParameters { { "Bar", _review.BarName } };
-            await _navigationService.GoBackAsync(navParams);
+            await NavigationService.GoBackAsync(navParams);
         }
     }
 }

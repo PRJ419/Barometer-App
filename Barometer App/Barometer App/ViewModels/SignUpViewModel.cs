@@ -2,9 +2,9 @@
 using System.Windows.Input;
 using Barometer_App.DTO;
 using Barometer_App.Services;
+using Prism;
 using Prism.Commands;
 using Prism.Navigation;
-using RESTClient;
 
 namespace Barometer_App.ViewModels
 {
@@ -111,7 +111,7 @@ namespace Barometer_App.ViewModels
         if(await RestClient.RegisterAsync(dto))
             await _navigationService.GoBackAsync();
         else
-            await App.Current.MainPage.DisplayAlert("Error", "Something went wrong in the registration!", "OK");
+            await PrismApplicationBase.Current.MainPage.DisplayAlert("Error", "Something went wrong in the registration!", "OK");
             
         }
 

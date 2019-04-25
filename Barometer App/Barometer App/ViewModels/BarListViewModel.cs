@@ -6,7 +6,6 @@ using System.Windows.Input;
 using Barometer_App.Models;
 using Prism.Commands;
 using Prism.Navigation;
-using RESTClient;
 
 
 namespace Barometer_App.ViewModels
@@ -16,11 +15,6 @@ namespace Barometer_App.ViewModels
     /// </summary>
     public class BarListViewModel : ViewModelBase
     {
-        /// <summary>
-        /// Navigation service for navigation of the views
-        /// </summary>
-        private readonly INavigationService _navigationService;
-
         /// <summary>
         /// Bindable collection that holds the bars shown
         /// </summary>
@@ -35,16 +29,17 @@ namespace Barometer_App.ViewModels
         public BarListViewModel(INavigationService navigationService)
         {         
             Bars = new ObservableCollection<BarSimple>();
-            _navigationService = navigationService;
+            NavigationService = navigationService;
             Title = "Bar list";
         }
 
+        /// <inheritdoc />
         /// <summary>
         /// Override of the OnNavigatedTo method from INavigationAware
         /// Calls the helper method to load bars
         /// </summary>
         /// <param name="parameters">
-        /// 
+        /// Navigation service provided by Prism
         /// </param>
         public override void OnNavigatedTo(INavigationParameters parameters)
         {
@@ -56,7 +51,7 @@ namespace Barometer_App.ViewModels
         /// <summary>
         /// Property for holding the currently selected bar
         /// </summary>
-        private BarSimple _currentBar = null;
+        private BarSimple _currentBar;
 
         /// <summary>
         /// Bindable property for accessing the currently selected bar
@@ -66,25 +61,14 @@ namespace Barometer_App.ViewModels
             get => _currentBar;
             set => SetProperty(ref _currentBar, value);
         }
-
         #endregion
 
         #region Commands
-
         /// <summary>
-        /// ICommand property that holds the DelegateCommand for later consumption
-        /// </summary>
-        private ICommand _loadItemsCommand;
-
-        /// <summary>
-        /// Bindable command that resolves to a DelegateCommand
-        /// </summary>
-        public ICommand LoadItemsCommand =>
-            _loadItemsCommand ??
-            (_loadItemsCommand = new DelegateCommand(OnLoadItemsCommand));
-
-        /// <summary>
-        /// Logic that defines the loading behaviour for the BarList
+        /// Logic that defines the loading behaviour for the BarList.
+        /// bug: We have to reload the entire list on every load. 
+        /// The viewmodel also takes the avg rating and divides it by 5 so it fits
+        /// inside the progressbar
         /// </summary>
         private async void OnLoadItemsCommand()
         {
@@ -93,7 +77,6 @@ namespace Barometer_App.ViewModels
             var barList = await RestClient.GetBestBarList();
             foreach (var barSimple in barList)
             {
-                //AvgRating in db can go to 5. only to 1 in the application. 
                 barSimple.AvgRating = barSimple.AvgRating / 5;
                 Bars.Add(barSimple); 
             }
@@ -116,8 +99,7 @@ namespace Barometer_App.ViewModels
         public async void NavigateViaListView()
         {           
             var navParam = new NavigationParameters {{"Bar", CurrentBar.BarName}};
-            CurrentBar = null;
-            await _navigationService.NavigateAsync("DetailedBar", navParam);
+            await NavigationService.NavigateAsync("DetailedBar", navParam);
         }
 
         /// <summary>
@@ -156,10 +138,10 @@ namespace Barometer_App.ViewModels
 
             switch (obj)
             {
-                case "BarName":
+                case "Alphabetical":
                     tempBars = Bars.OrderBy(o => o.BarName).ToList();
                     break;
-                case "AvgRating":
+                case "Rating":
                     tempBars = Bars.OrderBy(o => o.AvgRating).ToList();
                     //Highest rating first
                     tempBars.Reverse();

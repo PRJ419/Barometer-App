@@ -23,19 +23,14 @@ namespace Barometer_App.ViewModels
         public string Password { get; set; }
 
         /// <summary>
-        /// Navigation Service provided by Prism, which is later used for navigation to other Views and popping back to earlier Views when logged in.
-        /// </summary>
-        private readonly INavigationService _navigationService;
-
-        /// <summary>
         /// Constructor for ViewModel, this sets Title for binding and _navigationService for later use.
         /// </summary>
         /// <param name="navigationService">
         /// A reference to the navigationService object provided by Prism
         /// </param>
-        public LoginViewModel(INavigationService navigationService) : base()
+        public LoginViewModel(INavigationService navigationService)
         {
-            _navigationService = navigationService;
+            NavigationService = navigationService;
             Title = "Login";
         }
 
@@ -57,7 +52,7 @@ namespace Barometer_App.ViewModels
         /// </summary>
         public async void OnNavSignup()
         {
-            await _navigationService.NavigateAsync("Signup");
+            await NavigationService.NavigateAsync("Signup");
         }
         #endregion
 
@@ -95,7 +90,7 @@ namespace Barometer_App.ViewModels
                 if (token != null)
                 {
                     customer.UserToken = token;
-                    await _navigationService.GoBackAsync();
+                    await NavigationService.GoBackAsync();
                 }
                 else
                     await App.Current.MainPage.DisplayAlert("Error", "Something went wrong in the login!", "OK");

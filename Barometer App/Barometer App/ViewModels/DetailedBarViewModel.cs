@@ -2,7 +2,6 @@
 using Barometer_App.Models;
 using Prism.Commands;
 using Prism.Navigation;
-using RESTClient;
 
 namespace Barometer_App.ViewModels
 {
@@ -12,40 +11,9 @@ namespace Barometer_App.ViewModels
     public class DetailedBarViewModel : ViewModelBase
     {
         /// <summary>
-        /// Navigation service for navigation of the views
-        /// </summary>
-        private readonly INavigationService _navigationService;
-
-        /// <summary>
         /// Property to hold the currently accessed bar
         /// </summary>
         private Bar _bar;
-
-        /// <summary>
-        /// Constructor for the ViewModel of the detailed bar View
-        /// </summary>
-        /// <param name="navigationService">
-        /// Navigation service provided by Prism
-        /// </param>
-        public DetailedBarViewModel(INavigationService navigationService) : base()
-        {
-            _navigationService = navigationService;
-            Bar = new Bar();
-        }
-
-        /// <summary>
-        /// Override of the OnNavigatedTo method from INavigationAware
-        /// Gets the barname from the parameter and calls the load method
-        /// </summary>
-        /// <param name="parameters">
-        /// Parameter list which is used to hold the barname
-        /// </param>
-        public override void OnNavigatedTo(INavigationParameters parameters)
-        {
-            var barName = parameters.GetValue<string>("Bar");
-            if (barName == null) return;
-            OnLoadItemsCommand(barName);
-        }
 
         /// <summary>
         /// Bindable Bar property for the View to access
@@ -57,8 +25,36 @@ namespace Barometer_App.ViewModels
         }
 
         /// <summary>
+        /// Constructor for the ViewModel of the detailed bar View
+        /// </summary>
+        /// <param name="navigationService">
+        /// Navigation service provided by Prism
+        /// </param>
+        public DetailedBarViewModel(INavigationService navigationService) : base()
+        {
+            NavigationService = navigationService;
+            Bar = new Bar();
+        }
+
+        /// <inheritdoc />
+        /// <summary>
+        /// Override of the OnNavigatedTo method from INavigationAware
+        /// Gets the barName from the parameter and calls the load method
+        /// </summary>
+        /// <param name="parameters">
+        /// Parameter list which is used to hold the barName
+        /// </param>
+        public override void OnNavigatedTo(INavigationParameters parameters)
+        {
+            var barName = parameters.GetValue<string>("Bar");
+            if (barName == null) return;
+            OnLoadItemsCommand(barName);
+        }
+
+        /// <summary>
         /// Used to load in the details of a specific bar
         /// It uses the RestClient to do so
+        /// It also divides AvgRating in 5 so it fits progressbar widget
         /// </summary>
         /// <param name="bar">
         /// Name of the bar that needs loading
@@ -70,6 +66,7 @@ namespace Barometer_App.ViewModels
             Title = Bar.BarName;
         }
 
+        #region Commands       
         /// <summary>
         /// ICommand property that holds the DelegateCommand for later consumption
         /// </summary>
@@ -78,15 +75,20 @@ namespace Barometer_App.ViewModels
         /// <summary>
         /// Bindable command that resolves to a DelegateCommand
         /// </summary>
-        public ICommand RatingCommand => _ratingCommand ?? (_ratingCommand = new DelegateCommand(OnRatingCommand));
+        public ICommand RatingCommand => _ratingCommand ?? (_ratingCommand = new DelegateCommand(OnRatingCommand, CanRateCommand));
 
         /// <summary>
         /// Logic that defines behaviour for the navigation to the BarRating view
         /// </summary>
-        public async void OnRatingCommand()
+        private async void OnRatingCommand()
         {
             var navigationParameters = new NavigationParameters {{"Bar", Bar.BarName}};
-            await _navigationService.NavigateAsync("BarRating", navigationParameters);
+            await NavigationService.NavigateAsync("BarRating", navigationParameters);
+        }
+
+        private static bool CanRateCommand()
+        {
+            return User.GetCustomer().LoggedIn;
         }
 
         /// <summary>
@@ -105,7 +107,7 @@ namespace Barometer_App.ViewModels
         private async void OnDrinksCommand()
         {
             var navParams = new NavigationParameters {{"Bar", Bar.BarName}};
-            await _navigationService.NavigateAsync("DrinkList", navParams);
+            await NavigationService.NavigateAsync("DrinkList", navParams);
         }
 
         /// <summary>
@@ -124,7 +126,8 @@ namespace Barometer_App.ViewModels
         private async void OnEventCommand()
         {
             var navParams = new NavigationParameters{{"Bar", Bar.BarName}};
-            await _navigationService.NavigateAsync("Events", navParams);
+            await NavigationService.NavigateAsync("Events", navParams);
         }
+        #endregion
     }
 }

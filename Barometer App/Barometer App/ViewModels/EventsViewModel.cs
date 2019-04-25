@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Text;
+﻿using System.Collections.ObjectModel;
 using Barometer_App.Models;
-using Barometer_App.Views;
 using Prism.Navigation;
 
 namespace Barometer_App.ViewModels
@@ -26,6 +22,7 @@ namespace Barometer_App.ViewModels
             Events = new ObservableCollection<BarEvent>();            
         }
 
+        /// <inheritdoc />
         /// <summary>
         /// Override of OnNavigatedTo from INavigationAware
         /// This loads the Events from the currently accessed bar upon navigation to the View

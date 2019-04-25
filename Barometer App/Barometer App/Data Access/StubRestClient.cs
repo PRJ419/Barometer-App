@@ -20,10 +20,10 @@ namespace RESTClient
         {
             var stubList = new List<BarSimple>();
 
-            var bar1 = new BarSimple { BarName = "Barname", AvgRating = 5, ShortDescription = "This is Bar1", Image = "katrine.png" };
+            var bar1 = new BarSimple { BarName = "Barname", AvgRating = 5, ShortDescription = "This is Bar1", Image = "https://www.bigskyfishing.com/wordpress/wp-content/uploads/2018/03/two-med-lake-reflections-lead.jpg" };
             stubList.Add(bar1);
 
-            var bar2 = new BarSimple { BarName = "Bar2", AvgRating = 4, ShortDescription = "This is Bar2", Image = "katrine.png" };
+            var bar2 = new BarSimple { BarName = "Bar2", AvgRating = 4, ShortDescription = "This is Bar2", Image = "https://www.xamarin.com/content/images/pages/forms/example-app.png" };
             stubList.Add(bar2);
 
             return stubList;
