@@ -229,13 +229,13 @@ namespace RESTClient
         }
 
         //PUT /api/bars/{barname}/reviews
-        public async Task<bool> EditReview(Review editedReview, string id)
+        public async Task<bool> EditReview(Review editedReview)
         {
             return true;
         }
 
         //POST /api/bars/{barname}/reviews
-        public async Task<bool> CreateReview(Review newReview, string id)
+        public async Task<bool> CreateReview(Review newReview)
         {
             return true;
         }

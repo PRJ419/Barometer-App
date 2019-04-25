@@ -19,8 +19,8 @@ namespace Barometer_App.ViewModels
 
         public override void OnNavigatedTo(INavigationParameters parameters)
         {
-            if (parameters.GetValue<string>("Bar") == null) return;
             var barName = parameters.GetValue<string>("Bar");
+            if (barName == null) return;
             OnLoadItemsCommand(barName);
         }
 
@@ -33,6 +33,7 @@ namespace Barometer_App.ViewModels
         public async void OnLoadItemsCommand(string bar)
         {
             Bar = await RestClient.GetDetailedBar(bar);
+            Bar.AvgRating = Bar.AvgRating / 5;
             Title = Bar.BarName;
         }
 

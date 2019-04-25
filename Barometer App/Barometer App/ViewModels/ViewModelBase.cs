@@ -6,15 +6,15 @@ namespace Barometer_App.ViewModels
 {
     public class ViewModelBase : BindableBase, INavigationAware, IDestructible
     {
-        protected IRestClient RestClient = new StubRestClient();
+        protected IRestClient RestClient = new RestClient();
 
         protected INavigationService NavigationService;
 
         private string _title;
         public string Title
         {
-            get { return _title; }
-            set { SetProperty(ref _title, value); }
+            get => _title;
+            set => SetProperty(ref _title, value);
         }
 
         public virtual void OnNavigatedFrom(INavigationParameters parameters)

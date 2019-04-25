@@ -32,8 +32,8 @@ namespace RESTClient
 
         //REVIEWS
         Task<List<Review>> GetBarReviewList(string id);
-        Task<bool> EditReview(Review editedReview, string id);
-        Task<bool> CreateReview(Review newReview, string id);
+        Task<bool> EditReview(Review editedReview);
+        Task<bool> CreateReview(Review newReview);
         Task<Review> GetSpecificBarReview(string barId, string username);
         Task<bool> DeleteReview(string barId, string username);
     }

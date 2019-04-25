@@ -12,7 +12,7 @@ namespace Barometer_App.Models
         private static readonly Customer customer = new Customer();
         private Customer() {}
 
-        public static Customer getCustomer()
+        public static Customer GetCustomer()
         {
             return customer;
         }

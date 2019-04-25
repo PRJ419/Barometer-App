@@ -55,6 +55,8 @@ namespace Barometer_App.ViewModels
             var barList = await RestClient.GetBestBarList();
             foreach (var barSimple in barList)
             {
+                //AvgRating in db can go to 5. only to 1 in the application. 
+                barSimple.AvgRating = barSimple.AvgRating / 5;
                 Bars.Add(barSimple); 
             }
         }

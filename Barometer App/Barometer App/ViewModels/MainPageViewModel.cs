@@ -23,7 +23,7 @@ namespace Barometer_App.ViewModels
         /// <summary>
         /// Public bindable Customer class for the View to bind to and access login status from
         /// </summary>
-        public Customer customer
+        public Customer Customer
         {
             get => _customer;
             set => SetProperty(ref _customer, value);
@@ -47,7 +47,7 @@ namespace Barometer_App.ViewModels
             Title = "Bar-O-Meter";
 
             //Load this in later
-            customer = Customer.getCustomer();
+            Customer = Customer.GetCustomer();
         }
 
         /// <summary>
@@ -65,7 +65,7 @@ namespace Barometer_App.ViewModels
         /// </summary>
         public void OnLogout()
         {
-            customer.UserToken = null;
+            Customer.UserToken = null;
         }
 
         #region NavCommands
@@ -85,8 +85,7 @@ namespace Barometer_App.ViewModels
         /// </summary>
         public async void OnNavShowBars()
         {
-            var navParams = new NavigationParameters();
-            navParams.Add("Bars", Bars);
+            var navParams = new NavigationParameters {{"Bars", Bars}};
 
             await _navigationService.NavigateAsync("BarList", navParams);
         }

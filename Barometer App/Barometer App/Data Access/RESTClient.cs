@@ -15,8 +15,8 @@ namespace RESTClient
     public class RestClient : IRestClient
     {
        // private const string Baseaddress = "https://localhost:44310/";
-        private const string Baseaddress = "https://192.168.43.170:45457/";
-        private Customer customer = Customer.getCustomer();
+        private const string Baseaddress = "https://10.192.71.109:45459";
+        private Customer customer = Customer.GetCustomer();
 
         //BAR
         //GET api/bars/
@@ -644,7 +644,7 @@ namespace RESTClient
         /// <returns>
         /// True if it went well. False if it went wrong.
         /// </returns>
-        public async Task<bool> EditReview(Review editedReview, string id)
+        public async Task<bool> EditReview(Review editedReview)
         {
             using (var client = new HttpClient())
             {
@@ -656,7 +656,7 @@ namespace RESTClient
 
                     var content = new StringContent(jsonString, Encoding.UTF8, "application/json");
 
-                    var response = await client.PutAsync($"api/bars/{id}/reviews", content);
+                    var response = await client.PutAsync($"api/bars/{editedReview.BarName}/reviews", content);
 
                     if (response.IsSuccessStatusCode)
                     {
@@ -684,7 +684,7 @@ namespace RESTClient
         /// <returns>
         /// True if it went well. False if it went wrong.
         /// </returns>
-        public async Task<bool> CreateReview(Review newReview, string id)
+        public async Task<bool> CreateReview(Review newReview)
         {
             using (var client = new HttpClient())
             {
@@ -696,7 +696,7 @@ namespace RESTClient
 
                     var content = new StringContent(jsonString, Encoding.UTF8, "application/json");
 
-                    var response = await client.PostAsync($"api/bars/{id}/reviews", content);
+                    var response = await client.PostAsync($"api/bars/{newReview.BarName}/reviews", content);
 
                     if (response.IsSuccessStatusCode)
                     {

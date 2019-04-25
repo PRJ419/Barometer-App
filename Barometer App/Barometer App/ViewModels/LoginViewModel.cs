@@ -86,7 +86,7 @@ namespace Barometer_App.ViewModels
         /// </summary>
         public async void OnLoginCommand()
         {
-            Customer customer = Customer.getCustomer();
+            Customer customer = Customer.GetCustomer();
 
             if (!customer.LoggedIn)
             {
