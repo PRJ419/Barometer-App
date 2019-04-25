@@ -31,11 +31,6 @@ namespace Barometer_App.ViewModels
         private readonly INavigationService _nav;
 
         /// <summary>
-        /// RestClient for later use
-        /// </summary>
-        private readonly IRestClient _restClient;
-
-        /// <summary>
         /// Constructor for the ViewModel of the BarSignup View
         /// Initializes Bar and RestClient
         /// </summary>
@@ -46,7 +41,6 @@ namespace Barometer_App.ViewModels
         {
             _nav = navigationService;
             Bar = new Bar();
-            _restClient = new RestClient();
         }
 
         /// <summary>
@@ -64,7 +58,7 @@ namespace Barometer_App.ViewModels
         /// </summary>
         private async void OnSignUp()
         {
-           await _restClient.CreateBar(Bar);
+           await RestClient.CreateBar(Bar);
         }
 
     }

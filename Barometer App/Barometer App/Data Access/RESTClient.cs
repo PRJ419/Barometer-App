@@ -15,8 +15,8 @@ namespace RESTClient
     public class RestClient : IRestClient
     {
        // private const string Baseaddress = "https://localhost:44310/";
-        private const string Baseaddress = "https://192.168.43.170:45457/";
-        private Customer customer = Customer.getCustomer();
+        private const string Baseaddress = "https://192.168.43.170:45456/";
+        private User customer = User.getCustomer();
 
         //BAR
         //GET api/bars/

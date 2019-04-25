@@ -18,12 +18,12 @@ namespace Barometer_App.ViewModels
         /// <summary>
         /// Private version of the bindable property for the ViewModel to hold
         /// </summary>
-        private Customer _customer;
+        private User _customer;
 
         /// <summary>
         /// Public bindable Customer class for the View to bind to and access login status from
         /// </summary>
-        public Customer customer
+        public User customer
         {
             get => _customer;
             set => SetProperty(ref _customer, value);
@@ -47,7 +47,7 @@ namespace Barometer_App.ViewModels
             Title = "Bar-O-Meter";
 
             //Load this in later
-            customer = Customer.getCustomer();
+            customer = User.getCustomer();
         }
 
         /// <summary>

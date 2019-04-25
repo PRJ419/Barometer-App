@@ -6,7 +6,7 @@ namespace Barometer_App.ViewModels
 {
     public class ViewModelBase : BindableBase, INavigationAware, IDestructible
     {
-        protected IRestClient RestClient = new StubRestClient();
+        protected IRestClient RestClient = new RestClient();
 
         protected INavigationService NavigationService;
 

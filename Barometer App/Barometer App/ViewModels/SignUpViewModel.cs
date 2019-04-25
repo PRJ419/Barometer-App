@@ -49,12 +49,6 @@ namespace Barometer_App.ViewModels
         public InputValidator validator;
 
         /// <summary>
-        /// RestClient for communication to application server.
-        /// Includes Identity and regular API calls through HTTPS.
-        /// </summary>
-        private RestClient _apiService = new RestClient();
-
-        /// <summary>
         /// Navigation Service provided by Prism, which is later used for navigation to other Views and popping back to earlier Views when logged in.
         /// </summary>
         public INavigationService _navigationService { get; }
@@ -114,7 +108,7 @@ namespace Barometer_App.ViewModels
                 Password = password,
             };
 
-        if(await _apiService.RegisterAsync(dto))
+        if(await RestClient.RegisterAsync(dto))
             await _navigationService.GoBackAsync();
         else
             await App.Current.MainPage.DisplayAlert("Error", "Something went wrong in the registration!", "OK");
