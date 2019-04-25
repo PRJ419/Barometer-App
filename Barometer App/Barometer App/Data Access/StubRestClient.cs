@@ -47,11 +47,12 @@ namespace RESTClient
             var detailedBar = new Bar()
             {
                 BarName = "Barname",
-                Address = "Bar address",
+                Address = "Finlandsgade 22",
                 AgeLimit = 18,
                 AvgRating = 4.2,
                 LongDescription = "Looooooong description",
-                Image = "katrine.png"
+                Image = "katrine",
+                Educations = "Engineers"
             };
 
             if (id == "Barname")

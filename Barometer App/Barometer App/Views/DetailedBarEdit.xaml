@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Barometer_App.Views.DetailedBarEdit"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             Title="{Binding Title}">
+    <ScrollView Margin="20">
+            <StackLayout Margin="0,0,0,10">
+                <Image Source="{Binding Bar.Image}" 
+                   VerticalOptions="Center"
+                   HorizontalOptions="Center"></Image>
+
+                <StackLayout Orientation="Horizontal" Margin="0,10" HorizontalOptions="CenterAndExpand">
+                    <Label Text="The bar for"
+               FontSize="Large"
+               TextColor="Black"
+               FontAttributes="Bold"></Label>
+                    <Label Text="{Binding Bar.Educations}" 
+                   FontSize="Large" 
+                   TextColor="Black"
+                   FontAttributes="Bold"></Label>
+                </StackLayout>
+
+
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Age Limit:" 
+                       FontSize="Large"
+                       HorizontalTextAlignment="Start" 
+                       VerticalTextAlignment="End"></Label>
+                    <Label Text="{Binding Bar.AgeLimit}"
+                           FontSize="Large"
+                           HorizontalTextAlignment="Start"
+                           VerticalTextAlignment="Center"
+                           TextColor="Black"></Label>
+                </StackLayout>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"></ColumnDefinition>
+                        <ColumnDefinition Width="4*"></ColumnDefinition>
+                        <ColumnDefinition Width="2*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0"
+                           Text="Rating:" 
+                           VerticalTextAlignment="Center" 
+                           HorizontalTextAlignment="Start" 
+                           FontSize="Large"></Label>
+                    <ProgressBar Grid.Column="1"
+                                 Progress="{Binding Bar.AvgRating}" 
+                                 ProgressColor="Green"></ProgressBar>
+                    <Button Grid.Column="2" 
+                            Text="Rate"
+                            HorizontalOptions="EndAndExpand"
+                            Command="{Binding RatingCommand}"></Button>
+                </Grid>
+
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Address:"
+                       FontSize="Large"></Label>
+                    <Label Text="{Binding Bar.Address}"
+                       FontSize="Large" 
+                       TextColor="Black"></Label>
+                </StackLayout>
+
+                <Label Text="{Binding Bar.LongDescription}" 
+                   FontSize="Medium"
+                   TextColor="Black"></Label>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <Button Grid.Column="0" 
+                            Text="Drinks" Command="{Binding DrinksCommand}" 
+                            Style="{DynamicResource DetailedBarButton}"></Button>
+                    <Button Grid.Column="1" 
+                        Text="Events" Command="{Binding EventCommand}"
+                        Style="{DynamicResource DetailedBarButton}"></Button>
+                    <Button Grid.Column="2"
+                        Text="Coupons"
+                        Style="{DynamicResource DetailedBarButton}"></Button>
+
+                </Grid>
+
+                <Frame BorderColor="Red">
+                    <Label Text="If you want to change anything, change it under here. The text will change accordingly."
+                           FontSize="Large"
+                           TextColor="Black"
+                           VerticalTextAlignment="Start"
+                           HorizontalTextAlignment="Start"></Label>
+                </Frame>
+
+                <Label Text="If you want to change the picture, write the URL in this box"></Label>
+                <Entry Placeholder="SomeURL.com/picture"
+                       Text="{Binding Bar.Image}"></Entry>
+
+                <Entry Text="{Binding Bar.Educations}"
+                       Placeholder="Educations are typed here"></Entry>
+
+                <Entry Text="{Binding Bar.AgeLimit}" 
+                       Placeholder="Age is typed here"></Entry>
+
+                <Entry Text="{Binding Bar.Address}"
+                       Placeholder="Address is typed here"></Entry>
+
+            <Editor Placeholder="The long description is typed here!"
+                            Text="{Binding Bar.LongDescription}" AutoSize="TextChanges"></Editor>
+            <Button Text="Save changes"
+                        Command="{Binding SaveCommand}"
+                ></Button>
+            </StackLayout>
+        </ScrollView>
+</ContentPage>

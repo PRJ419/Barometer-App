@@ -148,7 +148,7 @@ namespace Barometer_App.ViewModels
         {
             var navParams = new NavigationParameters();
 
-            await _navigationService.NavigateAsync("About", navParams);
+            await _navigationService.NavigateAsync("DetailedBarEdit", navParams);
         }
 
         /// <summary>
