@@ -17,14 +17,15 @@ namespace Barometer_App.ViewModels
         /// <summary>
         /// Private version of the bindable property for the ViewModel to hold
         /// </summary>
-        private Customer _customer;
-        public Customer Customer
+        private User _customer;
+        public User Customer
         {
             get => _customer;
             set => SetProperty(ref _customer, value);
         }
 
-        private Bar _bar;
+        private Review _review;
+        private readonly Bar _bar;
 
         /// <summary>
         /// Navigation service for navigation of the views
@@ -43,10 +44,10 @@ namespace Barometer_App.ViewModels
             _bar = new Bar();
             _navigationService = navigationService;
             _review = new Review();
-            Customer = Customer.GetCustomer();
+            Customer = User.GetCustomer();
 
             //stub
-            Customer.UserName = "k00ziex";
+           Customer.UserName = "k00ziex";
         }
 
         /// <summary>

@@ -15,12 +15,12 @@ namespace Barometer_App.ViewModels
         /// <summary>
         /// Property for the View to bind to
         /// </summary>
-        public string username { get; set; }
+        public string Username { get; set; }
 
         /// <summary>
         /// Property for the View to bind to
         /// </summary>
-        public string password { get; set; }
+        public string Password { get; set; }
 
         /// <summary>
         /// Navigation Service provided by Prism, which is later used for navigation to other Views and popping back to earlier Views when logged in.
@@ -80,14 +80,14 @@ namespace Barometer_App.ViewModels
         /// </summary>
         public async void OnLoginCommand()
         {
-            User customer = User.getCustomer();
+            User customer = User.GetCustomer();
 
             if (!customer.LoggedIn)
             {
                 LoginDTO dto = new LoginDTO()
                 {
-                    Username = username,
-                    Password = password,
+                    Username = Username,
+                    Password = Password,
                 };
 
                 string token = await RestClient.LoginAsync(dto);
