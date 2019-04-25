@@ -73,21 +73,38 @@ namespace Barometer_App.ViewModels
 
         #region Commands
 
-
+        /// <summary>
+        /// ICommand property that holds the DelegateCommand for later consumption
+        /// </summary>
         private ICommand _navigateToBarSignUpCommand;
 
+        /// <summary>
+        /// Bindable command that resolves to a DelegateCommand
+        /// </summary>
         public ICommand NavigateToBarSignUpCommand =>
             _navigateToBarSignUpCommand ?? (_navigateToBarSignUpCommand = new DelegateCommand(OnNavigateToBarSignUp));
 
+        /// <summary>
+        /// Logic that defines behaviour for the BarSignup navigation
+        /// </summary>
         public async void OnNavigateToBarSignUp()
         {
             await _navigationService.NavigateAsync("BarSignup");
         }
 
+        /// <summary>
+        /// ICommand property that holds the DelegateCommand for later consumption
+        /// </summary>
         private ICommand _signupCommand;
 
+        /// <summary>
+        /// Bindable command that resolves to a DelegateCommand
+        /// </summary>
         public ICommand SignupCommand => _signupCommand ?? (_signupCommand = new DelegateCommand(OnSignupCommand));
 
+        /// <summary>
+        /// Logic that defines behaviour for the Signup action
+        /// </summary>
         public async void OnSignupCommand()
         {
             RegisterDTO dto = new RegisterDTO()
