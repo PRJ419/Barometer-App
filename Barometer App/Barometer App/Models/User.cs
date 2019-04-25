@@ -6,11 +6,11 @@ using Prism.Mvvm;
 
 namespace Barometer_App.Models
 {
-    public class Customer : BindableBase
+    public class User : BindableBase
     {
         //Singleton pattern to ensure on only customer is logged in
-        private static readonly Customer customer = new Customer();
-        private Customer() {}
+        private static readonly User customer = new User();
+        private User() {}
 
         public static Customer GetCustomer()
         {

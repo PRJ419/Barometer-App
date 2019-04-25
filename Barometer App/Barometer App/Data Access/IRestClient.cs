@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Barometer_App.DTO;
 using Barometer_App.Models;
 
 
@@ -36,5 +37,9 @@ namespace RESTClient
         Task<bool> CreateReview(Review newReview);
         Task<Review> GetSpecificBarReview(string barId, string username);
         Task<bool> DeleteReview(string barId, string username);
+
+        //IDENTITY
+        Task<bool> RegisterAsync(RegisterDTO model);
+        Task<string> LoginAsync(LoginDTO model);
     }
 }

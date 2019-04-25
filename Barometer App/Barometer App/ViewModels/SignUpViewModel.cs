@@ -49,12 +49,6 @@ namespace Barometer_App.ViewModels
         public InputValidator validator;
 
         /// <summary>
-        /// RestClient for communication to application server.
-        /// Includes Identity and regular API calls through HTTPS.
-        /// </summary>
-        private RestClient _apiService = new RestClient();
-
-        /// <summary>
         /// Navigation Service provided by Prism, which is later used for navigation to other Views and popping back to earlier Views when logged in.
         /// </summary>
         public INavigationService _navigationService { get; }
@@ -73,21 +67,38 @@ namespace Barometer_App.ViewModels
 
         #region Commands
 
-
+        /// <summary>
+        /// ICommand property that holds the DelegateCommand for later consumption
+        /// </summary>
         private ICommand _navigateToBarSignUpCommand;
 
+        /// <summary>
+        /// Bindable command that resolves to a DelegateCommand
+        /// </summary>
         public ICommand NavigateToBarSignUpCommand =>
             _navigateToBarSignUpCommand ?? (_navigateToBarSignUpCommand = new DelegateCommand(OnNavigateToBarSignUp));
 
+        /// <summary>
+        /// Logic that defines behaviour for the BarSignup navigation
+        /// </summary>
         public async void OnNavigateToBarSignUp()
         {
             await _navigationService.NavigateAsync("BarSignup");
         }
 
+        /// <summary>
+        /// ICommand property that holds the DelegateCommand for later consumption
+        /// </summary>
         private ICommand _signupCommand;
 
+        /// <summary>
+        /// Bindable command that resolves to a DelegateCommand
+        /// </summary>
         public ICommand SignupCommand => _signupCommand ?? (_signupCommand = new DelegateCommand(OnSignupCommand));
 
+        /// <summary>
+        /// Logic that defines behaviour for the Signup action
+        /// </summary>
         public async void OnSignupCommand()
         {
             RegisterDTO dto = new RegisterDTO()
@@ -97,7 +108,7 @@ namespace Barometer_App.ViewModels
                 Password = password,
             };
 
-        if(await _apiService.RegisterAsync(dto))
+        if(await RestClient.RegisterAsync(dto))
             await _navigationService.GoBackAsync();
         else
             await App.Current.MainPage.DisplayAlert("Error", "Something went wrong in the registration!", "OK");

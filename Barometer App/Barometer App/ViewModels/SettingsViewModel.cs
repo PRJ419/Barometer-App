@@ -11,11 +11,6 @@ namespace Barometer_App.ViewModels
     class SettingsViewModel : ViewModelBase
     {
         /// <summary>
-        /// RestClient for use in communication with the application server through HTTPS
-        /// </summary>
-        private readonly IRestClient _restClient;
-
-        /// <summary>
         /// Navigation Service provided by Prism
         /// </summary>
         private readonly INavigationService _navigationService;
@@ -29,7 +24,6 @@ namespace Barometer_App.ViewModels
         public SettingsViewModel(INavigationService navigationService) : base()
         {
             Title = "Settings";
-            _restClient = new RestClient();
             _navigationService = navigationService;
         }
 

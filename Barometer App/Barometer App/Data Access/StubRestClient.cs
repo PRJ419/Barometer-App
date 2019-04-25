@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using Barometer_App.DTO;
 using Barometer_App.Models;
 using Barometer_App.Views;
 using Newtonsoft.Json;
@@ -256,6 +257,16 @@ namespace RESTClient
         public async Task<bool> DeleteReview(string barId, string username)
         {
             return true;
+        }
+
+        public async Task<bool> RegisterAsync(RegisterDTO model)
+        {
+            return true;
+        }
+
+        public async Task<string> LoginAsync(LoginDTO model)
+        {
+            return "UserToken";
         }
     }
 }

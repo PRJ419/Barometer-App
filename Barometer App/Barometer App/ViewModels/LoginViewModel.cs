@@ -23,12 +23,6 @@ namespace Barometer_App.ViewModels
         public string password { get; set; }
 
         /// <summary>
-        /// RestClient for communication to application server.
-        /// Includes Identity and regular API calls through HTTPS.
-        /// </summary>
-        private RestClient _apiService = new RestClient();
-
-        /// <summary>
         /// Navigation Service provided by Prism, which is later used for navigation to other Views and popping back to earlier Views when logged in.
         /// </summary>
         private readonly INavigationService _navigationService;
@@ -86,7 +80,7 @@ namespace Barometer_App.ViewModels
         /// </summary>
         public async void OnLoginCommand()
         {
-            Customer customer = Customer.GetCustomer();
+            User customer = User.getCustomer();
 
             if (!customer.LoggedIn)
             {
@@ -96,7 +90,7 @@ namespace Barometer_App.ViewModels
                     Password = password,
                 };
 
-                string token = await _apiService.LoginAsync(dto);
+                string token = await RestClient.LoginAsync(dto);
 
                 if (token != null)
                 {
