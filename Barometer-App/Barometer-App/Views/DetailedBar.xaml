@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Barometer_App.Views.DetailedBar"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             Title="{Binding Title}">
+    <ContentPage.Content>
+        <ScrollView Margin="20">
+        <StackLayout Margin="0,0,0,10">
+            <Image Source="{Binding Bar.Image}" 
+                   VerticalOptions="Center"
+                   HorizontalOptions="Center"></Image>
+
+        <StackLayout Orientation="Horizontal" Margin="0,10" HorizontalOptions="CenterAndExpand">
+        <Label Text="The bar for"
+               FontSize="Large"
+               TextColor="Black"
+               FontAttributes="Bold"></Label>
+            <Label Text="{Binding Bar.Educations}" 
+                   FontSize="Large" 
+                   TextColor="Black"
+                   FontAttributes="Bold"></Label>
+                </StackLayout>
+            
+
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Age Limit:" 
+                       FontSize="Large"
+                       HorizontalTextAlignment="Start" 
+                       VerticalTextAlignment="End"></Label>
+                    <Label Text="{Binding Bar.AgeLimit}"
+                           FontSize="Large"
+                           HorizontalTextAlignment="Start"
+                           VerticalTextAlignment="Center"
+                           TextColor="Black"></Label>
+            </StackLayout>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"></ColumnDefinition>
+                        <ColumnDefinition Width="4*"></ColumnDefinition>
+                        <ColumnDefinition Width="2*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0"
+                           Text="Rating:" 
+                           VerticalTextAlignment="Center" 
+                           HorizontalTextAlignment="Start" 
+                           FontSize="Large"></Label>
+                    <ProgressBar Grid.Column="1"
+                                 Progress="{Binding Bar.AvgRating}" 
+                                 ProgressColor="Green"></ProgressBar>
+                    <Button Grid.Column="2" 
+                            Text="Rate"
+                            HorizontalOptions="EndAndExpand"
+                            Command="{Binding RatingCommand}"></Button>
+                </Grid>
+
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Address:"
+                       FontSize="Large"></Label>
+                    <Label Text="{Binding Bar.Address}"
+                       FontSize="Large" 
+                       TextColor="Black"></Label>
+                </StackLayout>
+
+            <Label Text="{Binding Bar.LongDescription}" 
+                   FontSize="Medium"
+                   TextColor="Black"></Label>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                    <Button Grid.Column="0" 
+                            Text="Drinks" Command="{Binding DrinksCommand}" 
+                            Style="{DynamicResource DetailedBarButton}"></Button>
+                <Button Grid.Column="1" 
+                        Text="Events" Command="{Binding EventCommand}"
+                        Style="{DynamicResource DetailedBarButton}"></Button>
+                <Button Grid.Column="2"
+                        Text="Coupons"
+                        Style="{DynamicResource DetailedBarButton}"></Button>
+
+            </Grid>
+        </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

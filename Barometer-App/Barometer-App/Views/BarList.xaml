@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Barometer_App.Views.BarList"  
+             xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
+             Title="{Binding Title}">
+    <StackLayout>
+        <StackLayout Orientation="Horizontal">
+            <Picker x:Name="Picker" Title="Filter by:" FontAttributes="Bold" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>Alphabetical</x:String>
+                        <x:String>Rating</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+            <Button Text="Filter" Command="{Binding FilterItemsCommand}" CommandParameter="{Binding Source={x:Reference Picker}, Path=SelectedItem}"></Button>
+        </StackLayout>
+        <ListView
+            x:Name="BarsListView"
+            SeparatorVisibility ="Default"
+            ItemsSource="{Binding Bars}"
+            VerticalOptions="FillAndExpand"
+            HasUnevenRows="True"
+            RefreshCommand="{Binding LoadItemsCommand}"
+            IsPullToRefreshEnabled="False"
+            SelectedItem="{Binding CurrentBar}"
+            CachingStrategy="RecycleElementAndDataTemplate"
+            >
+            <ListView.Behaviors>
+                <b:EventToCommandBehavior EventName="ItemSelected"
+                                          Command="{Binding NavigationCommand}">
+                    
+                </b:EventToCommandBehavior>
+            </ListView.Behaviors>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Margin="5">
+                            <Label Text="{Binding BarName}"
+                                   LineBreakMode="NoWrap"
+                                   FontSize="16"
+                                   FontAttributes="Bold"
+                                   Style="{DynamicResource ListItemTextStyle}"></Label>
+                            <Label Text="{Binding ShortDescription}"
+                                   FontSize="12"
+                                   Style="{DynamicResource ListItemDetailTextStyle}"></Label>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Column="0" Text="Rating" FontSize="Large" Style="{DynamicResource ListItemDetailTextStyle}"></Label>
+                                <ProgressBar Grid.Column="1" Progress="{Binding AvgRating}" ProgressColor="Green"></ProgressBar>
+                            </Grid>
+                            <Image
+                                Source="{Binding Image}"
+                                MinimumHeightRequest="200"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Center"                               
+                            ></Image>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+</ContentPage>
