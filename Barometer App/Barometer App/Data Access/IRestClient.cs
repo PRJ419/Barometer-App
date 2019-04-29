@@ -18,6 +18,28 @@ namespace RESTClient
         Task<List<BarSimple>> GetWorstBarList();
         Task<List<BarSimple>> GetSpecificBarList(int startIndex, int pageSize);
 
+        //BARREPRESENTATIVE
+        Task<List<BarRepresentative>> GetAllBarRepresentatives();
+        Task<bool> EditBarRepresentative(BarRepresentative editedBarRepresentative);
+        Task<bool> CreateBarRepresentative(BarRepresentative newBarRepresentative);
+        Task<BarRepresentative> GetSpecificBarRepresentative(string username);
+        Task<bool> DeleteBarRepresentative(string username);
+        
+
+        //COUPON
+        Task<List<Coupon>> GetAllCoupons(string barName);
+        Task<bool> EditCoupon(Coupon editedCoupon, string barName);
+        Task<bool> CreateCoupon(Coupon newCoupon, string barName);
+        Task<Coupon> GetSpecificCoupon(string barName, string couponID);
+        Task<bool> DeleteCoupon(string barName, string couponID);
+
+        //CUSTOMER
+        Task<List<Customer>> GetAllCustomers();
+        Task<bool> EditCustomer(Customer editedCustomer);
+        Task<bool> CreateCustomer(Customer newCustomer);
+        Task<Customer> GetSpecificCustomer(string username);
+        Task<bool> DeleteCustomer(string username);
+
         //DRINKS
         Task<List<Drink>> GetBarDrinkList(string id);
         Task<bool> EditDrink(Drink editedDrink, string id);

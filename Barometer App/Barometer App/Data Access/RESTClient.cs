@@ -279,6 +279,446 @@ namespace RESTClient
             }
         }
 
+        //BARREPRESENTATIVE
+
+        //GET api/barrepresentatives
+        public async Task<List<BarRepresentative>> GetAllBarRepresentatives()
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(Baseaddress);
+
+                try
+                {
+                    var response = await client.GetAsync($"api/barrepresentatives");
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var msg = await response.Content.ReadAsStringAsync();
+                        var representatives = JsonConvert.DeserializeObject<List<BarRepresentative>>(msg);
+
+                        return representatives;
+                    }
+                    //GetAsync failed, returning empty list of representatives
+                    return new List<BarRepresentative>();
+                }
+                catch (Exception)
+                {
+                    //There were no representatives to get, returning empty list of representatives
+                    return new List<BarRepresentative>();
+                }
+            }
+        }
+
+        //PUT api/barrepresentatives
+        public async Task<bool> EditBarRepresentative(BarRepresentative editedBarRepresentative)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(Baseaddress);
+
+                try
+                {
+                    var jsonString = JsonConvert.SerializeObject(editedBarRepresentative);
+
+                    var content = new StringContent(jsonString, Encoding.UTF8, "application/json");
+
+                    var response = await client.PutAsync($"api/barrepresentatives", content);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        return true;
+                    }
+                    //PutAsync failed
+                    return false;
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
+            }
+        }
+
+        //POST api/barrepresentatives
+        public async Task<bool> CreateBarRepresentative(BarRepresentative newBarRepresentative)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(Baseaddress);
+
+                try
+                {
+                    var jsonString = JsonConvert.SerializeObject(newBarRepresentative);
+
+                    var content = new StringContent(jsonString, Encoding.UTF8, "application/json");
+
+                    var response = await client.PostAsync($"api/barrepresentatives", content);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        return true;
+                    }
+                    return false;
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
+            }
+        }
+
+        //GET api/barrepresentatives/{username}
+        public async Task<BarRepresentative> GetSpecificBarRepresentative(string username)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(Baseaddress);
+
+                try
+                {
+                    var response = await client.GetAsync($"api/barrepresentatives/{username}");
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var msg = await response.Content.ReadAsStringAsync();
+                        var representative = JsonConvert.DeserializeObject<BarRepresentative>(msg);
+
+                        return representative;
+                    }
+                    //GetAsync failed, returning empty representative
+                    return new BarRepresentative();
+                }
+                catch (Exception)
+                {
+                    //There were no representative to get, returning empty representative
+                    return new BarRepresentative();
+                }
+            }
+        }
+
+        //DELETE api/barrepresentatives/{username}
+        public async Task<bool> DeleteBarRepresentative(string username)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(Baseaddress);
+
+                try
+                {
+                    var response = await client.DeleteAsync($"api/barrepresentatives/{username}");
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        return true;
+                    }
+                    //DeleteAsync failed
+                    return false;
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
+            }
+        }
+
+
+
+        //COUPON
+
+        //GET api/bars/{barName}/coupons
+        public async Task<List<Coupon>> GetAllCoupons(string barName)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(Baseaddress);
+
+                try
+                {
+                    var response = await client.GetAsync($"api/bars/{barName}/coupons");
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var msg = await response.Content.ReadAsStringAsync();
+                        var coupons = JsonConvert.DeserializeObject<List<Coupon>>(msg);
+
+                        return coupons;
+                    }
+                    //GetAsync failed, returning empty list of coupons
+                    return new List<Coupon>();
+                }
+                catch (Exception)
+                {
+                    //There were no coupons to get, returning empty list of coupons
+                    return new List<Coupon>();
+                }
+            }
+        }
+
+        //PUT api/bars/{barName}/coupons
+        public async Task<bool> EditCoupon(Coupon editedCoupon, string barName)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(Baseaddress);
+
+                try
+                {
+                    var jsonString = JsonConvert.SerializeObject(editedCoupon);
+
+                    var content = new StringContent(jsonString, Encoding.UTF8, "application/json");
+
+                    var response = await client.PutAsync($"api/bars/{barName}/coupons", content);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        return true;
+                    }
+                    //PutAsync failed
+                    return false;
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
+            }
+        }
+
+        //POST api/bars/{barName}/coupons
+        public async Task<bool> CreateCoupon(Coupon newCoupon, string barName)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(Baseaddress);
+
+                try
+                {
+                    var jsonString = JsonConvert.SerializeObject(newCoupon);
+
+                    var content = new StringContent(jsonString, Encoding.UTF8, "application/json");
+
+                    var response = await client.PostAsync($"api/bars/{barName}/coupons", content);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        return true;
+                    }
+                    return false;
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
+            }
+        }
+
+        //GET api/bars/{barName}/coupons/{couponID}
+        public async Task<Coupon> GetSpecificCoupon(string barName, string couponID)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(Baseaddress);
+
+                try
+                {
+                    var response = await client.GetAsync($"api/bars/{barName}/coupons/{couponID}");
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var msg = await response.Content.ReadAsStringAsync();
+                        var coupon = JsonConvert.DeserializeObject<Coupon>(msg);
+
+                        return coupon;
+                    }
+                    //GetAsync failed, returning empty coupon
+                    return new Coupon();
+                }
+                catch (Exception)
+                {
+                    //There were no coupon to get, returning empty coupon
+                    return new Coupon();
+                }
+            }
+        }
+
+        //DELETE api/bars/{barName}/coupons/{couponID
+        public async Task<bool> DeleteCoupon(string barName, string couponID)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(Baseaddress);
+
+                try
+                {
+                    var response = await client.DeleteAsync($"api/bars/{barName}/coupons/{couponID}");
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        return true;
+                    }
+                    //DeleteAsync failed
+                    return false;
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
+            }
+        }
+
+
+        //CUSTOMER
+
+        //GET api/customers
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public async Task<List<Customer>> GetAllCustomers()
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(Baseaddress);
+
+                try
+                {
+                    var response = await client.GetAsync($"api/customers");
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var msg = await response.Content.ReadAsStringAsync();
+                        var customers = JsonConvert.DeserializeObject<List<Customer>>(msg);
+
+                        return customers;
+                    }
+                    //GetAsync failed, returning empty list of customers
+                    return new List<Customer>();
+                }
+                catch (Exception)
+                {
+                    //There were no drinks to get, returning empty list of customers
+                    return new List<Customer>();
+                }
+            }
+        }
+
+        //PUT api/customers
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="editedCustomer"></param>
+        /// <param name="username"></param>
+        /// <returns></returns>
+        public async Task<bool> EditCustomer(Customer editedCustomer)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(Baseaddress);
+
+                try
+                {
+                    var jsonString = JsonConvert.SerializeObject(editedCustomer);
+
+                    var content = new StringContent(jsonString, Encoding.UTF8, "application/json");
+
+                    var response = await client.PutAsync($"api/customers", content);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        return true;
+                    }
+                    //PutAsync failed
+                    return false;
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
+            }
+        }
+
+        //POST api/customers
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="newCustomer"></param>
+        /// <returns></returns>
+        public async Task<bool> CreateCustomer(Customer newCustomer)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(Baseaddress);
+
+                try
+                {
+                    var jsonString = JsonConvert.SerializeObject(newCustomer);
+
+                    var content = new StringContent(jsonString, Encoding.UTF8, "application/json");
+
+                    var response = await client.PostAsync($"api/customers", content);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        return true;
+                    }
+                    return false;
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
+            }
+        }
+
+        //GET api/customers/{username}
+        public async Task<Customer> GetSpecificCustomer(string username)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(Baseaddress);
+
+                try
+                {
+                    var response = await client.GetAsync($"api/customers/{username}");
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var msg = await response.Content.ReadAsStringAsync();
+                        var customers = JsonConvert.DeserializeObject<Customer>(msg);
+
+                        return customers;
+                    }
+                    //GetAsync failed, returning null
+                    return null;
+                }
+                catch (Exception)
+                {
+                    //There were no customer to get, returning null
+                    return null;
+                }
+            }
+        }
+
+        //DELETE api/customers/{username}
+        public async Task<bool> DeleteCustomer(string username)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(Baseaddress);
+
+                try
+                {
+                    var response = await client.DeleteAsync($"api/customers/{username}");
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        return true;
+                    }
+                    //DeleteAsync failed
+                    return false;
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
+            }
+        }
+
+
+
         //DRINK
 
         //GET api/bars/{barname}/drinks
@@ -307,7 +747,7 @@ namespace RESTClient
 
                         return drinks;
                     }
-                    //GetAsync failed, returning empty list of bars
+                    //GetAsync failed, returning empty list of drinks
                     return new List<Drink>();
                 }
                 catch (Exception)
