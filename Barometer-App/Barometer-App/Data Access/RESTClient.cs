@@ -282,6 +282,12 @@ namespace RESTClient
         //BARREPRESENTATIVE
 
         //GET api/barrepresentatives
+        /// <summary>
+        /// Gets a list of BarRepresentatives.
+        /// </summary>
+        /// <returns>
+        /// A list of BarRepresentative.
+        /// </returns>
         public async Task<List<BarRepresentative>> GetAllBarRepresentatives()
         {
             using (var client = new HttpClient())
@@ -310,6 +316,15 @@ namespace RESTClient
         }
 
         //PUT api/barrepresentatives
+        /// <summary>
+        /// Allows editing of a BarRepresentative.
+        /// </summary>
+        /// <param name="editedBarRepresentative">
+        /// The edited version of the specific BarRepresentative.
+        /// </param>
+        /// <returns>
+        /// True if it went well. False if it went wrong.
+        /// </returns>
         public async Task<bool> EditBarRepresentative(BarRepresentative editedBarRepresentative)
         {
             using (var client = new HttpClient())
@@ -339,6 +354,15 @@ namespace RESTClient
         }
 
         //POST api/barrepresentatives
+        /// <summary>
+        /// Allows creation of a BarRepresentative.
+        /// </summary>
+        /// <param name="newBarRepresentative">
+        /// The new instance of BarRepresentative.
+        /// </param>
+        /// <returns>
+        /// True if it went well. False if it went wrong.
+        /// </returns>
         public async Task<bool> CreateBarRepresentative(BarRepresentative newBarRepresentative)
         {
             using (var client = new HttpClient())
@@ -367,6 +391,15 @@ namespace RESTClient
         }
 
         //GET api/barrepresentatives/{username}
+        /// <summary>
+        /// Gets a specific BarRepresentative.
+        /// </summary>
+        /// <param name="username">
+        /// The name of the BarRepresentative which is to be fetched.
+        /// </param>
+        /// <returns>
+        /// The BarRepresentative with username matching the request.
+        /// </returns>
         public async Task<BarRepresentative> GetSpecificBarRepresentative(string username)
         {
             using (var client = new HttpClient())
@@ -395,6 +428,15 @@ namespace RESTClient
         }
 
         //DELETE api/barrepresentatives/{username}
+        /// <summary>
+        /// Deletes a specific BarRepresentative.
+        /// </summary>
+        /// <param name="username">
+        /// The name of the BarRepresentative which is to be deleted.
+        /// </param>
+        /// <returns>
+        /// True if it went well. False if it went wrong.
+        /// </returns>
         public async Task<bool> DeleteBarRepresentative(string username)
         {
             using (var client = new HttpClient())
@@ -424,6 +466,15 @@ namespace RESTClient
         //COUPON
 
         //GET api/bars/{barName}/coupons
+        /// <summary>
+        /// Gets a list of coupons for the requested bar.
+        /// </summary>
+        /// <param name="barName">
+        /// The name ofthe bar which coupons is to be fetched.
+        /// </param>
+        /// <returns>
+        /// A list of coupons.
+        /// </returns>
         public async Task<List<Coupon>> GetAllCoupons(string barName)
         {
             using (var client = new HttpClient())
@@ -452,6 +503,18 @@ namespace RESTClient
         }
 
         //PUT api/bars/{barName}/coupons
+        /// <summary>
+        /// Allows editing of a coupon.
+        /// </summary>
+        /// <param name="editedCoupon">
+        /// The edited version of the coupon.
+        /// </param>
+        /// <param name="barName">
+        /// The name of the bar which the coupon belongs to.
+        /// </param>
+        /// <returns>
+        /// True if it went well. False if it went wrong.
+        /// </returns>
         public async Task<bool> EditCoupon(Coupon editedCoupon, string barName)
         {
             using (var client = new HttpClient())
@@ -481,6 +544,18 @@ namespace RESTClient
         }
 
         //POST api/bars/{barName}/coupons
+        /// <summary>
+        /// Allows creation of a coupon.
+        /// </summary>
+        /// <param name="newCoupon">
+        /// The new instance of Coupon.
+        /// </param>
+        /// <param name="barName">
+        /// The name of the bar which the coupon belongs to.
+        /// </param>
+        /// <returns>
+        /// True if it went well. False if it went wrong.
+        /// </returns>
         public async Task<bool> CreateCoupon(Coupon newCoupon, string barName)
         {
             using (var client = new HttpClient())
@@ -509,6 +584,18 @@ namespace RESTClient
         }
 
         //GET api/bars/{barName}/coupons/{couponID}
+        /// <summary>
+        /// Gets a specific coupon for a bar.
+        /// </summary>
+        /// <param name="barName">
+        /// The name of the bar which the coupon belongs to.
+        /// </param>
+        /// <param name="couponID">
+        /// The ID of the coupon which is to be fetched.
+        /// </param>
+        /// <returns>
+        /// The coupon with ID matching the request.
+        /// </returns>
         public async Task<Coupon> GetSpecificCoupon(string barName, string couponID)
         {
             using (var client = new HttpClient())
@@ -536,7 +623,19 @@ namespace RESTClient
             }
         }
 
-        //DELETE api/bars/{barName}/coupons/{couponID
+        //DELETE api/bars/{barName}/coupons/{couponID}
+        /// <summary>
+        /// Deletes a specific coupon of a bar.
+        /// </summary>
+        /// <param name="barName">
+        /// The name of the bar which the coupon belongs to.
+        /// </param>
+        /// <param name="couponID">
+        /// The ID of the coupon which is to be deleted.
+        /// </param>
+        /// <returns>
+        /// True if it went well. False if it went wrong.
+        /// </returns>
         public async Task<bool> DeleteCoupon(string barName, string couponID)
         {
             using (var client = new HttpClient())
@@ -566,9 +665,11 @@ namespace RESTClient
 
         //GET api/customers
         /// <summary>
-        /// 
+        /// Gets a list of all customers.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>
+        /// A list of customers.
+        /// </returns>
         public async Task<List<Customer>> GetAllCustomers()
         {
             using (var client = new HttpClient())
@@ -598,11 +699,14 @@ namespace RESTClient
 
         //PUT api/customers
         /// <summary>
-        /// 
+        /// Allows editing of a customer.
         /// </summary>
-        /// <param name="editedCustomer"></param>
-        /// <param name="username"></param>
-        /// <returns></returns>
+        /// <param name="editedCustomer">
+        /// The edited instance of a customer.
+        /// </param>
+        /// <returns>
+        /// True if it went well. False if it went wrong.
+        /// </returns>
         public async Task<bool> EditCustomer(Customer editedCustomer)
         {
             using (var client = new HttpClient())
@@ -633,10 +737,14 @@ namespace RESTClient
 
         //POST api/customers
         /// <summary>
-        /// 
+        /// Creates a new Customer.
         /// </summary>
-        /// <param name="newCustomer"></param>
-        /// <returns></returns>
+        /// <param name="newCustomer">
+        /// The new instance of a Customer.
+        /// </param>
+        /// <returns>
+        /// True if it went well. False if it went wrong.
+        /// </returns>
         public async Task<bool> CreateCustomer(Customer newCustomer)
         {
             using (var client = new HttpClient())
@@ -665,6 +773,15 @@ namespace RESTClient
         }
 
         //GET api/customers/{username}
+        /// <summary>
+        /// Gets a specific Customer.
+        /// </summary>
+        /// <param name="username">
+        /// The username of the Customer which is to be fetched.
+        /// </param>
+        /// <returns>
+        /// The Customer with username matching the request.
+        /// </returns>
         public async Task<Customer> GetSpecificCustomer(string username)
         {
             using (var client = new HttpClient())
@@ -693,6 +810,15 @@ namespace RESTClient
         }
 
         //DELETE api/customers/{username}
+        /// <summary>
+        /// Deletes a specific Customer.
+        /// </summary>
+        /// <param name="username">
+        /// The name of the Customer which is to be deleted.
+        /// </param>
+        /// <returns>
+        /// True if it went well. False if it went wrong.
+        /// </returns>
         public async Task<bool> DeleteCustomer(string username)
         {
             using (var client = new HttpClient())
