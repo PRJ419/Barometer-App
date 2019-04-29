@@ -35,10 +35,10 @@ namespace RESTClient
         Task<bool> DeleteCoupon(string barName, string couponID);
 
         //CUSTOMER
-        Task<List<Customer>> GetAllCustomers();
-        Task<bool> EditCustomer(Customer editedCustomer);
-        Task<bool> CreateCustomer(Customer newCustomer);
-        Task<Customer> GetSpecificCustomer(string username);
+        Task<List<User>> GetAllCustomers();
+        Task<bool> EditCustomer(User editedCustomer);
+        Task<bool> CreateCustomer(User newCustomer);
+        Task<User> GetSpecificCustomer(string username);
         Task<bool> DeleteCustomer(string username);
 
         //DRINKS

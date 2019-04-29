@@ -176,25 +176,25 @@ namespace RESTClient
         //CUSTOMER
 
         //GET api/customers
-        public async Task<List<Customer>> GetAllCustomers()
+        public async Task<List<User>> GetAllCustomers()
         {
             throw new NotImplementedException();
         }
 
         //PUT api/customers
-        public async Task<bool> EditCustomer(Customer editedCustomer)
+        public async Task<bool> EditCustomer(User editedCustomer)
         {
             throw new NotImplementedException();
         }
 
         //POST api/customers
-        public async Task<bool> CreateCustomer(Customer newCustomer)
+        public async Task<bool> CreateCustomer(User newCustomer)
         {
             throw new NotImplementedException();
         }
 
         //GET api/customers/{username}
-        public async Task<Customer> GetSpecificCustomer(string username)
+        public async Task<User> GetSpecificCustomer(string username)
         {
             throw new NotImplementedException();
         }

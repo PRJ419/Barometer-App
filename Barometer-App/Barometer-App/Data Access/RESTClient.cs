@@ -670,7 +670,7 @@ namespace RESTClient
         /// <returns>
         /// A list of customers.
         /// </returns>
-        public async Task<List<Customer>> GetAllCustomers()
+        public async Task<List<User>> GetAllCustomers()
         {
             using (var client = new HttpClient())
             {
@@ -682,17 +682,17 @@ namespace RESTClient
                     if (response.IsSuccessStatusCode)
                     {
                         var msg = await response.Content.ReadAsStringAsync();
-                        var customers = JsonConvert.DeserializeObject<List<Customer>>(msg);
+                        var customers = JsonConvert.DeserializeObject<List<User>>(msg);
 
                         return customers;
                     }
                     //GetAsync failed, returning empty list of customers
-                    return new List<Customer>();
+                    return new List<User>();
                 }
                 catch (Exception)
                 {
                     //There were no drinks to get, returning empty list of customers
-                    return new List<Customer>();
+                    return new List<User>();
                 }
             }
         }
@@ -707,7 +707,7 @@ namespace RESTClient
         /// <returns>
         /// True if it went well. False if it went wrong.
         /// </returns>
-        public async Task<bool> EditCustomer(Customer editedCustomer)
+        public async Task<bool> EditCustomer(User editedCustomer)
         {
             using (var client = new HttpClient())
             {
@@ -745,7 +745,7 @@ namespace RESTClient
         /// <returns>
         /// True if it went well. False if it went wrong.
         /// </returns>
-        public async Task<bool> CreateCustomer(Customer newCustomer)
+        public async Task<bool> CreateCustomer(User newCustomer)
         {
             using (var client = new HttpClient())
             {
@@ -782,7 +782,7 @@ namespace RESTClient
         /// <returns>
         /// The Customer with username matching the request.
         /// </returns>
-        public async Task<Customer> GetSpecificCustomer(string username)
+        public async Task<User> GetSpecificCustomer(string username)
         {
             using (var client = new HttpClient())
             {
@@ -794,7 +794,7 @@ namespace RESTClient
                     if (response.IsSuccessStatusCode)
                     {
                         var msg = await response.Content.ReadAsStringAsync();
-                        var customers = JsonConvert.DeserializeObject<Customer>(msg);
+                        var customers = JsonConvert.DeserializeObject<User>(msg);
 
                         return customers;
                     }
