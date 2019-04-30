@@ -37,6 +37,7 @@ namespace Barometer_App.ViewModels
             NavigationService = navigationService;
             _review = new Review();
             Customer = User.GetCustomer();
+            Customer.UserName = "k00ziex";
         }
 
         /// <inheritdoc />

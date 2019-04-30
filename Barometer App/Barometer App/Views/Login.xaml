@@ -11,9 +11,9 @@
 
             <Label Text="Login to Bar-O-Meter" Style="{StaticResource HeaderStyle}"/>
             <Label Text="Username" TextColor="{StaticResource LabelColor}"/>
-            <Entry Text="{Binding username}" Placeholder="Username" PlaceholderColor="DimGray"/>
+            <Entry Text="{Binding Username}" Placeholder="Username" PlaceholderColor="DimGray"/>
             <Label Text="Password" TextColor="{StaticResource LabelColor}"/>
-            <Entry Text="{Binding password}" Placeholder="Password" PlaceholderColor="DimGray" IsPassword="True"/>
+            <Entry Text="{Binding Password}" Placeholder="Password" PlaceholderColor="DimGray" IsPassword="True"/>
             <Button Text="Login" Command="{Binding LoginCommand}"/>
             <Button Text="Sign Up" Command="{Binding NavSignupCommand}"/>
         </StackLayout>

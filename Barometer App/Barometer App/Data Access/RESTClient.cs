@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using Barometer_App;
 using Barometer_App.DTO;
 using Barometer_App.Models;
 using Newtonsoft.Json;
@@ -15,7 +13,7 @@ namespace RESTClient
     public class RestClient : IRestClient
     {
        // private const string Baseaddress = "https://localhost:44310/";
-        private const string Baseaddress = "https://10.192.71.109:45459";
+        private const string Baseaddress = "https://10.192.71.109:45456";
         private User customer = User.GetCustomer();
 
         //BAR
