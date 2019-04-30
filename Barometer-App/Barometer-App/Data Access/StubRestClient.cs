@@ -106,6 +106,106 @@ namespace RESTClient
             return stubList.GetRange(startIndex, pageSize);
         }
 
+
+        //BARREPRESENTATIVE
+
+        //GET api/barrepresentatives
+        public async Task<List<BarRepresentative>> GetAllBarRepresentatives()
+        {
+            throw new NotImplementedException();
+        }
+
+        //PUT api/barrepresentatives
+        public async Task<bool> EditBarRepresentative(BarRepresentative editedBarRepresentative)
+        {
+            throw new NotImplementedException();
+        }
+
+        //POST api/barrepresentatives
+        public async Task<bool> CreateBarRepresentative(BarRepresentative newBarRepresentative)
+        {
+            throw new NotImplementedException();
+        }
+
+        //GET api/barrepresentatives/{username}
+        public async Task<BarRepresentative> GetSpecificBarRepresentative(string username)
+        {
+            throw new NotImplementedException();
+        }
+
+        //DELETE api/barrepresentatives/{username}
+        public async Task<bool> DeleteBarRepresentative(string username)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        //COUPON
+
+        //GET api/bars/{barName}/coupons
+        public async Task<List<Coupon>> GetAllCoupons(string barName)
+        {
+            throw new NotImplementedException();
+        }
+
+        //PUT api/bars/{barName}/coupons
+        public async Task<bool> EditCoupon(Coupon editedCoupon, string barName)
+        {
+            throw new NotImplementedException();
+        }
+
+        //POST api/bars/{barName}/coupons
+        public async Task<bool> CreateCoupon(Coupon newCoupon, string barName)
+        {
+            throw new NotImplementedException();
+        }
+
+        //GET api/bars/{barName}/coupons/{couponID
+        public async Task<Coupon> GetSpecificCoupon(string barName, string couponID)
+        {
+            throw new NotImplementedException();
+        }
+
+        //DELETE api/bars/{barName}/coupons/{couponID
+        public async Task<bool> DeleteCoupon(string barName, string couponID)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        //CUSTOMER
+
+        //GET api/customers
+        public async Task<List<User>> GetAllCustomers()
+        {
+            throw new NotImplementedException();
+        }
+
+        //PUT api/customers
+        public async Task<bool> EditCustomer(User editedCustomer)
+        {
+            throw new NotImplementedException();
+        }
+
+        //POST api/customers
+        public async Task<bool> CreateCustomer(User newCustomer)
+        {
+            throw new NotImplementedException();
+        }
+
+        //GET api/customers/{username}
+        public async Task<User> GetSpecificCustomer(string username)
+        {
+            throw new NotImplementedException();
+        }
+
+        //DELETE api/customers/{username}
+        public async Task<bool> DeleteCustomer(string username)
+        {
+            throw new NotImplementedException();
+        }
+
+
         //DRINK
 
         //GET api/bars/{barname}/drinks

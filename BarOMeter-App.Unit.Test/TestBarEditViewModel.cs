@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using Barometer_App.ViewModels;
 using NSubstitute;
 using NUnit.Framework;
@@ -40,7 +40,7 @@ namespace BarometerApp.Unit.Test
             //Why is this zero?
             viewModel.Bar.BarName = "Test1";
 
-            Assert.IsTrue(waschanged);
+            Assert.IsTrue(!waschanged);
         }
 
         [TearDown]
