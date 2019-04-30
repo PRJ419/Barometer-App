@@ -19,7 +19,7 @@ namespace Barometer_App.Models
 
         public string UserName { get; set; }
         public string Name { get; set; }
-        public DateTime DateOfBirth { get; set; }
+        public DateTime? DateOfBirth { get; set; }
         //Deprecated begin
         public string Email{ get; set; }
         public string Password { get; set; }
@@ -39,8 +39,7 @@ namespace Barometer_App.Models
         private bool _loggedIn;
         public bool LoggedIn
         {
-            get => _loggedIn;
-            set => SetProperty(ref _loggedIn, value);
+            get { return _loggedIn; }
         }
         public string FavoriteBar { get; set; }
         public string FavoriteDrinks { get; set; }

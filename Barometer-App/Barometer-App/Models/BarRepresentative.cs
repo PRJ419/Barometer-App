@@ -4,6 +4,9 @@ using System.Text;
 
 namespace Barometer_App.Models
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class BarRepresentative
     {
         public string Username { get; set; }
