@@ -9,7 +9,7 @@ namespace Barometer_App.ViewModels
         /// <summary>
         /// RestClient which is inherited.
         /// </summary>
-        protected IRestClient RestClient = new StubRestClient();
+        protected IRestClient RestClient = new RestClient();
         /// <summary>
         /// NavigationService which is inherited
         /// </summary>

@@ -5,11 +5,5 @@
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
              Title="{Binding Title}">
-  <ContentPage.Content>
-      <StackLayout>
-          <Label Text="Enter the name of the bar you want to delete"></Label>
-          <Entry Text="{Binding BarToDelete}"></Entry>
-            <Button Text="DELETE" Command="{Binding DeleteCommand}"></Button>
-      </StackLayout>
-  </ContentPage.Content>
+    <Label Text="No settings yet."></Label>
 </ContentPage>
