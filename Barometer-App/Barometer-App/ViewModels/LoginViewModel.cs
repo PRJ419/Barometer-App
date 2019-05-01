@@ -90,6 +90,7 @@ namespace Barometer_App.ViewModels
                 if (token != null)
                 {
                     customer.UserToken = token;
+                    customer.UserName = Username;
                     await NavigationService.GoBackAsync();
                 }
                 else

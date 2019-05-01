@@ -27,7 +27,7 @@
                     HorizontalOptions="CenterAndExpand" Style="{StaticResource BtnLabelStyle}"/>
 
                 <StackLayout.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding NavShowBarsCommand}"/>
+                    <TapGestureRecognizer Command="{Binding NavCommand}" CommandParameter="BarList"/>
                 </StackLayout.GestureRecognizers>
             </StackLayout>
 
@@ -40,7 +40,7 @@
                        HorizontalOptions="CenterAndExpand" Style="{StaticResource BtnLabelStyle}"/>
 
                 <StackLayout.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding NavLoginCommand}"/>
+                    <TapGestureRecognizer Command="{Binding NavCommand}" CommandParameter="Login"/>
                 </StackLayout.GestureRecognizers>
             </StackLayout>
 
@@ -66,7 +66,7 @@
                        HorizontalOptions="CenterAndExpand" Style="{StaticResource BtnLabelStyle}"/>
 
                 <StackLayout.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding NavSignupCommand}"/>
+                    <TapGestureRecognizer Command="{Binding NavCommand}" CommandParameter="Signup"/>
                 </StackLayout.GestureRecognizers>
             </StackLayout>
 
@@ -79,7 +79,7 @@
                        HorizontalOptions="CenterAndExpand" Style="{StaticResource BtnLabelStyle}"/>
 
                 <StackLayout.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding NavSettingsCommand}"/>
+                    <TapGestureRecognizer Command="{Binding NavCommand}" CommandParameter="Setttings"/>
                 </StackLayout.GestureRecognizers>
             </StackLayout>
 
@@ -92,7 +92,7 @@
                        HorizontalOptions="CenterAndExpand" Style="{StaticResource BtnLabelStyle}"/>
 
                 <StackLayout.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding NavAboutCommand}"/>
+                    <TapGestureRecognizer Command="{Binding NavCommand}" CommandParameter="About"/>
                 </StackLayout.GestureRecognizers>
             </StackLayout>
         </Grid>

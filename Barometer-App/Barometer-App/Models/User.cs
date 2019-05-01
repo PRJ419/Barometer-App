@@ -6,9 +6,15 @@ using Prism.Mvvm;
 
 namespace Barometer_App.Models
 {
+    /// <summary>
+    /// Singleton class representing the user in the application
+    /// </summary>
     public class User : BindableBase
     {
         //Singleton pattern to ensure on only customer is logged in
+        /// <summary>
+        /// 
+        /// </summary>
         private static readonly User Customer = new User();
         private User() {}
 
@@ -20,10 +26,6 @@ namespace Barometer_App.Models
         public string UserName { get; set; }
         public string Name { get; set; }
         public DateTime? DateOfBirth { get; set; }
-        //Deprecated begin
-        public string Email{ get; set; }
-        public string Password { get; set; }
-        //Deprecated end
         private string _usertoken;
         public string UserToken
         {

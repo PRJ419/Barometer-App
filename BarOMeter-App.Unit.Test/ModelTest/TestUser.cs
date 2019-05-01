@@ -21,11 +21,9 @@ namespace BarOMeterApp.Unit.Test
 
             //Clear the singleton values between tests
             User.Name = null;
-            User.Email = null;
             User.DateOfBirth = null;
             User.FavoriteBar = null;
             User.FavoriteDrinks = null;
-            User.Password = null;
             User.UserName = null;
             User.UserToken = null;
         }

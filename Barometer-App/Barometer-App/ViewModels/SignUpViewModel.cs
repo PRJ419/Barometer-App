@@ -62,6 +62,7 @@ namespace Barometer_App.ViewModels
         {
             Title = "Sign Up";
             _navigationService = navigationService;
+            birthday = DateTime.Now;
             validator = new InputValidator();
         }
 
@@ -106,6 +107,10 @@ namespace Barometer_App.ViewModels
                 Email = email,
                 Username = username,
                 Password = password,
+                Name = name,
+                DateOfBirth = birthday,
+                FavoriteBar = null,
+                FavoriteDrink = null,
             };
 
         if(await RestClient.RegisterAsync(dto))

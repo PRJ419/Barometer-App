@@ -13,7 +13,7 @@ namespace RESTClient
     public class RestClient : IRestClient
     {
        // private const string Baseaddress = "https://localhost:44310/";
-        private const string Baseaddress = "https://10.192.71.109:45456";
+        private const string Baseaddress = "https://192.168.43.170:45456";
         private User customer = User.GetCustomer();
 
         //BAR
@@ -103,7 +103,7 @@ namespace RESTClient
         /// <returns>
         /// True if it went well. False if it went wrong.
         /// </returns>
-        public async Task<bool> CreateBar(Bar newBar)
+        public async Task<bool> CreateBar(RegisterBarDTO newBar)
         {
             using (var client = new HttpClient())
             {
@@ -115,7 +115,7 @@ namespace RESTClient
 
                     var content = new StringContent(jsonString, Encoding.UTF8, "application/json");
 
-                    var response = await client.PostAsync("api/bars/", content);
+                    var response = await client.PostAsync("api/register/barrep/", content);
 
                     if (response.IsSuccessStatusCode)
                     {

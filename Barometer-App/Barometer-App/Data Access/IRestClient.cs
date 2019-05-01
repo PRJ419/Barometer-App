@@ -13,7 +13,7 @@ namespace RESTClient
         //BARS
         Task<List<BarSimple>> GetBestBarList();
         Task<bool> EditBar(Bar editedBar);
-        Task<bool> CreateBar(Bar newBar);
+        Task<bool> CreateBar(RegisterBarDTO newBar);
         Task<Bar> GetDetailedBar(string id);
         Task<bool> DeleteBar(string id);
         Task<List<BarSimple>> GetWorstBarList();

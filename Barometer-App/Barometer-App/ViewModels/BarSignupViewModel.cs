@@ -1,4 +1,5 @@
 ﻿using System.Windows.Input;
+using Barometer_App.DTO;
 using Barometer_App.Models;
 using Prism.Commands;
 using Prism.Navigation;
@@ -14,12 +15,12 @@ namespace Barometer_App.ViewModels
         /// <summary>
         /// Property for hold the incoming bar object information
         /// </summary>
-        private Bar _bar;
+        private RegisterBarDTO _bar;
 
         /// <summary>
         /// Bindable property for the View
         /// </summary>
-        public Bar Bar
+        public RegisterBarDTO Bar
         {
             get => _bar;
             set => SetProperty(ref _bar, value);
@@ -35,7 +36,7 @@ namespace Barometer_App.ViewModels
         public BarSignupViewModel(INavigationService navigationService)
         {
             NavigationService = navigationService;
-            Bar = new Bar();
+            Bar = new RegisterBarDTO();
         }
 
         /// <summary>
@@ -53,7 +54,11 @@ namespace Barometer_App.ViewModels
         /// </summary>
         private async void OnSignUp()
         {
-           await RestClient.CreateBar(Bar);
+            bool result = await RestClient.CreateBar(Bar);
+            if (result)
+                await NavigationService.GoBackAsync();
+            else
+                await App.Current.MainPage.DisplayAlert("Error", "Something went wrong in the login!", "OK");
         }
     }
 }
