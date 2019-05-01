@@ -13,7 +13,7 @@ namespace RESTClient
     public class RestClient : IRestClient
     {
        // private const string Baseaddress = "https://localhost:44310/";
-        private const string Baseaddress = "https://192.168.43.170:45456";
+        private const string Baseaddress = "https://192.168.43.96:45457";
         private User customer = User.GetCustomer();
 
         //BAR
@@ -29,6 +29,7 @@ namespace RESTClient
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(Baseaddress);
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", customer.UserToken);
 
                 try
                 {
@@ -67,6 +68,7 @@ namespace RESTClient
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(Baseaddress);
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", customer.UserToken);
 
                 try
                 {
@@ -108,6 +110,7 @@ namespace RESTClient
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(Baseaddress);
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", customer.UserToken);
 
                 try
                 {
@@ -184,6 +187,7 @@ namespace RESTClient
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(Baseaddress);
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", customer.UserToken);
 
                 try
                 {
@@ -215,6 +219,7 @@ namespace RESTClient
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(Baseaddress);
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", customer.UserToken);
 
                 try
                 {
@@ -255,6 +260,7 @@ namespace RESTClient
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(Baseaddress);
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", customer.UserToken);
 
                 try
                 {
@@ -291,6 +297,7 @@ namespace RESTClient
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(Baseaddress);
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", customer.UserToken);
 
                 try
                 {
@@ -328,6 +335,7 @@ namespace RESTClient
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(Baseaddress);
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", customer.UserToken);
 
                 try
                 {
@@ -366,6 +374,7 @@ namespace RESTClient
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(Baseaddress);
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", customer.UserToken);
 
                 try
                 {
@@ -403,6 +412,7 @@ namespace RESTClient
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(Baseaddress);
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", customer.UserToken);
 
                 try
                 {
@@ -440,6 +450,7 @@ namespace RESTClient
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(Baseaddress);
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", customer.UserToken);
 
                 try
                 {
@@ -478,6 +489,7 @@ namespace RESTClient
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(Baseaddress);
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", customer.UserToken);
 
                 try
                 {
@@ -518,6 +530,7 @@ namespace RESTClient
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(Baseaddress);
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", customer.UserToken);
 
                 try
                 {
@@ -559,6 +572,7 @@ namespace RESTClient
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(Baseaddress);
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", customer.UserToken);
 
                 try
                 {
@@ -599,6 +613,7 @@ namespace RESTClient
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(Baseaddress);
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", customer.UserToken);
 
                 try
                 {
@@ -639,6 +654,7 @@ namespace RESTClient
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(Baseaddress);
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", customer.UserToken);
 
                 try
                 {
@@ -673,6 +689,7 @@ namespace RESTClient
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(Baseaddress);
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", customer.UserToken);
 
                 try
                 {
@@ -710,6 +727,7 @@ namespace RESTClient
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(Baseaddress);
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", customer.UserToken);
 
                 try
                 {
@@ -748,6 +766,7 @@ namespace RESTClient
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(Baseaddress);
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", customer.UserToken);
 
                 try
                 {
@@ -785,6 +804,7 @@ namespace RESTClient
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(Baseaddress);
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", customer.UserToken);
 
                 try
                 {
@@ -822,6 +842,7 @@ namespace RESTClient
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(Baseaddress);
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", customer.UserToken);
 
                 try
                 {
@@ -860,6 +881,7 @@ namespace RESTClient
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(Baseaddress);
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", customer.UserToken);
 
                 try
                 {
@@ -900,6 +922,7 @@ namespace RESTClient
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(Baseaddress);
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", customer.UserToken);
 
                 try
                 {
@@ -941,6 +964,7 @@ namespace RESTClient
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(Baseaddress);
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", customer.UserToken);
 
                 try
                 {
@@ -981,6 +1005,7 @@ namespace RESTClient
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(Baseaddress);
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", customer.UserToken);
 
                 try
                 {
@@ -1017,6 +1042,7 @@ namespace RESTClient
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(Baseaddress);
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", customer.UserToken);
 
                 try
                 {
@@ -1057,6 +1083,7 @@ namespace RESTClient
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(Baseaddress);
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", customer.UserToken);
 
                 try
                 {
@@ -1097,6 +1124,7 @@ namespace RESTClient
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(Baseaddress);
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", customer.UserToken);
 
                 try
                 {
@@ -1137,6 +1165,7 @@ namespace RESTClient
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(Baseaddress);
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", customer.UserToken);
 
                 try
                 {
@@ -1173,6 +1202,7 @@ namespace RESTClient
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(Baseaddress);
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", customer.UserToken);
 
                 try
                 {
@@ -1213,6 +1243,7 @@ namespace RESTClient
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(Baseaddress);
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", customer.UserToken);
 
                 try
                 {
@@ -1253,6 +1284,7 @@ namespace RESTClient
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(Baseaddress);
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", customer.UserToken);
 
                 try
                 {
@@ -1293,6 +1325,7 @@ namespace RESTClient
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(Baseaddress);
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", customer.UserToken);
                 try
                 {
                     var response = await client.GetAsync($"api/bars/{barId}/reviews/{username}");
@@ -1333,6 +1366,7 @@ namespace RESTClient
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(Baseaddress);
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", customer.UserToken);
 
                 try
                 {

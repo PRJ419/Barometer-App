@@ -102,22 +102,28 @@ namespace Barometer_App.ViewModels
         /// </summary>
         public async void OnSignupCommand()
         {
-            RegisterDTO dto = new RegisterDTO()
+            if (confpass == password)
             {
-                Email = email,
-                Username = username,
-                Password = password,
-                Name = name,
-                DateOfBirth = birthday,
-                FavoriteBar = null,
-                FavoriteDrink = null,
-            };
+                RegisterDTO dto = new RegisterDTO()
+                {
+                    Email = email,
+                    Username = username,
+                    Password = password,
+                    Name = name,
+                    DateOfBirth = birthday,
+                    FavoriteBar = null,
+                    FavoriteDrink = null,
+                };
 
-        if(await RestClient.RegisterAsync(dto))
-            await _navigationService.GoBackAsync();
-        else
-            await PrismApplicationBase.Current.MainPage.DisplayAlert("Error", "Something went wrong in the registration!", "OK");
-            
+                if (await RestClient.RegisterAsync(dto))
+                    await _navigationService.GoBackAsync();
+                else
+                    await PrismApplicationBase.Current.MainPage.DisplayAlert("Error",
+                        "Something went wrong in the registration!", "OK");
+            }
+            else
+                await PrismApplicationBase.Current.MainPage.DisplayAlert("Error",
+                    "Password does not match!", "OK");
         }
 
         #endregion

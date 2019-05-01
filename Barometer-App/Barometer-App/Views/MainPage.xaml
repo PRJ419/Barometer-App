@@ -31,6 +31,20 @@
                 </StackLayout.GestureRecognizers>
             </StackLayout>
 
+            <Skia:SKCanvasView PaintSurface="CanvasPaintRoundedRectangle" Grid.Row="0" Grid.Column="0" IsVisible="{Binding Customer.IsBarRep}"/>
+            <!-- Edit my bar when BarRep logged in -->
+            <StackLayout x:Name="EditBar" Grid.Row="0" Grid.Column="0" 
+                         VerticalOptions="CenterAndExpand" Margin="3,3" IsVisible="{Binding Customer.IsBarRep}">
+
+                <Image Source="pen.png" InputTransparent="True"/>
+                <Label Text="EDIT MY BAR" Margin="10" InputTransparent="True"
+                       HorizontalOptions="CenterAndExpand" Style="{StaticResource BtnLabelStyle}"/>
+
+                <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding NavToMyBarCommand}" CommandParameter="DetailedBarEdit"/>
+                </StackLayout.GestureRecognizers>
+            </StackLayout>
+
             <Skia:SKCanvasView PaintSurface="CanvasPaintRoundedRectangle" Grid.Row="0" Grid.Column="1"/>
             <!-- Login for when the user isn't logged in -->
             <StackLayout x:Name="Login" Grid.Row="0" Grid.Column="1" 

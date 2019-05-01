@@ -3,6 +3,7 @@ using Prism.Navigation;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Barometer_App.Models;
+using Prism;
 
 namespace Barometer_App.ViewModels
 {
@@ -57,9 +58,36 @@ namespace Barometer_App.ViewModels
         /// <summary>
         /// Logic that defines behaviour for the Logout command
         /// </summary>
-        public void OnLogout()
+        public async void OnLogout()
         {
-            Customer.UserToken = null;
+            bool result = await PrismApplicationBase.Current.MainPage.DisplayAlert(
+                "Confirmation",
+                "Are you sure you want to log out",
+                "Yes",
+                "No");
+            if (result)
+                Customer.UserToken = null;
+        }
+
+        /// <summary>
+        /// ICommand property that holds the DelegateCommand for later consumption
+        /// </summary>
+        private ICommand _navToMyBarCommand;
+
+        /// <summary>
+        /// Bindable command that resolves to a DelegateCommand
+        /// </summary>
+        public ICommand NavToMyBarCommand => _navToMyBarCommand ?? (_navToMyBarCommand = new DelegateCommand<string>(OnNavToMyBar));
+
+        /// <summary>
+        /// Logic that defines behaviour for the navigation to my bar
+        /// </summary>
+        public async void OnNavToMyBar(string navTo)
+        {
+            var navParams = new NavigationParameters();
+            navParams.Add("Bar", Customer.FavoriteBar);
+
+            await NavigationService.NavigateAsync(navTo, navParams);
         }
     }
 }

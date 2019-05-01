@@ -43,6 +43,14 @@ namespace Barometer_App.Models
         {
             get { return _loggedIn; }
         }
+
+        private bool _isBarRep;
+        public bool IsBarRep
+        {
+            get { return _isBarRep; }
+            set { SetProperty(ref _isBarRep, value); }
+        }
+
         public string FavoriteBar { get; set; }
         public string FavoriteDrinks { get; set; }
     }

@@ -1,6 +1,7 @@
 ﻿using System.Windows.Input;
 using Barometer_App.DTO;
 using Barometer_App.Models;
+using Prism;
 using Prism.Commands;
 using Prism.Navigation;
 using RESTClient;
@@ -91,10 +92,19 @@ namespace Barometer_App.ViewModels
                 {
                     customer.UserToken = token;
                     customer.UserName = Username;
+
+                    BarRepresentative barrep = await RestClient.GetSpecificBarRepresentative(customer.UserName);
+
+                    if (barrep.Name != null)
+                    {
+                        customer.FavoriteBar = barrep.BarName;
+                        customer.IsBarRep = true;
+                    }
+
                     await NavigationService.GoBackAsync();
                 }
                 else
-                    await App.Current.MainPage.DisplayAlert("Error", "Something went wrong in the login!", "OK");
+                    await PrismApplicationBase.Current.MainPage.DisplayAlert("Error", "Something went wrong in the login!", "OK");
             }
 
         }
