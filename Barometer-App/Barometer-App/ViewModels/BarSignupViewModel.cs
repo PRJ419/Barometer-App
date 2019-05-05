@@ -1,6 +1,8 @@
-﻿using System.Windows.Input;
+﻿using System;
+using System.Windows.Input;
 using Barometer_App.DTO;
 using Barometer_App.Models;
+using Prism;
 using Prism.Commands;
 using Prism.Navigation;
 using RESTClient;
@@ -12,6 +14,8 @@ namespace Barometer_App.ViewModels
     /// </summary>
     public class BarSignupViewModel : ViewModelBase
     {
+        private IAlerter Alerter;
+        public string ConfirmPassword { get; set; }
         /// <summary>
         /// Property for hold the incoming bar object information
         /// </summary>
@@ -37,6 +41,19 @@ namespace Barometer_App.ViewModels
         {
             NavigationService = navigationService;
             Bar = new RegisterBarDTO();
+            Alerter = new Alerter();
+        }
+
+        /// <summary>
+        /// Constructor for testing purposes
+        /// </summary>
+        /// <param name="navigationService"></param>
+        /// <param name="restClient"></param>
+        public BarSignupViewModel(INavigationService navigationService, IRestClient restClient, IAlerter alert) : base(restClient)
+        {
+            NavigationService = navigationService;
+            Bar = new RegisterBarDTO();
+            Alerter = alert;
         }
 
         /// <summary>
@@ -54,11 +71,29 @@ namespace Barometer_App.ViewModels
         /// </summary>
         private async void OnSignUp()
         {
-            bool result = await RestClient.CreateBar(Bar);
-            if (result)
-                await NavigationService.GoBackAsync();
-            else
-                await App.Current.MainPage.DisplayAlert("Error", "Something went wrong in the login!", "OK");
+            try
+            {
+                if (Bar.Password == ConfirmPassword)
+                {
+                    bool result = await RestClient.CreateBar(Bar);
+                    if (result)
+                    {
+                        await Alerter.Alert("Notice",
+                            "Your Bar and Bar Representative account have been registered!", "OK");
+                        await NavigationService.GoBackAsync();
+                    }
+                    else
+                        await Alerter.Alert("Error",
+                            "Something went wrong in the login!", "OK");
+                }
+                else
+                    await Alerter.Alert("Error", "Passwords do not match", "OK");
+            }
+                            catch (Exception e)
+                {
+                    await Alerter.Alert("Error",
+                        e.Message, "OK");
+                }
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Windows.Input;
+﻿using System;
+using System.Windows.Input;
 using Barometer_App.DTO;
 using Barometer_App.Models;
 using Prism;
@@ -13,6 +14,7 @@ namespace Barometer_App.ViewModels
     /// </summary>
     public class LoginViewModel : ViewModelBase
     {
+        private IAlerter Alerter;
         /// <summary>
         /// Property for the View to bind to
         /// </summary>
@@ -33,6 +35,14 @@ namespace Barometer_App.ViewModels
         {
             NavigationService = navigationService;
             Title = "Login";
+            Alerter = new Alerter();
+        }
+
+        public LoginViewModel(INavigationService navigationService, IRestClient restClient, IAlerter alert) : base(restClient)
+        {
+            NavigationService = navigationService;
+            Title = "Login";
+            Alerter = alert;
         }
 
         #region NavCommands
@@ -85,26 +95,34 @@ namespace Barometer_App.ViewModels
                     Username = Username,
                     Password = Password,
                 };
-
-                string token = await RestClient.LoginAsync(dto);
-
-                if (token != null)
+                try
                 {
-                    customer.UserToken = token;
-                    customer.UserName = Username;
+                    string token = await RestClient.LoginAsync(dto);
 
-                    BarRepresentative barrep = await RestClient.GetSpecificBarRepresentative(customer.UserName);
-
-                    if (barrep.Name != null)
+                    if (token != null)
                     {
-                        customer.FavoriteBar = barrep.BarName;
-                        customer.IsBarRep = true;
-                    }
+                        customer.UserToken = token;
+                        customer.UserName = Username;
 
-                    await NavigationService.GoBackAsync();
+                        BarRepresentative barrep = await RestClient.GetSpecificBarRepresentative(customer.UserName);
+
+                        if (barrep.Name != null)
+                        {
+                            customer.FavoriteBar = barrep.BarName;
+                            customer.IsBarRep = true;
+                        }
+
+                        await NavigationService.GoBackAsync();
+                    }
+                    else
+                        await Alerter.Alert("Error",
+                            "Something went wrong in the login!", "OK");
                 }
-                else
-                    await PrismApplicationBase.Current.MainPage.DisplayAlert("Error", "Something went wrong in the login!", "OK");
+                catch (Exception e)
+                {
+                    await Alerter.Alert("Error",
+                        e.Message, "OK");
+                }
             }
 
         }

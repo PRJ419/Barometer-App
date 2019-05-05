@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Windows.Input;
 using Barometer_App.DTO;
+using Barometer_App.Models;
 using Barometer_App.Services;
 using Prism;
 using Prism.Commands;
 using Prism.Navigation;
+using RESTClient;
 
 namespace Barometer_App.ViewModels
 {
@@ -13,6 +15,7 @@ namespace Barometer_App.ViewModels
     /// </summary>
     public class SignupViewModel : ViewModelBase
     {
+        private IAlerter Alerter;
         /// <summary>
         /// String property for View to bind to
         /// </summary>
@@ -58,12 +61,23 @@ namespace Barometer_App.ViewModels
         /// This sets the Title and constructs an InputValidator for use in checking inputs
         /// </summary>
         /// <param name="navigationService"></param>
-        public SignupViewModel(INavigationService navigationService) : base()
+        public SignupViewModel(INavigationService navigationService)
         {
             Title = "Sign Up";
             _navigationService = navigationService;
             birthday = DateTime.Now;
             validator = new InputValidator();
+            Alerter = new Alerter();
+        }
+
+        public SignupViewModel(INavigationService navigationService, IRestClient restClient, IAlerter alert) : base(restClient)
+        {
+            Title = "Sign Up";
+            _navigationService = navigationService;
+            birthday = DateTime.Now;
+            validator = new InputValidator();
+
+            Alerter = alert;
         }
 
         #region Commands
@@ -102,28 +116,42 @@ namespace Barometer_App.ViewModels
         /// </summary>
         public async void OnSignupCommand()
         {
-            if (confpass == password)
+            try
             {
-                RegisterDTO dto = new RegisterDTO()
+                if (confpass == password)
                 {
-                    Email = email,
-                    Username = username,
-                    Password = password,
-                    Name = name,
-                    DateOfBirth = birthday,
-                    FavoriteBar = null,
-                    FavoriteDrink = null,
-                };
+                    RegisterDTO dto = new RegisterDTO()
+                    {
+                        Email = email,
+                        Username = username,
+                        Password = password,
+                        Name = name,
+                        DateOfBirth = birthday,
+                        FavoriteBar = null,
+                        FavoriteDrink = null,
+                    };
 
-                if (await RestClient.RegisterAsync(dto))
-                    await _navigationService.GoBackAsync();
+                    bool result = await RestClient.RegisterAsync(dto);
+
+                    if (result)
+                    {
+                        await Alerter.Alert("Notice",
+                            "Your account has been registered!", "OK");
+                        await _navigationService.GoBackAsync();
+                    }
+                    else
+                        await Alerter.Alert("Error",
+                            "Something went wrong in the registration!", "OK");
+                }
                 else
-                    await PrismApplicationBase.Current.MainPage.DisplayAlert("Error",
-                        "Something went wrong in the registration!", "OK");
+                    await Alerter.Alert("Error",
+                        "Passwords do not match!", "OK");
             }
-            else
-                await PrismApplicationBase.Current.MainPage.DisplayAlert("Error",
-                    "Password does not match!", "OK");
+            catch (Exception e)
+            {
+                await Alerter.Alert("Error",
+                    e.Message, "OK");
+            }
         }
 
         #endregion

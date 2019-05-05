@@ -31,6 +31,20 @@ namespace Barometer_App.ViewModels
         }
 
         /// <summary>
+        /// Parameterless constructor for the other ViewModels to use easily
+        /// </summary>
+        public ViewModelBase() { }
+
+        /// <summary>
+        /// Constructor primarily used for testing purposes
+        /// </summary>
+        /// <param name="restClient"></param>
+        public ViewModelBase(IRestClient restClient)
+        {
+            RestClient = restClient;
+        }
+
+        /// <summary>
         /// Is called when navigating from a page. 
         /// </summary>
         /// <param name="parameters"></param>

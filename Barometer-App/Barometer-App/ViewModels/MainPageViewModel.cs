@@ -66,7 +66,10 @@ namespace Barometer_App.ViewModels
                 "Yes",
                 "No");
             if (result)
+            {
                 Customer.UserToken = null;
+                Customer.IsBarRep = false;
+            }
         }
 
         /// <summary>

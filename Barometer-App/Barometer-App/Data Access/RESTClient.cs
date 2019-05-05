@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Net.Http;
@@ -119,6 +121,12 @@ namespace RESTClient
                     var content = new StringContent(jsonString, Encoding.UTF8, "application/json");
 
                     var response = await client.PostAsync("api/register/barrep/", content);
+
+                    if (response.StatusCode == HttpStatusCode.BadRequest)
+                    {
+                        if (response.ReasonPhrase.ToLower().Contains("duplicate"))
+                            throw new DuplicateNameException("Bar or BarRep already exists");
+                    }
 
                     if (response.IsSuccessStatusCode)
                     {
@@ -1412,6 +1420,16 @@ namespace RESTClient
             try
             {
                 var response = await client.PostAsync("api/register", content);
+
+                if (response.StatusCode == HttpStatusCode.BadRequest)
+                {
+                    if (response.ReasonPhrase.ToLower().Contains("duplicate"))
+                        throw new DuplicateNameException("Username already exists");
+
+                    if(response.ReasonPhrase.ToLower().Contains("password"))
+                        throw new Exception("Password must contain at least one uppercase letter, one lowercase letter and a number");
+                }
+
                 return response.IsSuccessStatusCode;
             }
             catch (Exception e)
@@ -1440,6 +1458,12 @@ namespace RESTClient
             try
             {
                 var response = await client.PostAsync("api/login", content);
+
+                if (response.StatusCode == HttpStatusCode.BadRequest)
+                {
+                    if(response.ReasonPhrase.ToLower().Contains("password"))
+                        throw new Exception("Wrong username and/or password");
+                }
 
                 if (response.IsSuccessStatusCode)
                 {

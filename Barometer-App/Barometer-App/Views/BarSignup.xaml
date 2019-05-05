@@ -47,6 +47,9 @@
             <Label Text="Password" TextColor="{StaticResource LabelColor}"/>
             <Entry Placeholder="Password" PlaceholderColor="DimGray" IsPassword="True" Text="{Binding Bar.Password}"/>
 
+            <Label Text="Confirm Password" TextColor="{StaticResource LabelColor}"/>
+            <Entry Placeholder="Password Again" PlaceholderColor="DimGray" IsPassword="True" Text="{Binding ConfirmPassword}"/>
+
             <Button Text="Sign Up" Command="{Binding SignUpCommand}"/>
         </StackLayout>
     </ScrollView>
