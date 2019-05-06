@@ -14,9 +14,28 @@ namespace RESTClient
 {
     public class RestClient : IRestClient
     {
-       // private const string Baseaddress = "https://localhost:44310/";
+        //private const string Baseaddress = "https://localhost:44310/";
         private const string Baseaddress = "https://192.168.43.96:45457";
         private User customer = User.GetCustomer();
+        private IHttpClientFactory clientFactory;
+
+        /// <summary>
+        /// Normal use of Restclient uses normal HttpClient for communication
+        /// </summary>
+        public RestClient()
+        {
+            clientFactory = new HttpClientFactory();
+        }
+
+        /// <summary>
+        /// RestClient ctor used for injection a mock version of HttpClient
+        /// </summary>
+        /// <param name="mockFactory"></param>
+        public RestClient(HttpClientHandler mockHandler)
+        {
+            clientFactory = new MockHttpClientFactory(mockHandler);
+        }
+        
 
         //BAR
         //GET api/bars/
@@ -26,9 +45,11 @@ namespace RESTClient
         /// <returns>
         /// A list of BarSimple
         /// </returns>
+        ///
         public async Task<List<BarSimple>> GetBestBarList()
         {
-            using (var client = new HttpClient())
+            //using (var client = new HttpClient())
+            using (var client = clientFactory.CreateHttpClient())
             {
                 client.BaseAddress = new Uri(Baseaddress);
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", customer.UserToken);
@@ -124,7 +145,7 @@ namespace RESTClient
 
                     if (response.StatusCode == HttpStatusCode.BadRequest)
                     {
-                        if (response.ReasonPhrase.ToLower().Contains("duplicate"))
+                        if (response.ReasonPhrase.ToLower().Contains("e"))
                             throw new DuplicateNameException("Bar or BarRep already exists");
                     }
 
@@ -1423,10 +1444,16 @@ namespace RESTClient
 
                 if (response.StatusCode == HttpStatusCode.BadRequest)
                 {
-                    if (response.ReasonPhrase.ToLower().Contains("duplicate"))
+                    if (response.ReasonPhrase.ToLower().Contains("DuplicateName"))
                         throw new DuplicateNameException("Username already exists");
+                    //God kode her...........
+                    if(response.ReasonPhrase.ToLower().Contains("PasswordRequireUpper"))
+                        throw new Exception("Password must contain at least one uppercase letter, one lowercase letter and a number");
 
-                    if(response.ReasonPhrase.ToLower().Contains("password"))
+                    if (response.ReasonPhrase.ToLower().Contains("PasswordRequireLower"))
+                        throw new Exception("Password must contain at least one uppercase letter, one lowercase letter and a number");
+
+                    if (response.ReasonPhrase.ToLower().Contains("PasswordRequireDigit"))
                         throw new Exception("Password must contain at least one uppercase letter, one lowercase letter and a number");
                 }
 
@@ -1461,7 +1488,7 @@ namespace RESTClient
 
                 if (response.StatusCode == HttpStatusCode.BadRequest)
                 {
-                    if(response.ReasonPhrase.ToLower().Contains("password"))
+                    if(response.ReasonPhrase.ToLower().Contains("Invalid login"))
                         throw new Exception("Wrong username and/or password");
                 }
 
