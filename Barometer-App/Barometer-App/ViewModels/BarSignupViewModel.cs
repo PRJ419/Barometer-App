@@ -14,6 +14,9 @@ namespace Barometer_App.ViewModels
     /// </summary>
     public class BarSignupViewModel : ViewModelBase
     {
+        /// <summary>
+        /// Alerter used for popups
+        /// </summary>
         private IAlerter Alerter;
         public string ConfirmPassword { get; set; }
         /// <summary>
@@ -89,11 +92,11 @@ namespace Barometer_App.ViewModels
                 else
                     await Alerter.Alert("Error", "Passwords do not match", "OK");
             }
-                            catch (Exception e)
-                {
+            catch (Exception e)
+            {
                     await Alerter.Alert("Error",
                         e.Message, "OK");
-                }
+            }
         }
     }
 }

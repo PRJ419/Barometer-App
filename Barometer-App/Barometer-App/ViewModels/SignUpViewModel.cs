@@ -15,6 +15,9 @@ namespace Barometer_App.ViewModels
     /// </summary>
     public class SignupViewModel : ViewModelBase
     {
+        /// <summary>
+        /// Alerter used for popups
+        /// </summary>
         private IAlerter Alerter;
         /// <summary>
         /// String property for View to bind to
@@ -96,7 +99,7 @@ namespace Barometer_App.ViewModels
         /// <summary>
         /// Logic that defines behaviour for the BarSignup navigation
         /// </summary>
-        public async void OnNavigateToBarSignUp()
+        private async void OnNavigateToBarSignUp()
         {
             await _navigationService.NavigateAsync("BarSignup");
         }
@@ -114,7 +117,7 @@ namespace Barometer_App.ViewModels
         /// <summary>
         /// Logic that defines behaviour for the Signup action
         /// </summary>
-        public async void OnSignupCommand()
+        private async void OnSignupCommand()
         {
             try
             {

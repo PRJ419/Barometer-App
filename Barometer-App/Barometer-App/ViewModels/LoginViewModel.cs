@@ -14,6 +14,9 @@ namespace Barometer_App.ViewModels
     /// </summary>
     public class LoginViewModel : ViewModelBase
     {
+        /// <summary>
+        /// Alerter used for popups
+        /// </summary>
         private IAlerter Alerter;
         /// <summary>
         /// Property for the View to bind to
@@ -61,7 +64,7 @@ namespace Barometer_App.ViewModels
         /// <summary>
         /// Logic that defines behaviour for the Signup navigation
         /// </summary>
-        public async void OnNavSignup()
+        private async void OnNavSignup()
         {
             await NavigationService.NavigateAsync("Signup");
         }
@@ -84,7 +87,7 @@ namespace Barometer_App.ViewModels
         /// Logic that defines the behaviour for the Login command.
         /// This uses the _apiService to LoginAsync with a LoginDTO, it also displays an error if something goes wrong and updates the Customer object if login is successful
         /// </summary>
-        public async void OnLoginCommand()
+        private async void OnLoginCommand()
         {
             User customer = User.GetCustomer();
 

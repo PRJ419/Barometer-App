@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 
 namespace Barometer_App.Models
 {
+    /// <summary>
+    /// Interface for the Alerter class
+    /// </summary>
     public interface IAlerter
     {
         Task Alert(string title, string message, string cancel);
