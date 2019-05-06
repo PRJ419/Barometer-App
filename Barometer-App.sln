@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Barometer-App.Android", "Ba
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Barometer-App", "Barometer-App\Barometer-App\Barometer-App.csproj", "{DFF0CFEA-B481-4006-B1D2-872A0B6E5646}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BarOMeter-App.Unit.Test", "BarOMeter-App.Unit.Test\BarOMeter-App.Unit.Test.csproj", "{3D094543-9382-4616-A70A-1ED6D5115518}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BarOMeter-App.Unit.Test", "BarOMeter-App.Unit.Test\BarOMeter-App.Unit.Test.csproj", "{3D094543-9382-4616-A70A-1ED6D5115518}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -14,9 +14,28 @@ namespace RESTClient
 {
     public class RestClient : IRestClient
     {
-       // private const string Baseaddress = "https://localhost:44310/";
+        //private const string Baseaddress = "https://localhost:44310/";
         private const string Baseaddress = "https://192.168.43.96:45457";
         private User customer = User.GetCustomer();
+        private IHttpClientFactory clientFactory;
+
+        /// <summary>
+        /// Normal use of Restclient uses normal HttpClient for communication
+        /// </summary>
+        public RestClient()
+        {
+            clientFactory = new HttpClientFactory();
+        }
+
+        /// <summary>
+        /// RestClient ctor used for injection a mock version of HttpClient
+        /// </summary>
+        /// <param name="mockFactory"></param>
+        public RestClient(HttpClientHandler mockHandler)
+        {
+            clientFactory = new MockHttpClientFactory(mockHandler);
+        }
+        
 
         //BAR
         //GET api/bars/
@@ -26,12 +45,15 @@ namespace RESTClient
         /// <returns>
         /// A list of BarSimple
         /// </returns>
+        ///
         public async Task<List<BarSimple>> GetBestBarList()
         {
-            using (var client = new HttpClient())
+            //using (var client = new HttpClient())
+            using (var client = clientFactory.CreateHttpClient(Baseaddress,
+                new AuthenticationHeaderValue("Bearer", customer.UserToken)))
             {
-                client.BaseAddress = new Uri(Baseaddress);
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", customer.UserToken);
+                //client.BaseAddress = new Uri(Baseaddress);
+                //client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", customer.UserToken);
 
                 try
                 {
