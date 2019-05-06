@@ -5,6 +5,6 @@ namespace RESTClient
 {
     public interface IHttpClientFactory
     {
-        HttpClient CreateHttpClient(string baseAddress, AuthenticationHeaderValue token);
+        HttpClient CreateHttpClient();
     }
 }

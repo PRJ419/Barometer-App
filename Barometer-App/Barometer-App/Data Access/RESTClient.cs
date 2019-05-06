@@ -49,11 +49,10 @@ namespace RESTClient
         public async Task<List<BarSimple>> GetBestBarList()
         {
             //using (var client = new HttpClient())
-            using (var client = clientFactory.CreateHttpClient(Baseaddress,
-                new AuthenticationHeaderValue("Bearer", customer.UserToken)))
+            using (var client = clientFactory.CreateHttpClient())
             {
-                //client.BaseAddress = new Uri(Baseaddress);
-                //client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", customer.UserToken);
+                client.BaseAddress = new Uri(Baseaddress);
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", customer.UserToken);
 
                 try
                 {

@@ -13,12 +13,9 @@ namespace RESTClient
             _mockHandler = mock; 
         }
 
-        public HttpClient CreateHttpClient(string baseAddress, AuthenticationHeaderValue token)
+        public HttpClient CreateHttpClient()
         {
-            var client = new HttpClient(_mockHandler);
-            client.BaseAddress = new Uri(baseAddress);
-            client.DefaultRequestHeaders.Authorization = token;
-            return client;
+            return new HttpClient(_mockHandler);
         }
     }
 }

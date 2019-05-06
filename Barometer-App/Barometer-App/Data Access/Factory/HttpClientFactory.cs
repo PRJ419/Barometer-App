@@ -7,12 +7,9 @@ namespace RESTClient
 {
     public class HttpClientFactory : IHttpClientFactory
     {
-        public HttpClient CreateHttpClient(string baseAddress, AuthenticationHeaderValue token)
+        public HttpClient CreateHttpClient()
         {
-            var client = new HttpClient();
-            client.BaseAddress = new Uri(baseAddress);
-            client.DefaultRequestHeaders.Authorization = token;
-            return client;
+            return new HttpClient();
         }
     }
 }
