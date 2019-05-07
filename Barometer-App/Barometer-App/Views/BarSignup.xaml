@@ -20,6 +20,9 @@
             <Label Text="Address" TextColor="{StaticResource LabelColor}"></Label>
             <Entry Placeholder="BarStreet 12" PlaceholderColor="DimGray" Text="{Binding Bar.Address}"></Entry>
 
+            <Label Text="Age Limit" TextColor="{StaticResource LabelColor}"></Label>
+            <Entry Placeholder="21" PlaceholderColor="DimGray" Text="{Binding Bar.AgeLimit}"></Entry>
+
             <Label Text="CVR" TextColor="{StaticResource LabelColor}"></Label>
             <Entry Placeholder="12345678" PlaceholderColor="DimGray" MaxLength="8" Text="{Binding Bar.CVR}"></Entry>
 
@@ -35,11 +38,17 @@
             <Label Text="Long Desciption of your bar" TextColor="{StaticResource LabelColor}"></Label>
             <Editor Placeholder="Max 500 chars" PlaceholderColor="DimGray" MaxLength="500" Text="{Binding Bar.LongDescription}"></Editor>
 
+            <Label Text="Bar Representatives Full name" TextColor="{StaticResource LabelColor}"/>
+            <Entry Placeholder="John Doe" PlaceholderColor="DimGray" Text="{Binding Bar.Name}"/>
+
             <Label Text="Username" TextColor="{StaticResource LabelColor}"/>
-            <Entry Placeholder="Username" PlaceholderColor="DimGray" />
+            <Entry Placeholder="Username" PlaceholderColor="DimGray" Text="{Binding Bar.Username}"/>
 
             <Label Text="Password" TextColor="{StaticResource LabelColor}"/>
-            <Entry Placeholder="Password" PlaceholderColor="DimGray" IsPassword="True"/>
+            <Entry Placeholder="Password" PlaceholderColor="DimGray" IsPassword="True" Text="{Binding Bar.Password}"/>
+
+            <Label Text="Confirm Password" TextColor="{StaticResource LabelColor}"/>
+            <Entry Placeholder="Password Again" PlaceholderColor="DimGray" IsPassword="True" Text="{Binding ConfirmPassword}"/>
 
             <Button Text="Sign Up" Command="{Binding SignUpCommand}"/>
         </StackLayout>

@@ -11,6 +11,7 @@ namespace Barometer_App.ViewModels
     /// </summary>
     public class BarRatingViewModel : ViewModelBase
     {
+        public bool NewReview = false;
         /// <summary>
         /// Property for holding the currently accessed bar
         /// </summary>
@@ -37,7 +38,6 @@ namespace Barometer_App.ViewModels
             NavigationService = navigationService;
             _review = new Review();
             Customer = User.GetCustomer();
-            Customer.UserName = "k00ziex";
         }
 
         /// <inheritdoc />
@@ -53,15 +53,17 @@ namespace Barometer_App.ViewModels
             Title = "Rate " + bar;
             _review = await RestClient.GetSpecificBarReview(bar, Customer.UserName);
             //Update the database with a new review if none exists.
-            //This could have bee done in a model, but that takes a lot of
+            //This could have been done in a model, but that takes a lot of
             //unnecessary data transfer
-            if (_review.BarName == null) {
-                _review.BarName = bar;
-                _review.Username = Customer.UserName;
-                _review.BarPressure = 5;
-                await RestClient.CreateReview(_review);             
+            if (review.BarName == null)
+            {
+                NewReview = true;
+                BarRating = 1;
             }
-            BarRating = _review.BarPressure;
+            else
+                BarRating = review.BarPressure;
+            _review.BarName = bar;
+            _review.Username = Customer.UserName;
         }
 
         /// <summary>
@@ -94,7 +96,10 @@ namespace Barometer_App.ViewModels
         private async void OnRateCommand()
         {
             _review.BarPressure = BarRating;
-            await RestClient.EditReview(_review);
+            if(NewReview)
+                await RestClient.CreateReview(_review);
+            else
+                await RestClient.EditReview(_review);
 
             var navParams = new NavigationParameters { { "Bar", _review.BarName } };
             await NavigationService.GoBackAsync(navParams);

@@ -3,6 +3,7 @@ using Prism.Navigation;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Barometer_App.Models;
+using Prism;
 
 namespace Barometer_App.ViewModels
 {
@@ -57,112 +58,39 @@ namespace Barometer_App.ViewModels
         /// <summary>
         /// Logic that defines behaviour for the Logout command
         /// </summary>
-        public void OnLogout()
+        public async void OnLogout()
         {
-            Customer.UserToken = null;
-        }
-
-        #region NavCommands
-
-        /// <summary>
-        /// ICommand property that holds the DelegateCommand for later consumption
-        /// </summary>
-        private ICommand _navShowBarsCommand;
-
-        /// <summary>
-        /// Bindable command that resolves to a DelegateCommand
-        /// </summary>
-        public ICommand NavShowBarsCommand => _navShowBarsCommand ?? (_navShowBarsCommand = new DelegateCommand(OnNavShowBars));
-
-        /// <summary>
-        /// Logic that defines behaviour for the navigation to Bar List 
-        /// </summary>
-        public async void OnNavShowBars()
-        {
-            var navParams = new NavigationParameters {{"Bars", Bars}};
-
-            await NavigationService.NavigateAsync("BarList", navParams);
+            bool result = await PrismApplicationBase.Current.MainPage.DisplayAlert(
+                "Confirmation",
+                "Are you sure you want to log out",
+                "Yes",
+                "No");
+            if (result)
+            {
+                Customer.UserToken = null;
+                Customer.IsBarRep = false;
+            }
         }
 
         /// <summary>
         /// ICommand property that holds the DelegateCommand for later consumption
         /// </summary>
-        private ICommand _navLoginCommand;
+        private ICommand _navToMyBarCommand;
 
         /// <summary>
         /// Bindable command that resolves to a DelegateCommand
         /// </summary>
-        public ICommand NavLoginCommand => _navLoginCommand ?? (_navLoginCommand = new DelegateCommand(OnNavLogin));
+        public ICommand NavToMyBarCommand => _navToMyBarCommand ?? (_navToMyBarCommand = new DelegateCommand<string>(OnNavToMyBar));
 
         /// <summary>
-        /// Logic that defines behaviour for the navigation to Login 
+        /// Logic that defines behaviour for the navigation to my bar
         /// </summary>
-        public async void OnNavLogin()
+        public async void OnNavToMyBar(string navTo)
         {
             var navParams = new NavigationParameters();
+            navParams.Add("Bar", Customer.FavoriteBar);
 
-            await NavigationService.NavigateAsync("Login", navParams);
+            await NavigationService.NavigateAsync(navTo, navParams);
         }
-
-        /// <summary>
-        /// ICommand property that holds the DelegateCommand for later consumption
-        /// </summary>
-        private ICommand _navSignupCommand;
-
-        /// <summary>
-        /// Bindable command that resolves to a DelegateCommand
-        /// </summary>
-        public ICommand NavSignupCommand => _navSignupCommand ?? (_navSignupCommand = new DelegateCommand(OnNavSignUp));
-
-        /// <summary>
-        /// Logic that defines behaviour for the navigation to Signup
-        /// </summary>
-        public async void OnNavSignUp()
-        {
-            var navParams = new NavigationParameters();
-
-            await NavigationService.NavigateAsync("Signup", navParams);
-        }
-
-        /// <summary>
-        /// ICommand property that holds the DelegateCommand for later consumption
-        /// </summary>
-        private ICommand _navAboutCommand;
-
-        /// <summary>
-        /// Bindable command that resolves to a DelegateCommand
-        /// </summary>
-        public ICommand NavAboutCommand => _navAboutCommand ?? (_navAboutCommand = new DelegateCommand(OnNavAbout));
-
-        /// <summary>
-        /// Logic that defines behaviour for the navigation to About 
-        /// </summary>
-        public async void OnNavAbout()
-        {
-            var navParams = new NavigationParameters();
-
-            await NavigationService.NavigateAsync("About", navParams);
-        }
-
-        /// <summary>
-        /// ICommand property that holds the DelegateCommand for later consumption
-        /// </summary>
-        private ICommand _navSettingsCommand;
-
-        /// <summary>
-        /// Bindable command that resolves to a DelegateCommand
-        /// </summary>
-        public ICommand NavSettingsCommand => _navSettingsCommand ?? (_navSettingsCommand = new DelegateCommand(OnNavSettings));
-
-        /// <summary>
-        /// Logic that defines behaviour for the navigation to Settings
-        /// </summary>
-        public async void OnNavSettings()
-        {
-            var navParams = new NavigationParameters();
-
-            await NavigationService.NavigateAsync("Settings", navParams);
-        }
-        #endregion
     }
 }

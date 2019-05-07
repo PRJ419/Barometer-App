@@ -1,4 +1,6 @@
-﻿using Prism.Mvvm;
+﻿using System.Windows.Input;
+using Prism.Commands;
+using Prism.Mvvm;
 using Prism.Navigation;
 using RESTClient;
 
@@ -26,6 +28,20 @@ namespace Barometer_App.ViewModels
         {
             get => _title;
             set => SetProperty(ref _title, value);
+        }
+
+        /// <summary>
+        /// Parameterless constructor for the other ViewModels to use easily
+        /// </summary>
+        public ViewModelBase() { }
+
+        /// <summary>
+        /// Constructor primarily used for testing purposes
+        /// </summary>
+        /// <param name="restClient"></param>
+        public ViewModelBase(IRestClient restClient)
+        {
+            RestClient = restClient;
         }
 
         /// <summary>
@@ -60,5 +76,29 @@ namespace Barometer_App.ViewModels
         {
 
         }
+
+        #region NavCommand
+
+        /// <summary>
+        /// ICommand property that holds the DelegateCommand for later consumption
+        /// </summary>
+        private ICommand _navCommand;
+
+        /// <summary>
+        /// Bindable command that resolves to a DelegateCommand
+        /// </summary>
+        public ICommand NavCommand => _navCommand ?? (_navCommand = new DelegateCommand<string>(OnNav));
+
+        /// <summary>
+        /// Logic that defines behaviour for the navigation
+        /// </summary>
+        public async void OnNav(string navTo)
+        {
+            var navParams = new NavigationParameters();
+
+            await NavigationService.NavigateAsync(navTo, navParams);
+        }
+
+        #endregion
     }
 }

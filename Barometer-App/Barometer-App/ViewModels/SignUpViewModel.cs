@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Windows.Input;
 using Barometer_App.DTO;
+using Barometer_App.Models;
 using Barometer_App.Services;
 using Prism;
 using Prism.Commands;
 using Prism.Navigation;
+using RESTClient;
 
 namespace Barometer_App.ViewModels
 {
@@ -13,6 +15,10 @@ namespace Barometer_App.ViewModels
     /// </summary>
     public class SignupViewModel : ViewModelBase
     {
+        /// <summary>
+        /// Alerter used for popups
+        /// </summary>
+        private IAlerter Alerter;
         /// <summary>
         /// String property for View to bind to
         /// </summary>
@@ -58,11 +64,23 @@ namespace Barometer_App.ViewModels
         /// This sets the Title and constructs an InputValidator for use in checking inputs
         /// </summary>
         /// <param name="navigationService"></param>
-        public SignupViewModel(INavigationService navigationService) : base()
+        public SignupViewModel(INavigationService navigationService)
         {
             Title = "Sign Up";
             _navigationService = navigationService;
+            birthday = DateTime.Now;
             validator = new InputValidator();
+            Alerter = new Alerter();
+        }
+
+        public SignupViewModel(INavigationService navigationService, IRestClient restClient, IAlerter alert) : base(restClient)
+        {
+            Title = "Sign Up";
+            _navigationService = navigationService;
+            birthday = DateTime.Now;
+            validator = new InputValidator();
+
+            Alerter = alert;
         }
 
         #region Commands
@@ -81,7 +99,7 @@ namespace Barometer_App.ViewModels
         /// <summary>
         /// Logic that defines behaviour for the BarSignup navigation
         /// </summary>
-        public async void OnNavigateToBarSignUp()
+        private async void OnNavigateToBarSignUp()
         {
             await _navigationService.NavigateAsync("BarSignup");
         }
@@ -99,20 +117,44 @@ namespace Barometer_App.ViewModels
         /// <summary>
         /// Logic that defines behaviour for the Signup action
         /// </summary>
-        public async void OnSignupCommand()
+        private async void OnSignupCommand()
         {
-            RegisterDTO dto = new RegisterDTO()
+            try
             {
-                Email = email,
-                Username = username,
-                Password = password,
-            };
+                if (confpass == password)
+                {
+                    RegisterDTO dto = new RegisterDTO()
+                    {
+                        Email = email,
+                        Username = username,
+                        Password = password,
+                        Name = name,
+                        DateOfBirth = birthday,
+                        FavoriteBar = null,
+                        FavoriteDrink = null,
+                    };
 
-        if(await RestClient.RegisterAsync(dto))
-            await _navigationService.GoBackAsync();
-        else
-            await PrismApplicationBase.Current.MainPage.DisplayAlert("Error", "Something went wrong in the registration!", "OK");
-            
+                    bool result = await RestClient.RegisterAsync(dto);
+
+                    if (result)
+                    {
+                        await Alerter.Alert("Notice",
+                            "Your account has been registered!", "OK");
+                        await _navigationService.GoBackAsync();
+                    }
+                    else
+                        await Alerter.Alert("Error",
+                            "Something went wrong in the registration!", "OK");
+                }
+                else
+                    await Alerter.Alert("Error",
+                        "Passwords do not match!", "OK");
+            }
+            catch (Exception e)
+            {
+                await Alerter.Alert("Error",
+                    e.Message, "OK");
+            }
         }
 
         #endregion

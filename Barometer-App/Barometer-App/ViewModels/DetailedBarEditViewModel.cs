@@ -10,6 +10,7 @@ namespace Barometer_App.ViewModels
     /// </summary>
     public class DetailedBarEditViewModel : ViewModelBase
     {
+        private User customer;
         /// <summary>
         /// Private property for the bindable property bar
         /// </summary>
@@ -34,6 +35,7 @@ namespace Barometer_App.ViewModels
             Bar = new Bar();
             Title = "Detailed Bar Editing Page";
             NavigationService = navigationService;
+            customer = User.GetCustomer();
         }
 
         /// <summary>
@@ -43,7 +45,7 @@ namespace Barometer_App.ViewModels
         /// <param name="parameters"></param>
         public override async void OnNavigatedTo(INavigationParameters parameters)
         {
-            Bar = await RestClient.GetDetailedBar("Barname");
+            Bar = await RestClient.GetDetailedBar(customer.FavoriteBar);
         }
 
         /// <summary>

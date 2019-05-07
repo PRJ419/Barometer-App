@@ -1,6 +1,8 @@
-﻿using System.Windows.Input;
+﻿using System;
+using System.Windows.Input;
 using Barometer_App.DTO;
 using Barometer_App.Models;
+using Prism;
 using Prism.Commands;
 using Prism.Navigation;
 using RESTClient;
@@ -12,6 +14,10 @@ namespace Barometer_App.ViewModels
     /// </summary>
     public class LoginViewModel : ViewModelBase
     {
+        /// <summary>
+        /// Alerter used for popups
+        /// </summary>
+        private IAlerter Alerter;
         /// <summary>
         /// Property for the View to bind to
         /// </summary>
@@ -32,6 +38,14 @@ namespace Barometer_App.ViewModels
         {
             NavigationService = navigationService;
             Title = "Login";
+            Alerter = new Alerter();
+        }
+
+        public LoginViewModel(INavigationService navigationService, IRestClient restClient, IAlerter alert) : base(restClient)
+        {
+            NavigationService = navigationService;
+            Title = "Login";
+            Alerter = alert;
         }
 
         #region NavCommands
@@ -50,7 +64,7 @@ namespace Barometer_App.ViewModels
         /// <summary>
         /// Logic that defines behaviour for the Signup navigation
         /// </summary>
-        public async void OnNavSignup()
+        private async void OnNavSignup()
         {
             await NavigationService.NavigateAsync("Signup");
         }
@@ -73,7 +87,7 @@ namespace Barometer_App.ViewModels
         /// Logic that defines the behaviour for the Login command.
         /// This uses the _apiService to LoginAsync with a LoginDTO, it also displays an error if something goes wrong and updates the Customer object if login is successful
         /// </summary>
-        public async void OnLoginCommand()
+        private async void OnLoginCommand()
         {
             User customer = User.GetCustomer();
 
@@ -84,16 +98,34 @@ namespace Barometer_App.ViewModels
                     Username = Username,
                     Password = Password,
                 };
-
-                string token = await RestClient.LoginAsync(dto);
-
-                if (token != null)
+                try
                 {
-                    customer.UserToken = token;
-                    await NavigationService.GoBackAsync();
+                    string token = await RestClient.LoginAsync(dto);
+
+                    if (token != null)
+                    {
+                        customer.UserToken = token;
+                        customer.UserName = Username;
+
+                        BarRepresentative barrep = await RestClient.GetSpecificBarRepresentative(customer.UserName);
+
+                        if (barrep.Name != null)
+                        {
+                            customer.FavoriteBar = barrep.BarName;
+                            customer.IsBarRep = true;
+                        }
+
+                        await NavigationService.GoBackAsync();
+                    }
+                    else
+                        await Alerter.Alert("Error",
+                            "Something went wrong in the login!", "OK");
                 }
-                else
-                    await App.Current.MainPage.DisplayAlert("Error", "Something went wrong in the login!", "OK");
+                catch (Exception e)
+                {
+                    await Alerter.Alert("Error",
+                        e.Message, "OK");
+                }
             }
 
         }

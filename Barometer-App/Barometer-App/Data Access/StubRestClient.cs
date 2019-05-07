@@ -37,7 +37,7 @@ namespace RESTClient
         }
 
         //POST api/bars/
-        public async Task<bool> CreateBar(Bar newBar)
+        public async Task<bool> CreateBar(RegisterBarDTO newBar)
         {
             return true;
         }

@@ -128,6 +128,25 @@ namespace Barometer_App.ViewModels
             var navParams = new NavigationParameters{{"Bar", Bar.BarName}};
             await NavigationService.NavigateAsync("Events", navParams);
         }
+
+        /// <summary>
+        /// ICommand property that holds the DelegateCommand for later consumption
+        /// </summary>
+        private ICommand _couponCommand;
+
+        /// <summary>
+        /// Bindable command that resolves to a DelegateCommand
+        /// </summary>
+        public ICommand CouponCommand => _couponCommand ?? (_couponCommand = new DelegateCommand(OnCouponCommand));
+
+        /// <summary>
+        /// Logic that defines behaviour for the navigation to the Events view
+        /// </summary>
+        private async void OnCouponCommand()
+        {
+            var navParams = new NavigationParameters { { "Bar", Bar.BarName } };
+            await NavigationService.NavigateAsync("Coupons", navParams);
+        }
         #endregion
     }
 }
