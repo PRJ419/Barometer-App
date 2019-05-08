@@ -36,9 +36,10 @@ namespace RESTClient
         {
             clientFactory = new MockHttpClientFactory(mockHandler);
         }
-        
 
-        //BAR
+
+        #region Bar
+
         //GET api/bars/
         /// <summary>
         /// Gets a list of simple bars to be shown on list view in the order of best first.
@@ -89,7 +90,7 @@ namespace RESTClient
         /// </returns>
         public async Task<bool> EditBar(Bar editedBar)
         {
-            using (var client = new HttpClient())
+            using (var client = clientFactory.CreateHttpClient())
             {
                 client.BaseAddress = new Uri(Baseaddress);
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", customer.UserToken);
@@ -131,7 +132,7 @@ namespace RESTClient
         /// </returns>
         public async Task<bool> CreateBar(RegisterBarDTO newBar)
         {
-            using (var client = new HttpClient())
+            using (var client = clientFactory.CreateHttpClient())
             {
                 client.BaseAddress = new Uri(Baseaddress);
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", customer.UserToken);
@@ -188,7 +189,7 @@ namespace RESTClient
         /// </returns>
         public async Task<Bar> GetDetailedBar(string id)
         {
-            using (var client = new HttpClient())
+            using (var client = clientFactory.CreateHttpClient())
             {
                 client.BaseAddress = new Uri(Baseaddress);
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", customer.UserToken);
@@ -226,7 +227,7 @@ namespace RESTClient
         /// </returns>
         public async Task<bool> DeleteBar(string id)
         {
-            using (var client = new HttpClient())
+            using (var client = clientFactory.CreateHttpClient())
             {
                 client.BaseAddress = new Uri(Baseaddress);
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", customer.UserToken);
@@ -258,7 +259,7 @@ namespace RESTClient
         /// </returns>
         public async Task<List<BarSimple>> GetWorstBarList()
         {
-            using (var client = new HttpClient())
+            using (var client = clientFactory.CreateHttpClient())
             {
                 client.BaseAddress = new Uri(Baseaddress);
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", customer.UserToken);
@@ -299,7 +300,7 @@ namespace RESTClient
         /// </returns>
         public async Task<List<BarSimple>> GetSpecificBarList(int startIndex, int pageSize)
         {
-            using (var client = new HttpClient())
+            using (var client = clientFactory.CreateHttpClient())
             {
                 client.BaseAddress = new Uri(Baseaddress);
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", customer.UserToken);
@@ -325,7 +326,9 @@ namespace RESTClient
             }
         }
 
-        //BARREPRESENTATIVE
+        #endregion
+
+        #region BarRepresentative
 
         //GET api/barrepresentatives
         /// <summary>
@@ -336,7 +339,7 @@ namespace RESTClient
         /// </returns>
         public async Task<List<BarRepresentative>> GetAllBarRepresentatives()
         {
-            using (var client = new HttpClient())
+            using (var client = clientFactory.CreateHttpClient())
             {
                 client.BaseAddress = new Uri(Baseaddress);
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", customer.UserToken);
@@ -374,7 +377,7 @@ namespace RESTClient
         /// </returns>
         public async Task<bool> EditBarRepresentative(BarRepresentative editedBarRepresentative)
         {
-            using (var client = new HttpClient())
+            using (var client = clientFactory.CreateHttpClient())
             {
                 client.BaseAddress = new Uri(Baseaddress);
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", customer.UserToken);
@@ -413,7 +416,7 @@ namespace RESTClient
         /// </returns>
         public async Task<bool> CreateBarRepresentative(BarRepresentative newBarRepresentative)
         {
-            using (var client = new HttpClient())
+            using (var client = clientFactory.CreateHttpClient())
             {
                 client.BaseAddress = new Uri(Baseaddress);
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", customer.UserToken);
@@ -451,7 +454,7 @@ namespace RESTClient
         /// </returns>
         public async Task<BarRepresentative> GetSpecificBarRepresentative(string username)
         {
-            using (var client = new HttpClient())
+            using (var client = clientFactory.CreateHttpClient())
             {
                 client.BaseAddress = new Uri(Baseaddress);
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", customer.UserToken);
@@ -489,7 +492,7 @@ namespace RESTClient
         /// </returns>
         public async Task<bool> DeleteBarRepresentative(string username)
         {
-            using (var client = new HttpClient())
+            using (var client = clientFactory.CreateHttpClient())
             {
                 client.BaseAddress = new Uri(Baseaddress);
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", customer.UserToken);
@@ -512,9 +515,9 @@ namespace RESTClient
             }
         }
 
+        #endregion
 
-
-        //COUPON
+        #region Coupon
 
         //GET api/bars/{barName}/coupons
         /// <summary>
@@ -528,7 +531,7 @@ namespace RESTClient
         /// </returns>
         public async Task<List<Coupon>> GetAllCoupons(string barName)
         {
-            using (var client = new HttpClient())
+            using (var client = clientFactory.CreateHttpClient())
             {
                 client.BaseAddress = new Uri(Baseaddress);
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", customer.UserToken);
@@ -569,7 +572,7 @@ namespace RESTClient
         /// </returns>
         public async Task<bool> EditCoupon(Coupon editedCoupon, string barName)
         {
-            using (var client = new HttpClient())
+            using (var client = clientFactory.CreateHttpClient())
             {
                 client.BaseAddress = new Uri(Baseaddress);
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", customer.UserToken);
@@ -611,7 +614,7 @@ namespace RESTClient
         /// </returns>
         public async Task<bool> CreateCoupon(Coupon newCoupon, string barName)
         {
-            using (var client = new HttpClient())
+            using (var client = clientFactory.CreateHttpClient())
             {
                 client.BaseAddress = new Uri(Baseaddress);
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", customer.UserToken);
@@ -652,7 +655,7 @@ namespace RESTClient
         /// </returns>
         public async Task<Coupon> GetSpecificCoupon(string barName, string couponID)
         {
-            using (var client = new HttpClient())
+            using (var client = clientFactory.CreateHttpClient())
             {
                 client.BaseAddress = new Uri(Baseaddress);
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", customer.UserToken);
@@ -693,7 +696,7 @@ namespace RESTClient
         /// </returns>
         public async Task<bool> DeleteCoupon(string barName, string couponID)
         {
-            using (var client = new HttpClient())
+            using (var client = clientFactory.CreateHttpClient())
             {
                 client.BaseAddress = new Uri(Baseaddress);
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", customer.UserToken);
@@ -716,8 +719,9 @@ namespace RESTClient
             }
         }
 
+        #endregion
 
-        //CUSTOMER
+        #region Customer
 
         //GET api/customers
         /// <summary>
@@ -728,7 +732,7 @@ namespace RESTClient
         /// </returns>
         public async Task<List<User>> GetAllCustomers()
         {
-            using (var client = new HttpClient())
+            using (var client = clientFactory.CreateHttpClient())
             {
                 client.BaseAddress = new Uri(Baseaddress);
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", customer.UserToken);
@@ -766,7 +770,7 @@ namespace RESTClient
         /// </returns>
         public async Task<bool> EditCustomer(User editedCustomer)
         {
-            using (var client = new HttpClient())
+            using (var client = clientFactory.CreateHttpClient())
             {
                 client.BaseAddress = new Uri(Baseaddress);
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", customer.UserToken);
@@ -805,7 +809,7 @@ namespace RESTClient
         /// </returns>
         public async Task<bool> CreateCustomer(User newCustomer)
         {
-            using (var client = new HttpClient())
+            using (var client = clientFactory.CreateHttpClient())
             {
                 client.BaseAddress = new Uri(Baseaddress);
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", customer.UserToken);
@@ -843,7 +847,7 @@ namespace RESTClient
         /// </returns>
         public async Task<User> GetSpecificCustomer(string username)
         {
-            using (var client = new HttpClient())
+            using (var client = clientFactory.CreateHttpClient())
             {
                 client.BaseAddress = new Uri(Baseaddress);
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", customer.UserToken);
@@ -881,7 +885,7 @@ namespace RESTClient
         /// </returns>
         public async Task<bool> DeleteCustomer(string username)
         {
-            using (var client = new HttpClient())
+            using (var client = clientFactory.CreateHttpClient())
             {
                 client.BaseAddress = new Uri(Baseaddress);
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", customer.UserToken);
@@ -904,9 +908,9 @@ namespace RESTClient
             }
         }
 
+        #endregion
 
-
-        //DRINK
+        #region Drink
 
         //GET api/bars/{barname}/drinks
         /// <summary>
@@ -920,7 +924,7 @@ namespace RESTClient
         /// </returns>
         public async Task<List<Drink>> GetBarDrinkList(string id)
         {
-            using (var client = new HttpClient())
+            using (var client = clientFactory.CreateHttpClient())
             {
                 client.BaseAddress = new Uri(Baseaddress);
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", customer.UserToken);
@@ -961,7 +965,7 @@ namespace RESTClient
         /// </returns>
         public async Task<bool> EditDrink(Drink editedDrink, string id)
         {
-            using (var client = new HttpClient())
+            using (var client = clientFactory.CreateHttpClient())
             {
                 client.BaseAddress = new Uri(Baseaddress);
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", customer.UserToken);
@@ -1003,7 +1007,7 @@ namespace RESTClient
         /// </returns>
         public async Task<bool> CreateDrink(Drink newDrink, string id)
         {
-            using (var client = new HttpClient())
+            using (var client = clientFactory.CreateHttpClient())
             {
                 client.BaseAddress = new Uri(Baseaddress);
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", customer.UserToken);
@@ -1044,7 +1048,7 @@ namespace RESTClient
         /// </returns>
         public async Task<bool> DeleteDrink(string barId, string drinkId)
         {
-            using (var client = new HttpClient())
+            using (var client = clientFactory.CreateHttpClient())
             {
                 client.BaseAddress = new Uri(Baseaddress);
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", customer.UserToken);
@@ -1066,8 +1070,9 @@ namespace RESTClient
             }
         }
 
+        #endregion
 
-        //EVENT
+        #region Event
 
         //GET /api/bars/{barname}/events
         /// <summary>
@@ -1081,7 +1086,7 @@ namespace RESTClient
         /// </returns>
         public async Task<List<BarEvent>> GetBarEventList(string id)
         {
-            using (var client = new HttpClient())
+            using (var client = clientFactory.CreateHttpClient())
             {
                 client.BaseAddress = new Uri(Baseaddress);
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", customer.UserToken);
@@ -1122,7 +1127,7 @@ namespace RESTClient
         /// </returns>
         public async Task<bool> EditEvent(BarEvent editedEvent, string id)
         {
-            using (var client = new HttpClient())
+            using (var client = clientFactory.CreateHttpClient())
             {
                 client.BaseAddress = new Uri(Baseaddress);
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", customer.UserToken);
@@ -1163,7 +1168,7 @@ namespace RESTClient
         /// </returns>
         public async Task<bool> CreateEvent(BarEvent newEvent, string id)
         {
-            using (var client = new HttpClient())
+            using (var client = clientFactory.CreateHttpClient())
             {
                 client.BaseAddress = new Uri(Baseaddress);
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", customer.UserToken);
@@ -1204,7 +1209,7 @@ namespace RESTClient
         /// </returns>
         public async Task<bool> DeleteEvent(string barId, string eventId)
         {
-            using (var client = new HttpClient())
+            using (var client = clientFactory.CreateHttpClient())
             {
                 client.BaseAddress = new Uri(Baseaddress);
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", customer.UserToken);
@@ -1226,8 +1231,9 @@ namespace RESTClient
             }
         }
 
+        #endregion
 
-        //REVIEW
+        #region Review
 
         //GET /api/bars/{barname}/reviews
         /// <summary>
@@ -1241,7 +1247,7 @@ namespace RESTClient
         /// </returns>
         public async Task<List<Review>> GetBarReviewList(string id)
         {
-            using (var client = new HttpClient())
+            using (var client = clientFactory.CreateHttpClient())
             {
                 client.BaseAddress = new Uri(Baseaddress);
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", customer.UserToken);
@@ -1282,7 +1288,7 @@ namespace RESTClient
         /// </returns>
         public async Task<bool> EditReview(Review editedReview)
         {
-            using (var client = new HttpClient())
+            using (var client = clientFactory.CreateHttpClient())
             {
                 client.BaseAddress = new Uri(Baseaddress);
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", customer.UserToken);
@@ -1323,7 +1329,7 @@ namespace RESTClient
         /// </returns>
         public async Task<bool> CreateReview(Review newReview)
         {
-            using (var client = new HttpClient())
+            using (var client = clientFactory.CreateHttpClient())
             {
                 client.BaseAddress = new Uri(Baseaddress);
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", customer.UserToken);
@@ -1364,7 +1370,7 @@ namespace RESTClient
         /// </returns>
         public async Task<Review> GetSpecificBarReview(string barId, string username)
         {
-            using (var client = new HttpClient())
+            using (var client = clientFactory.CreateHttpClient())
             {
                 client.BaseAddress = new Uri(Baseaddress);
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", customer.UserToken);
@@ -1405,7 +1411,7 @@ namespace RESTClient
         /// </returns>
         public async Task<bool> DeleteReview(string barId, string username)
         {
-            using (var client = new HttpClient())
+            using (var client = clientFactory.CreateHttpClient())
             {
                 client.BaseAddress = new Uri(Baseaddress);
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", customer.UserToken);
@@ -1427,6 +1433,8 @@ namespace RESTClient
             }
         }
 
+        #endregion
+
         /*
          * ####################
          * # IDENTITY SERVICE #
@@ -1442,7 +1450,7 @@ namespace RESTClient
         /// <returns> Task&lt;bool&gt; with value true if request is successful otherwise false </returns>
         public async Task<bool> RegisterAsync(RegisterDTO model)
         {
-            var client = new HttpClient();
+            var client = clientFactory.CreateHttpClient();
             client.BaseAddress = new Uri(Baseaddress);
 
             var json = JsonConvert.SerializeObject(model);
@@ -1488,7 +1496,7 @@ namespace RESTClient
         /// <returns> Task&lt;string&gt; with the token for later use in autherization </returns>
         public async Task<string> LoginAsync(LoginDTO model)
         {
-            var client = new HttpClient();
+            var client = clientFactory.CreateHttpClient();
             client.BaseAddress = new Uri(Baseaddress);
 
             var json = JsonConvert.SerializeObject(model);

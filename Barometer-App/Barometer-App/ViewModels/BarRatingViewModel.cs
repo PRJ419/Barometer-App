@@ -50,7 +50,8 @@ namespace Barometer_App.ViewModels
         public override async void OnNavigatingTo(INavigationParameters parameters)
         {
             var bar = parameters.GetValue<string>("Bar");
-            var review = await RestClient.GetSpecificBarReview(bar, Customer.UserName);
+            Title = "Rate " + bar;
+            _review = await RestClient.GetSpecificBarReview(bar, Customer.UserName);
             //Update the database with a new review if none exists.
             //This could have been done in a model, but that takes a lot of
             //unnecessary data transfer
