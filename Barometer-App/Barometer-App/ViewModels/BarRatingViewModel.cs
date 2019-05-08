@@ -55,13 +55,13 @@ namespace Barometer_App.ViewModels
             //Update the database with a new review if none exists.
             //This could have been done in a model, but that takes a lot of
             //unnecessary data transfer
-            if (review.BarName == null)
+            if (_review.BarName == null)
             {
                 NewReview = true;
                 BarRating = 1;
             }
             else
-                BarRating = review.BarPressure;
+                BarRating = _review.BarPressure;
             _review.BarName = bar;
             _review.Username = Customer.UserName;
         }
