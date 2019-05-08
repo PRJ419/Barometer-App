@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,7 +16,7 @@ namespace RESTClient
     public class RestClient : IRestClient
     {
         //private const string Baseaddress = "https://localhost:44310/";
-        private const string Baseaddress = "https://192.168.43.96:45457";
+        private const string Baseaddress = "https://192.168.43.170:45457";
         private User customer = User.GetCustomer();
         private IHttpClientFactory clientFactory;
 
@@ -134,32 +135,44 @@ namespace RESTClient
             {
                 client.BaseAddress = new Uri(Baseaddress);
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", customer.UserToken);
-
+                HttpResponseMessage response;
                 try
                 {
                     var jsonString = JsonConvert.SerializeObject(newBar);
 
                     var content = new StringContent(jsonString, Encoding.UTF8, "application/json");
 
-                    var response = await client.PostAsync("api/register/barrep/", content);
-
-                    if (response.StatusCode == HttpStatusCode.BadRequest)
-                    {
-                        if (response.ReasonPhrase.ToLower().Contains("e"))
-                            throw new DuplicateNameException("Bar or BarRep already exists");
-                    }
-
-                    if (response.IsSuccessStatusCode)
-                    {
-                        return true;
-                    }
-                    //PostAsync failed
-                    return false;
+                    response = await client.PostAsync("api/register/barrep/", content);
                 }
                 catch (Exception)
                 {
                     return false;
                 }
+
+                if (response.StatusCode == HttpStatusCode.BadRequest)
+                {
+                    var msg = await response.Content.ReadAsStringAsync();
+                    var reasons = JsonConvert.DeserializeObject<List<string>>(msg);
+
+                    foreach (var reason in reasons)
+                    {
+                        if (reason.Contains("UserName"))
+                            throw new DuplicateNameException("UserName already exists");
+                        if (reason.Contains("Email"))
+                            throw new DuplicateNameException("Email already used");
+                        if (reason.Contains("BarRep"))
+                            throw new DuplicateNameException("Bar-representative already exists!");
+                        if (reason.Contains("Bar"))
+                            throw new DuplicateNameException("Bar already exists!");
+                    }
+                }
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return true;
+                }
+                //PostAsync failed
+                return false;
             }
         }
 
@@ -1437,33 +1450,34 @@ namespace RESTClient
             HttpContent content = new StringContent(json);
 
             content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-
+            HttpResponseMessage response;
             try
             {
-                var response = await client.PostAsync("api/register", content);
-
-                if (response.StatusCode == HttpStatusCode.BadRequest)
-                {
-                    if (response.ReasonPhrase.ToLower().Contains("DuplicateName"))
-                        throw new DuplicateNameException("Username already exists");
-                    //God kode her...........
-                    if(response.ReasonPhrase.ToLower().Contains("PasswordRequireUpper"))
-                        throw new Exception("Password must contain at least one uppercase letter, one lowercase letter and a number");
-
-                    if (response.ReasonPhrase.ToLower().Contains("PasswordRequireLower"))
-                        throw new Exception("Password must contain at least one uppercase letter, one lowercase letter and a number");
-
-                    if (response.ReasonPhrase.ToLower().Contains("PasswordRequireDigit"))
-                        throw new Exception("Password must contain at least one uppercase letter, one lowercase letter and a number");
-                }
-
-                return response.IsSuccessStatusCode;
+                response = await client.PostAsync("api/register", content);
             }
             catch (Exception e)
             {
                 return false;
             }
 
+            if (response.StatusCode == HttpStatusCode.BadRequest)
+            {
+                var msg = await response.Content.ReadAsStringAsync();
+                var reasons = JsonConvert.DeserializeObject<List<string>>(msg);
+
+                foreach (string reason in reasons)
+                {
+                    if (reason.Contains("DuplicateUserName"))
+                        throw new DuplicateNameException("Username already exists!");
+                    if (reason.Contains("DuplicateEmail"))
+                        throw new Exception("Email already used for another account!");
+                    if (reason.Contains("PasswordRequiresUpper") || reason.Contains("PasswordRequiresLower") || reason.Contains("PasswordRequiresDigit"))
+                        throw new Exception(
+                            "Password must contain at least one uppercase letter, one lowercase letter and a number!");
+                }
+            }
+
+            return response.IsSuccessStatusCode;
         }
 
         /// <summary>
@@ -1481,30 +1495,33 @@ namespace RESTClient
             HttpContent content = new StringContent(json);
 
             content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-
+            HttpResponseMessage response;
             try
             {
-                var response = await client.PostAsync("api/login", content);
-
-                if (response.StatusCode == HttpStatusCode.BadRequest)
-                {
-                    if(response.ReasonPhrase.ToLower().Contains("Invalid login"))
-                        throw new Exception("Wrong username and/or password");
-                }
-
-                if (response.IsSuccessStatusCode)
-                {
-                    var jwt = await response.Content.ReadAsStringAsync();
-
-                    return jwt;
-                }
-                return null;
+                response = await client.PostAsync("api/login", content);
             }
             catch (Exception e)
             {
                 return null;
             }
+
+            if (response.StatusCode == HttpStatusCode.BadRequest)
+            {
+                var msg = await response.Content.ReadAsStringAsync();
+
+                if (msg.Contains("Invalid login"))
+                    throw new Exception("Wrong username and/or password");
+            }
+
+            if (response.IsSuccessStatusCode)
+            {
+                var jwt = await response.Content.ReadAsStringAsync();
+
+                return jwt;
+            }
+        return null;
         }
-        #endregion
     }
+    #endregion
 }
+

@@ -87,7 +87,7 @@ namespace Barometer_App.ViewModels
                     }
                     else
                         await Alerter.Alert("Error",
-                            "Something went wrong in the login!", "OK");
+                            "Something went wrong in the registration!", "OK");
                 }
                 else
                     await Alerter.Alert("Error", "Passwords do not match", "OK");
