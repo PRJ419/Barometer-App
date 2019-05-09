@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net.Mime;
 using System.Windows.Input;
 using Barometer_App.DTO;
 using Barometer_App.Models;
@@ -6,6 +7,7 @@ using Prism;
 using Prism.Commands;
 using Prism.Navigation;
 using RESTClient;
+using Xamarin.Forms;
 
 namespace Barometer_App.ViewModels
 {
@@ -106,6 +108,9 @@ namespace Barometer_App.ViewModels
                     {
                         customer.UserToken = token;
                         customer.UserName = Username;
+
+                        Application.Current.Properties["Token"] = customer.UserToken;
+                        Application.Current.Properties["Username"] = customer.UserName;
 
                         BarRepresentative barrep = await RestClient.GetSpecificBarRepresentative(customer.UserName);
 

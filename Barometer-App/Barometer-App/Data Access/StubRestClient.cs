@@ -130,7 +130,7 @@ namespace RESTClient
         //GET api/barrepresentatives/{username}
         public async Task<BarRepresentative> GetSpecificBarRepresentative(string username)
         {
-            throw new NotImplementedException();
+            return new BarRepresentative();
         }
 
         //DELETE api/barrepresentatives/{username}

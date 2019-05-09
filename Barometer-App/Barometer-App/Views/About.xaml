@@ -20,7 +20,7 @@
                    TextColor="{StaticResource LabelColor}"/>
 
             <!-- {Release Version}.{Major}.{Minor} -->
-            <Label Text="Version 0.1.0" 
+            <Label Text="Version 1.0.0" 
                    LineBreakMode="WordWrap" 
                    HorizontalTextAlignment="Center" 
                    TextColor="{StaticResource LabelColor}"/>

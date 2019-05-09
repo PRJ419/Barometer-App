@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Barometer_App.Models;
 using Prism;
+using Xamarin.Forms;
 
 namespace Barometer_App.ViewModels
 {
@@ -69,6 +70,9 @@ namespace Barometer_App.ViewModels
             {
                 Customer.UserToken = null;
                 Customer.IsBarRep = false;
+
+                Application.Current.Properties["Token"] = Customer.UserToken;
+                Application.Current.Properties["Username"] = Customer.UserName;
             }
         }
 
