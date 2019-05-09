@@ -32,7 +32,7 @@ namespace RESTClient
         /// RestClient ctor used for injection a mock version of HttpClient
         /// </summary>
         /// <param name="mockFactory"></param>
-        public RestClient(HttpClientHandler mockHandler)
+        public RestClient(HttpMessageHandler mockHandler)
         {
             clientFactory = new MockHttpClientFactory(mockHandler);
         }
