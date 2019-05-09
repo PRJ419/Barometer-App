@@ -1,4 +1,6 @@
-﻿using Prism;
+﻿using System;
+using Barometer_App.Models;
+using Prism;
 using Prism.Ioc;
 using Barometer_App.Views;
 using Xamarin.Forms;
@@ -21,6 +23,15 @@ namespace Barometer_App
         protected override async void OnInitialized()
         {
             InitializeComponent();
+
+            User user = User.GetCustomer();
+
+            try
+            {
+                user.UserToken = Application.Current.Properties["Token"] as string;
+                user.UserName = Application.Current.Properties["Username"] as string;
+            }
+            catch(Exception e) { }
 
             await NavigationService.NavigateAsync("NavigationPage/MainPage");
         }

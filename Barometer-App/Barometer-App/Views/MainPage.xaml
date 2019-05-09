@@ -41,7 +41,7 @@
                        HorizontalOptions="CenterAndExpand" Style="{StaticResource BtnLabelStyle}"/>
 
                 <StackLayout.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding NavToMyBarCommand}" CommandParameter="DetailedBarEdit"/>
+                    <TapGestureRecognizer Command="{Binding NavToMyBarCommand}" CommandParameter="BarEditsMenu"/>
                 </StackLayout.GestureRecognizers>
             </StackLayout>
 

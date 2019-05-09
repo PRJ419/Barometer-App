@@ -45,6 +45,7 @@ namespace Barometer_App.ViewModels
             NavigationService = navigationService;
             Bar = new RegisterBarDTO();
             Alerter = new Alerter();
+            Title = "Bar Sign Up";
         }
 
         /// <summary>

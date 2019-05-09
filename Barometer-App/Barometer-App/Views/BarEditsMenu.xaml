@@ -4,8 +4,8 @@
              x:Class="Barometer_App.Views.BarEditsMenu">
     <ContentPage.Content>
         <StackLayout>
-            <Button Text="Bar List Edit" Command="{Binding NavToBarListEditCommand}"></Button>
-            <Button Text="Detailed Bar Edit" Command="{Binding NavToDetailedBarEditCommand}"></Button>
+            <Button Text="Bar List Edit" Command="{Binding NavCommand}" CommandParameter="BarEdit"></Button>
+            <Button Text="Detailed Bar Edit" Command="{Binding NavCommand}" CommandParameter="DetailedBarEdit"></Button>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
