@@ -2,7 +2,6 @@
 using System.Windows.Input;
 using Barometer_App.DTO;
 using Barometer_App.Models;
-using Barometer_App.Services;
 using Prism;
 using Prism.Commands;
 using Prism.Navigation;
@@ -50,11 +49,6 @@ namespace Barometer_App.ViewModels
         public string confpass { get; set; }
 
         /// <summary>
-        /// InputValidator to check input conforms to requirements set by the application server
-        /// </summary>
-        public InputValidator validator;
-
-        /// <summary>
         /// Navigation Service provided by Prism, which is later used for navigation to other Views and popping back to earlier Views when logged in.
         /// </summary>
         public INavigationService _navigationService { get; }
@@ -69,7 +63,6 @@ namespace Barometer_App.ViewModels
             Title = "Sign Up";
             _navigationService = navigationService;
             birthday = DateTime.Now;
-            validator = new InputValidator();
             Alerter = new Alerter();
         }
 
@@ -78,7 +71,6 @@ namespace Barometer_App.ViewModels
             Title = "Sign Up";
             _navigationService = navigationService;
             birthday = DateTime.Now;
-            validator = new InputValidator();
 
             Alerter = alert;
         }
