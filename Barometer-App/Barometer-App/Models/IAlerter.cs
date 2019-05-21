@@ -11,6 +11,6 @@ namespace Barometer_App.Models
     public interface IAlerter
     {
         Task Alert(string title, string message, string cancel);
-        Task Alert(string title, string message, string accept, string cancel);
+        Task<bool> Alert(string title, string message, string accept, string cancel);
     }
 }

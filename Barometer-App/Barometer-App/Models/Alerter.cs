@@ -32,9 +32,9 @@ namespace Barometer_App.Models
         /// <param name="accept"> The accept option text </param>
         /// <param name="cancel"> The cancel option text </param>
         /// <returns></returns>
-        public async Task Alert(string title, string message, string accept, string cancel)
+        public async Task<bool> Alert(string title, string message, string accept, string cancel)
         {
-            await PrismApplication.Current.MainPage.DisplayAlert(title, message, accept, cancel);
+            return await PrismApplication.Current.MainPage.DisplayAlert(title, message, accept, cancel);
         }
     }
 }
