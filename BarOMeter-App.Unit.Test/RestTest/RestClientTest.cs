@@ -134,21 +134,21 @@ namespace BarOMeterApp.Unit.Test
             Assert.That(rc.CreateBar(new RegisterBarDTO()).Result, Is.True);
         }
 
-        [Test]
-        public void CreateBar_BadRequest_BarAlreadyExists_ReturnsFalse() //Fix this
-        {
-            var rc = new RestClient(new MockHttpMessageHandler(async (request, cancellationToken) =>
-            {
-                var responseMessage = new HttpResponseMessage(HttpStatusCode.BadRequest)
-                {
-                    Content = new StringContent("Bar")
-                };
+        //[Test]
+        //public void CreateBar_BadRequest_BarAlreadyExists_ReturnsFalse() //Fix this
+        //{
+        //    var rc = new RestClient(new MockHttpMessageHandler(async (request, cancellationToken) =>
+        //    {
+        //        var responseMessage = new HttpResponseMessage(HttpStatusCode.BadRequest)
+        //        {
+        //            Content = new StringContent("Bar")
+        //        };
 
-                return await Task.FromResult(responseMessage);
-            }));
+        //        return await Task.FromResult(responseMessage);
+        //    }));
 
-            //Assert.That(rc.CreateBar(new RegisterBarDTO()), Throws.DuplicateNameException("Bar already exists!"));
-        }
+        //    Assert.That(rc.CreateBar(new RegisterBarDTO()), Throws.DuplicateNameException("Bar already exists!"));
+        //}
 
         [Test]
         public void GetBestBarList_OK_ReceivesCorrectAmount()
