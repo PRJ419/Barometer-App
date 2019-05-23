@@ -30,7 +30,7 @@ namespace Barometer_App.ViewModels
         /// </summary>
         private async void GetBar()
         {
-            Bar = await RestClient.GetDetailedBar("");
+            Bar = await RestClient.GetDetailedBar(User.GetCustomer().FavoriteBar);
         }
 
         /// <summary>

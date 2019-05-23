@@ -17,6 +17,11 @@ namespace Barometer_App.ViewModels
         public ObservableCollection<Bar> Bars { get; set; }
 
         /// <summary>
+        /// Alerter used for popups
+        /// </summary>
+        private IAlerter Alerter;
+
+        /// <summary>
         /// Private version of the bindable property for the ViewModel to hold
         /// </summary>
         private User _customer;
@@ -44,6 +49,8 @@ namespace Barometer_App.ViewModels
 
             //Load this in later
             Customer = User.GetCustomer();
+
+            Alerter = new Alerter();
         }
 
         /// <summary>
@@ -61,9 +68,9 @@ namespace Barometer_App.ViewModels
         /// </summary>
         public async void OnLogout()
         {
-            bool result = await PrismApplicationBase.Current.MainPage.DisplayAlert(
+            bool result = await Alerter.Alert(
                 "Confirmation",
-                "Are you sure you want to log out",
+                "Are you sure you want to log out?",
                 "Yes",
                 "No");
             if (result)

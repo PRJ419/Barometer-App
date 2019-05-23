@@ -98,6 +98,7 @@
                 <Entry Placeholder="SomeURL.com/picture"
                        Text="{Binding Bar.Image}"></Entry>
 
+                <Label Text="Under here is all the other information. Try it out and see what changes!"></Label>
                 <Entry Text="{Binding Bar.Educations}"
                        Placeholder="Educations are typed here"></Entry>
 

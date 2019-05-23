@@ -84,7 +84,7 @@ namespace Barometer_App.ViewModels
                     {
                         await Alerter.Alert("Notice",
                             "Your Bar and Bar Representative account have been registered!", "OK");
-                        await NavigationService.GoBackAsync();
+                        await NavigationService.GoBackToRootAsync();
                     }
                     else
                         await Alerter.Alert("Error",
